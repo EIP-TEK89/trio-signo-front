@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Webcam from 'react-webcam';
 import './lesson.css';
 
 import a from './hand/a.jpg';
@@ -13,6 +14,7 @@ interface LessonProps {
 }
 
 const Lesson: React.FC<LessonProps> = ({ showHome }) => {
+    const webcamRef = React.useRef<Webcam>(null);
     const [display, setDisplay] = useState(0);
     const [letter, setLetter] = useState('');
 
@@ -40,6 +42,31 @@ const Lesson: React.FC<LessonProps> = ({ showHome }) => {
     const eLetter = () => {
         setLetter('e');
     };
+
+    const capture = React.useCallback(async () => {
+        if (webcamRef.current !== null) {
+            const imageSrc = webcamRef.current.getScreenshot();
+
+            // Envoyer l'image au serveur
+            if (imageSrc) {
+                try {
+                    const response = await fetch('http://localhost:5000/get-alphabet', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ image: imageSrc }),
+                    });
+
+                    const result = await response.json();
+                    console.log(result);
+                } catch (error) {
+                    console.error('Erreur lors de l\'envoi de l\'image:', error);
+                }
+            }
+        }
+    }, [webcamRef]);
+
     return (
         <div >
             {display === 0 && <div className="lessonSection">
@@ -67,17 +94,26 @@ const Lesson: React.FC<LessonProps> = ({ showHome }) => {
                 <button className="Next-Button" onClick={nextStepSelection}>Continuer</button>
             </div>
             }
-            {/* {display === 2 && <div className="lessonSection">
-
-            </div>
-            } */}
             {display === 2 && <div className="lessonSection">
-                <h1 className="Sign-Name">Bravo</h1>
-                <img className="Sign-Img" src={bravo} alt="Bravo sign" />
-                <button className="Next-Button" onClick={showHome}>Continuer</button>
+                <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    width={640}
+                    height={480}
+                />
+                <button onClick={capture}>Capture photo</button>
+                <button className="Next-Button" onClick={nextStepSelection}>Continuer</button>
             </div>
             }
-        </div>
+            {
+                display === 3 && <div className="lessonSection">
+                    <h1 className="Sign-Name">Bravo</h1>
+                    <img className="Sign-Img" src={bravo} alt="Bravo sign" />
+                    <button className="Next-Button" onClick={showHome}>Continuer</button>
+                </div>
+            }
+        </div >
     );
 };
 
