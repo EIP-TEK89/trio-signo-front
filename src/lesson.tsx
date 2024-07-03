@@ -45,10 +45,14 @@ const Lesson: React.FC<LessonProps> = ({ showHome }) => {
 
     const capture = React.useCallback(async () => {
         if (webcamRef.current !== null) {
+            console.log('capture');
             const imageSrc = webcamRef.current.getScreenshot();
+            console.log('captured');
+
 
             // Envoyer l'image au serveur
             if (imageSrc) {
+                console.log('img ok');
                 try {
                     const response = await fetch('http://localhost:5000/get-alphabet', {
                         method: 'POST',
