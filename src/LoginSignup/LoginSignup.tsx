@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
-import './LoginSignup.css';
 import { useNavigate } from 'react-router-dom';
 
+import './LoginSignup.css';
 import Logo from '../Assets/Logo.png';
-
-const isValidEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
-
-const isValidPassword = (password: string): boolean => {
-  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
-  return passwordRegex.test(password);
-};
 
 const LoginSignup: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -24,23 +14,12 @@ const LoginSignup: React.FC = () => {
   const handleSignUp = async () => {
     let validationErrors = {};
 
-    if (!isValidEmail(email)) {
-      validationErrors = { ...validationErrors, email: 'Invalid email address' };
-    }
-
-    if (!isValidPassword(password)) {
-      validationErrors = {
-        ...validationErrors,
-        password: 'Password must be at least 8 characters long and contain at least one number and one special character',
-      };
-    }
-
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length > 0) return;
       
     // Redirect to /lesson after successful sign up
-    navigate('/lesson');
+    navigate('/courses');
 
     // try {
     //   setLoading(true);

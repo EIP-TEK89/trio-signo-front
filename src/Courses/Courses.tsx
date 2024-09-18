@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Webcam from 'react-webcam';
-import './lesson.css';
+import { useNavigate } from 'react-router-dom';
 
-import a from './hand/a.jpg';
-import b from './hand/b.jpg';
-import i from './hand/i.jpg';
-import e from './hand/e.jpg';
+import './Courses.css';
+import a from '../Assets/hand/a.jpg';
+import b from '../Assets/hand/b.jpg';
+import i from '../Assets/hand/i.jpg';
+import e from '../Assets/hand/e.jpg';
 
-import bravo from './hand/bravo.gif';
+import bravo from '../Assets/hand/bravo.gif';
 
-interface LessonProps {
-    showHome: () => void;
-}
-
-const Lesson: React.FC<LessonProps> = ({ showHome }) => {
+const Courses: React.FC = () => {
+    const navigate = useNavigate();
     const webcamRef = React.useRef<Webcam>(null);
     const [display, setDisplay] = useState(0);
     const [letter, setLetter] = useState('');
+
+    const BackToHome = async () => {
+        navigate('/');
+      };
 
     const nextStep = () => {
         setDisplay(display + 1);
@@ -120,11 +122,11 @@ const Lesson: React.FC<LessonProps> = ({ showHome }) => {
             {display === 3 && <div className="lessonSection">
                 <h1 className="Sign-Name">Bravo</h1>
                 <img className="Sign-Img" src={bravo} alt="Bravo sign" />
-                <button className="Next-Button" onClick={showHome}>Continuer</button>
+                <button className="Next-Button" onClick={BackToHome}>Continuer</button>
             </div>
             }
         </div >
     );
 };
 
-export default Lesson;
+export default Courses;
