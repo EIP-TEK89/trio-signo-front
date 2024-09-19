@@ -1,103 +1,98 @@
 /* Container for the form */
 .logo {
-    width: 100%;
+  width: 100%;
 }
 
 .login-signup-container {
-    width: 350px;
-    margin: 0 auto;
-    padding: 40px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  h2 {
-    font-size: 28px;
-    color: #5c27a8;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  h2::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 3px;
-    background-color: #5c27a8;
-    margin: 10px auto;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 12px;
-    margin: 5px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  input::placeholder {
-    color: #888;
-  }
-  
-  .forgot-password {
-    margin: 10px 0;
-    font-size: 14px;
-    color: #888;
-  }
-  
-  .forgot-password a {
-    color: #5c27a8;
-    text-decoration: none;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  button {
-    background-color: #5c27a8;
-    border: none;
-    color: white;
-    padding: 12px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 45%;
-  }
-  
-  button:hover {
-    background-color: #3e1a73;
-  }
-  
-  button:last-child {
-    background-color: #3700ff;
-  }
-  
-  /* Error messages */
-  .error-message {
-    color: red;
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    text-align: left;
-  }
-  
-  .api-error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 20px;
-    text-align: center;
-  }
-  
+  width: 350px;
+  margin: 0 auto;
+  padding: 40px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  font-size: 28px;
+  color: #5c27a8;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #5c27a8;
+  margin: 10px auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input::placeholder {
+  color: #888;
+}
+
+.forgot-password {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #888;
+}
+
+.forgot-password a {
+  color: #5c27a8;
+  text-decoration: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #5c27a8;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 45%;
+}
+
+button:hover {
+  background-color: #3e1a73;
+}
+
+/* Error messages */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.api-error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 20px;
+  text-align: center;
+}

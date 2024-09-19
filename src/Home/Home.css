@@ -1,62 +1,167 @@
-.homepage {
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    padding: 20px;
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.Home {
     text-align: center;
 }
 
-.header {
+.Logo {
+    height: 80px;
+}
+
+.App-header {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: #873b21;
+    padding-left: 20%;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-bottom: 1px solid lightgray;
+}
+
+.login-btn {
+    background-color: #873b21;
+    border: none;
+    border-radius: 5px;
+    margin-right: 30%;
+    margin-left: auto;
+    color: white;
+    font-size: 16px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #a76037;
+}
+
+/* Global settings */
+body {
+    font-family: 'Helvetica', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+}
+
+h2,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Section title */
+.section-title {
+    text-align: center;
+    color: #4B4B4B;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+/* Section container */
+.section-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #f4f4f4;
+    margin: 50px 0;
+    padding: 0 10%;
 }
 
-.logo {
-    width: 150px;
+.section-container:nth-child(even) {
+    flex-direction: row-reverse;
 }
 
-.nav .login-btn {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
+/* Section text styling */
+.section-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.section-subtitle {
+    color: #873b21;
+    font-size: 2em;
     font-weight: bold;
-}
-
-.nav .login-btn:hover {
-    background-color: #0056b3;
-}
-
-.project-description {
-    margin: 40px 0;
-}
-
-.team-section {
-    margin: 40px 0;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.team-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.team-image {
-    width: 200px;
-    height: auto;
-    border-radius: 50%;
     margin-bottom: 20px;
+}
+
+.section-text p {
+    color: #4B4B4B;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.section-text p a {
+    color: #873b21;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.section-text p a:hover {
+    text-decoration: underline;
+}
+
+/* Section image styling */
+.section-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.section-image img {
+    width: 300px;
+    height: auto;
+}
+
+/* Style for smaller devices */
+@media screen and (max-width: 768px) {
+    .section-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-image img {
+        width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+    }
+
+    .section-text p {
+        text-align: center;
+    }
+}
+
+
+.team {
+    padding: 20px;
+    color: white;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+}
+
+.team-member {
+    width: 200px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.team-photo {
+    margin-bottom: 10px;
 }
 
 .footer {
     margin-top: 40px;
     padding: 20px;
-    background-color: #007BFF;
+    background-color: #a76037;
     color: white;
 }
