@@ -21,7 +21,7 @@
     margin-top: 5rem;
     margin-bottom: 1rem;
     display: inline-block;
-    background-color: #007bff;
+    background-color: #873b21;
     border: none;
     border-radius: 5px;
     width: 30%;
@@ -30,10 +30,14 @@
     overflow: hidden;
 }
 
+.Next-Button:hover {
+    background-color: #a76037;
+}
+
 .Sign-Selection {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px; /* Adjust the gap as needed */
+    gap: 10px;
 }
 
 .Img-Button {

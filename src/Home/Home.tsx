@@ -33,12 +33,16 @@ const Home: React.FC = () => {
     navigate('/login');
   };
 
+  const Courses = async () => {
+    navigate('/courses');
+  };
+
   return (
     <div className="Home">
       <header className="App-header">
         <img src={Logo} className="Logo" alt="logo" />
         <h1 className="Title">TRIO-SIGNO</h1>
-        <button className="login-btn">Login</button>
+        <button className="login-btn" onClick={Login}>Login</button>
       </header>
 
       <section className="description">
@@ -102,36 +106,39 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="team">
+      <section className="team-section">
         <h2>Meet the Team</h2>
-        <div className="team-member">
-          <img src={Lenny} alt="Lenny Vigeon" className="team-photo" />
-          <p>Lenny Vigeon - Frontend Developer</p>
-        </div>
-        <div className="team-member">
-          <img src={Jp} alt="Jean-Pierre Janopoulos" className="team-photo" />
-          <p>Jean-Pierre Janopoulos - Backend Developer</p>
-        </div>
-        <div className="team-member">
-          <img src={Enzo} alt="Enzo Pfeiffer" className="team-photo" />
-          <p>Enzo Pfeiffer - AI Specialist</p>
-        </div>
-        <div className="team-member">
-          <img src={Valentin} alt="Valentin Maurel" className="team-photo" />
-          <p>Valentin Maurel - Fullstack Developer</p>
-        </div>
-        <div className="team-member">
-          <img src={Antoine} alt="Antoine Rospars" className="team-photo" />
-          <p>Antoine Rospars - AI Engineer</p>
-        </div>
-        <div className="team-member">
-          <img src={Yann} alt="Yann Lebib" className="team-photo" />
-          <p>Yann Lebib - Backend Developer</p>
+        <div className="team">
+          <div className="team-member">
+            <img src={Lenny} alt="Lenny Vigeon" className="team-photo" />
+            <p>Lenny Vigeon - Frontend Developer</p>
+          </div>
+          <div className="team-member">
+            <img src={Jp} alt="Jean-Pierre Janopoulos" className="team-photo" />
+            <p>Jean-Pierre Janopoulos - Backend Developer</p>
+          </div>
+          <div className="team-member">
+            <img src={Enzo} alt="Enzo Pfeiffer" className="team-photo" />
+            <p>Enzo Pfeiffer - AI Specialist</p>
+          </div>
+          <div className="team-member">
+            <img src={Valentin} alt="Valentin Maurel" className="team-photo" />
+            <p>Valentin Maurel - Fullstack Developer</p>
+          </div>
+          <div className="team-member">
+            <img src={Antoine} alt="Antoine Rospars" className="team-photo" />
+            <p>Antoine Rospars - AI Engineer</p>
+          </div>
+          <div className="team-member">
+            <img src={Yann} alt="Yann Lebib" className="team-photo" />
+            <p>Yann Lebib - Backend Developer</p>
+          </div>
         </div>
       </section>
 
       <section className="live-demo">
         <h2>Live demo</h2>
+        <button className="login-btn" onClick={Courses}>try a lesson</button>
 
       </section>
 
