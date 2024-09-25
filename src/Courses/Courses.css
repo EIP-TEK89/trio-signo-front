@@ -1,5 +1,4 @@
 .lessonSection {
-    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +11,11 @@
 }
 
 .Sign-Img {
+    width: 30%;
+    height: auto;
+}
+
+.Sign-Img-Learn {
     width: 30%;
     height: auto;
 }
@@ -35,10 +39,11 @@
 }
 
 .Sign-Selection {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    display: flex;
     gap: 10px;
 }
+
 
 .Img-Button {
     padding: 0;

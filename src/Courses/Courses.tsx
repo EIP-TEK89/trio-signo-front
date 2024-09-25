@@ -19,7 +19,7 @@ const Courses: React.FC = () => {
 
     const BackToHome = async () => {
         navigate('/');
-      };
+    };
 
     const nextStep = () => {
         setDisplay(display + 1);
@@ -87,7 +87,7 @@ const Courses: React.FC = () => {
         <div >
             {display === 0 && <div className="lessonSection">
                 <h1 className="Sign-Name">A</h1>
-                <img className="Sign-Img" src={a} alt="A sign" />
+                <img className="Sign-Img-Learn" src={a} alt="A sign" />
                 <button className="Next-Button" onClick={nextStep}>Continuer</button>
             </div>
             }
@@ -111,6 +111,7 @@ const Courses: React.FC = () => {
             </div>
             }
             {display === 2 && <div className="lessonSection">
+                <h1 className="Sign-Name">A</h1>
                 <Webcam
                     audio={false}
                     ref={webcamRef}
@@ -118,7 +119,7 @@ const Courses: React.FC = () => {
                     width={640}
                     height={480}
                 />
-                <button onClick={capture}>Capture photo</button>
+                <button className="Next-Button" onClick={capture}>Capture photo</button>
             </div>
             }
             {display === 3 && <div className="lessonSection">
