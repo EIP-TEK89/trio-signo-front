@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Logo from '../Assets/Logo.png';
 import Acces from '../Assets/acces.png';
 import Fun from '../Assets/fun.png';
 import Free from '../Assets/free.png';
@@ -16,6 +15,7 @@ import Valentin from '../Assets/Team/Valentin.png';
 import Antoine from '../Assets/Team/Antoine.png';
 
 import './Home.css';
+import '../App.css';
 import { access } from 'fs';
 
 const Home: React.FC = () => {
@@ -40,9 +40,12 @@ const Home: React.FC = () => {
   return (
     <div className="Home">
       <header className="App-header">
-        <img src={Logo} className="Logo" alt="logo" />
-        <h1 className="Title">TRIO-SIGNO</h1>
-        <button className="login-btn" onClick={Login}>Login</button>
+        <h1 className="title">Signify</h1>
+        <button className="pushable login" onClick={Login}>
+          <span className="front">
+            Login
+          </span>
+        </button>
       </header>
 
       <section className="description">
@@ -111,34 +114,53 @@ const Home: React.FC = () => {
         <div className="team">
           <div className="team-member">
             <img src={Lenny} alt="Lenny Vigeon" className="team-photo" />
-            <p>Lenny Vigeon - Frontend Developer</p>
+            <p>Lenny Vigeon - IA Developer</p>
           </div>
           <div className="team-member">
             <img src={Jp} alt="Jean-Pierre Janopoulos" className="team-photo" />
-            <p>Jean-Pierre Janopoulos - Backend Developer</p>
-          </div>
-          <div className="team-member">
-            <img src={Enzo} alt="Enzo Pfeiffer" className="team-photo" />
-            <p>Enzo Pfeiffer - AI Specialist</p>
+            <p>Jean-Pierre Janopoulos - IA Developer</p>
           </div>
           <div className="team-member">
             <img src={Valentin} alt="Valentin Maurel" className="team-photo" />
-            <p>Valentin Maurel - Fullstack Developer</p>
+            <p>Valentin Maurel - Back-end Developer</p>
           </div>
           <div className="team-member">
             <img src={Antoine} alt="Antoine Rospars" className="team-photo" />
-            <p>Antoine Rospars - AI Engineer</p>
+            <p>Antoine Rospars - Back-end Developer</p>
           </div>
           <div className="team-member">
             <img src={Yann} alt="Yann Lebib" className="team-photo" />
-            <p>Yann Lebib - Backend Developer</p>
+            <p>Yann Lebib - Front-end Developer</p>
+          </div>
+          <div className="team-member">
+            <img src={Enzo} alt="Enzo Pfeiffer" className="team-photo" />
+            <p>Enzo Pfeiffer - Front-end Developer</p>
           </div>
         </div>
       </section>
 
       <section className="live-demo">
-        <h2>Live demo</h2>
-        <button className="login-btn" onClick={Courses}>try a lesson</button>
+        <h2>Demo: Webcam continuous hands landmarks detection</h2>
+        <p>Hold your hand in front of your webcam to get real-time hand landmarker detection.Click enable webcam below and grant access to the webcam if prompted.</p>
+
+        <div id="liveView" className="videoView">
+          <button id="webcamButton" className="pushable" onClick={Courses}>
+            <span className="front">
+              Enable WebCam
+            </span>
+          </button>
+          <div>
+            <video id="webcam"></video>
+            <canvas className="output_canvas" id="output_canvas"></canvas>
+          </div>
+        </div>
+
+        <p>Try a lesson now</p>
+        <button className="pushable" onClick={Courses}>
+          <span className="front">
+            TRY
+          </span>
+        </button>
 
       </section>
 
@@ -184,58 +206,6 @@ const Home: React.FC = () => {
           <li><a href="">Youtube</a></li>
         </ul>
       </footer>
-    </div>
-  );
-
-  return (
-
-    <div className="homepage">
-
-      <header className="header">
-        <div>
-          <h1>Triosigno</h1>
-          <nav className="nav">
-            <img src={Logo} alt="Logo" className="logo" />
-            <button className="login-btn" onClick={Login}>Login</button>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section className="project-description">
-          <h1 className="section-title">Project description</h1>
-          <div>vidéo demo</div>
-          <div>
-            <div>free and fun</div>
-            <div>demander a qq qui parle la lsf pour une expertise</div>
-          </div>
-
-        </section>
-
-        <section className="Fremium">
-          <h1 className="section-title">Fremium</h1>
-
-        </section>
-
-        <section className="team-section">
-          <h1 className="section-title">Our team</h1>
-          {/* mettre les linkedin ect... */}
-          <img src={Antoine} alt="Antoine" />
-          <img src={Enzo} alt="Enzo" />
-          <img src={Lenny} alt="Lenny" />
-          <img src={Valentin} alt="Valentin" />
-          <img src={Jp} alt="Jp" />
-          <img src={Yann} alt="Yann" />
-        </section>
-
-        <section className="team-section">
-          <h1 className="section-title">Let's practice</h1>
-          <button className="login-btn" onClick={Login}>Let's go</button>
-
-        </section>
-      </main>
-
-
     </div>
   );
 };

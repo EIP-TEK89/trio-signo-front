@@ -1,0 +1,34 @@
+:root {
+    --color: #9B59B6;
+    --hover-color: #ab70bf;
+    --bottom-color: #5D3A9B;
+    --text-color: white;
+}
+
+.pushable {
+    background: var(--bottom-color);
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    width: auto;
+}
+
+.front {
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: var(--color);
+    color: var(--text-color);
+    transform: translateY(-6px);
+}
+
+.front:hover {
+    background-color: var(--hover-color);
+}
+
+.pushable:active .front {
+    transform: translateY(-2px);
+}
