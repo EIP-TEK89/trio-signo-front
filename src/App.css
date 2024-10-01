@@ -3,6 +3,7 @@
     --hover-color: #ab70bf;
     --bottom-color: #5D3A9B;
     --text-color: white;
+    --text-darker-color: lightgray;
 }
 
 .pushable {
