@@ -6,89 +6,59 @@
 ![HTML](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
+**Signify** is an interactive platform dedicated to learning French Sign Language (LSF). With a modern and accessible interface, we offer a fun experience, supported by artificial intelligence, to help users learn LSF in an engaging way.
 
-**Signify** est une plateforme interactive dédiée à l'apprentissage de la Langue des Signes Française (LSF). Grâce à une interface moderne et accessible, nous proposons une expérience ludique, soutenue par l'intelligence artificielle, pour aider les utilisateurs à apprendre la LSF de manière engageante. 
+## 🌟 Key Features
 
-## 🌟 Fonctionnalités clés 
+- **AI-based sign recognition**: Users receive real-time feedback on their gestures.
+- **Gamification**: Points, levels, and leaderboards to encourage progress.
+- **Multi-platform accessibility**: Available on Web and Mobile.
+- **Personalized reminders**: Notifications to encourage daily practice.
 
-- **Reconnaissance des signes par l’IA** : Les utilisateurs reçoivent des retours en temps réel sur leurs gestes.
-- **Gamification** : Système de points, niveaux et classements pour stimuler la progression.
-- **Accessibilité multi-plateforme** : Disponible sur Web et Mobile.
-- **Rappels personnalisés** : Notifications pour encourager une pratique quotidienne.
+## 🖥️ Technologies Used
 
-## 🖥️ Technologies Utilisées 
+The front-end is built with the following technologies:
 
-Le front-end est développé avec les technologies suivantes :
+- **React** & **TypeScript**: For a reactive and robust interface.
+- **Vite**: A fast and efficient bundler.
+- **CSS3 & Sass**: For modern and responsive design.
+- **HTML5**: Compliance with accessibility standards.
 
-- **React** & **TypeScript** : Pour une interface réactive et robuste.
-- **Vite** : Bundler performant et rapide.
-- **CSS3 & Sass** : Pour un design moderne et responsive.
-- **HTML5** : Respect des standards d'accessibilité.
+## ⚙️ Prerequisites
 
-## ⚙️ Prérequis 
+- **Node.js** v14 or higher
+- **npm** or **yarn**
 
-- **Node.js** v14 ou plus
-- **npm** ou **yarn**
+## 🚀 Installation
 
-## 🚀 Installation 
-
-1. Cloner le dépôt :
+1. Clone the repository:
     ```bash
-    git clone https://github.com/utilisateur/signify-frontend.git
+    git clone https://github.com/EIP-TEK89/trio-signo-front.git
     ```
-2. Naviguer dans le répertoire du projet :
+2. Navigate to the project directory:
     ```bash
-    cd signify-frontend
+    cd trio-signo-front
     ```
-3. Installer les dépendances :
+3. Install the dependencies:
     ```bash
     npm install
     ```
 
-## 🔧 Lancer le projet en local 
+## 🔧 Running the project locally
 
-1. Démarrer le serveur de développement :
+1. Start the development server:
     ```bash
     npm start
     ```
-2. L'application sera disponible à l'adresse : `http://localhost:3000`
+2. The application will be available at: `http://localhost:3000`
 
-## 🧪 Exécuter les tests 
+## 🧪 Running tests
 
-Pour lancer les tests unitaires :
+To run unit tests:
 ```bash
 npm test
 ```
 
-## 🚢 Déploiement 
+## 👥 Contributing
 
-Les instructions pour déployer l’application en production :
-
-1. Construire l'application :
-    ```bash
-    npm run build
-    ```
-2. Les fichiers de production seront générés dans le dossier `/dist`.
-3. Déployer les fichiers générés sur le service d’hébergement de votre choix (ex : **Netlify**, **Vercel** ou **GitHub Pages**).
-    - Pour **Netlify** : déposez le contenu du dossier `/dist` dans l’interface de déploiement.
-    - Pour **Vercel** : connectez votre dépôt GitHub et suivez les instructions pour déployer directement.
-    - Pour **GitHub Pages** : configurez la branche `gh-pages` ou utilisez un outil comme `gh-pages` pour déployer le contenu de `/dist`.
-
-## 👥 Contribuer 
-
-Les étapes pour contribuer au projet :
-
-1. Forker le projet.
-2. Créer une nouvelle branche :
-    ```bash
-    git checkout -b ma-nouvelle-fonctionnalité
-    ```
-3. Committer vos modifications :
-    ```bash
-    git commit -m 'Ajout nouvelle fonctionnalité'
-    ```
-4. Pusher votre branche :
-    ```bash
-    git push origin ma-nouvelle-fonctionnalité
-    ```
-5. Ouvrir une pull request sur le dépôt principal.
+The steps for contributing to the project are described in the file [CONTRIBUTING.md](https://github.com/EIP-TEK89/trio-signo-fullstack/blob/main/Contributing.md).
