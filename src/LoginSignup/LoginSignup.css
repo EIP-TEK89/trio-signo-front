@@ -16,7 +16,7 @@
 
 h2 {
   font-size: 28px;
-  color: #5c27a8;
+  color: var(--color);
   margin-bottom: 20px;
   position: relative;
 }
@@ -26,7 +26,7 @@ h2::after {
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #5c27a8;
+  background-color: var(--color);
   margin: 10px auto;
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './LoginSignup.css';
-import Logo from '../Assets/Logo.png';
+import Logo from '../Assets/logo.png';
 
 const LoginSignup: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -17,9 +17,9 @@ const LoginSignup: React.FC = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length > 0) return;
-      
+
     // Redirect to /lesson after successful sign up
-    navigate('/courses');
+    navigate('/coursesJourney');
 
     // try {
     //   setLoading(true);
@@ -99,8 +99,16 @@ const LoginSignup: React.FC = () => {
         Lost Password? <a href="#">Click Here!</a>
       </p>
       <div className="button-container">
-        <button onClick={handleSignUp}>Sign Up</button>
-        <button onClick={handleLogin}>Login</button>
+        <button className="pushable" onClick={handleSignUp}>
+          <span className="front">
+            Sign Up
+          </span>
+        </button>
+        <button className="pushable" onClick={handleLogin}>
+          <span className="front">
+            Login
+          </span>
+        </button>
       </div>
       {errors.apiError && <p className="api-error-message">{errors.apiError}</p>}
     </div>
