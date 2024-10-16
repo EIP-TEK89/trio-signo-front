@@ -19,7 +19,7 @@ const LoginSignup: React.FC = () => {
     if (Object.keys(validationErrors).length > 0) return;
 
     // Redirect to /lesson after successful sign up
-    navigate('/coursesJourney');
+    navigate('/coursesJourney/home');
 
     // try {
     //   setLoading(true);
