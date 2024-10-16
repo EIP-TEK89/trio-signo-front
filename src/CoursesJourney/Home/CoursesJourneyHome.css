@@ -1,0 +1,42 @@
+/* Header.css */
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color);
+    padding: 10px 20px;
+    color: #fff;
+    z-index: 2;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+}
+
+.text {
+    font-size: 16px;
+}
+
+.body {
+    display: flex;
+}
+
+.coursesJourney {
+    height: 90vh;
+    width: 50%;
+}
+
+.pub {
+    height: 90vh;
+    background-color: red;
+    width: 25%;
+}
