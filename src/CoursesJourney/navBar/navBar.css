@@ -4,9 +4,9 @@
     align-items: center;
     position: fixed;
     bottom: 0;
-    width: 100%;
-    background-color: var(--color);
+    width: 50%;
     padding: 10px 0;
+    border-top: 1px solid lightgray;
 }
 
 .navButton {
@@ -20,7 +20,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 250px;
 }
 
 
@@ -33,7 +32,18 @@
     background-color: var(--bottom-color);
 }
 
-.icon {
-    width: 48px;
-    height: 48px;
+.navIcon {
+    width: 3vw;
+    height: 3vw;
+}
+
+@media (max-width: 880px) {
+    .navBar {
+        width: 100%;
+    }
+
+    .navIcon {
+        width: 5vw;
+        height: 5vw;
+    }
 }

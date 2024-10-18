@@ -21,35 +21,35 @@ const NavBar: React.FC = () => {
                     to={`${basePath}/home`}
                     className={({ isActive }) => isActive ? "navButton active" : "navButton"}
                 >
-                    <img src={Home} alt="home icon" className="icon" />
+                    <img src={Home} alt="home navIcon" className="navIcon" />
                 </NavLink>
 
                 <NavLink
                     to={`${basePath}/training`}
                     className={({ isActive }) => isActive ? "navButton active" : "navButton"}
                 >
-                    <img src={Haltere} alt="haltere icon" className="icon" />
+                    <img src={Haltere} alt="haltere navIcon" className="navIcon" />
                 </NavLink>
 
                 <NavLink
                     to={`${basePath}/competition`}
                     className={({ isActive }) => isActive ? "navButton active" : "navButton"}
                 >
-                    <img src={Trophy} alt="trophy icon" className="icon" />
+                    <img src={Trophy} alt="trophy navIcon" className="navIcon" />
                 </NavLink>
 
                 <NavLink
                     to={`${basePath}/profile`}
                     className={({ isActive }) => isActive ? "navButton active" : "navButton"}
                 >
-                    <img src={Genie} alt="genie icon" className="icon" />
+                    <img src={Genie} alt="genie navIcon" className="navIcon" />
                 </NavLink>
 
                 <NavLink
                     to={`${basePath}/quests`}
                     className={({ isActive }) => isActive ? "navButton active" : "navButton"}
                 >
-                    <img src={Chest} alt="chest icon" className="icon" />
+                    <img src={Chest} alt="chest navIcon" className="navIcon" />
                 </NavLink>
             </nav>
         </div>
