@@ -10,6 +10,9 @@ import Point from '../../Assets/coursesJourneyHome/point.png';
 import Life from '../../Assets/coursesJourneyHome/life.png';
 import Star from '../../Assets/coursesJourneyHome/star.png';
 
+import Pub1 from '../../Assets/pub/pub1.png';
+import Pub2 from '../../Assets/pub/pub2.png';
+
 const CoursesJourneyHome: React.FC = () => {
     const navigate = useNavigate();
 
@@ -47,8 +50,12 @@ const CoursesJourneyHome: React.FC = () => {
             });
     }, []);
 
+    const Courses = async () => {
+        navigate('/courses');
+    };
+
     const Training = async () => {
-        navigate('/login');
+        navigate('/coursesJourney/Training');
     };
 
     //   if (loading) {
@@ -60,8 +67,10 @@ const CoursesJourneyHome: React.FC = () => {
     //   }
 
     return (
-        <div className="body">
-            <div className='pub'></div>
+        <div className="coursesJourneyPage">
+            <div className='pub'>
+                <img src={Pub1} alt="Pub1" className='publicity'/>
+            </div>
 
             <div className='coursesJourney'>
                 <head className="header">
@@ -82,43 +91,45 @@ const CoursesJourneyHome: React.FC = () => {
                     </div>
                 </head>
 
-                <body className='body'>
-                    <button className="pushable unitButton" onClick={Training}>
-                        <span className="front">
-                            Chapitre {currentChapter}, Unité {currentUnit} <br />
-                            <span>
-                                {currentChapterName}
+                <body className='bodyCourses'>
+                    <div className='unitButton'>
+                        <button className="pushable " onClick={Training}>
+                            <span className="front">
+                                Chapitre {currentChapter}, Unité {currentUnit} <br />
+                                <span>
+                                    {currentChapterName}
+                                </span>
                             </span>
-                        </span>
-                    </button>
-
-                    <div className='journey'>
-                        <button className="pushable coursesButton" onClick={Training}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront">
-                            </img>
-                        </button>
-                        <button className="pushable coursesButton" onClick={Training}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront">
-                            </img>
-                        </button>
-                        <button className="pushable coursesButton" onClick={Training}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront">
-                            </img>
-                        </button>
-                        <button className="pushable coursesButton" onClick={Training}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront">
-                            </img>
                         </button>
                     </div>
 
 
-
+                    <div className='journey'>
+                        <button className="pushable coursesButton" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        </button>
+                        <button className="pushable coursesButton" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        </button>
+                        <button className="pushable coursesButton" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        </button>
+                        <button className="pushable coursesButton" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        </button>
+                        <button className="pushable coursesButton" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        </button>
+                    </div>
                 </body>
+
 
                 <NavBar />
             </div>
 
-            <div className='pub'></div>
+            <div className='pub'>
+                <img src={Pub2} alt="Pub2" className='publicity'/>
+            </div>
         </div>
     );
 };

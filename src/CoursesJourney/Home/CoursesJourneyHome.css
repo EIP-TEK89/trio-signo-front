@@ -1,4 +1,3 @@
-/* Header.css */
 .header {
     position: sticky;
     top: 0;
@@ -27,39 +26,69 @@
     color: var(--color);
 }
 
-.body {
+.coursesJourneyPage {
     display: flex;
 }
 
 .coursesJourney {
     height: 100vh;
-    width: 50%;
+    width: 30%;
 }
 
 .pub {
     height: 100vh;
-    background-color: red;
-    width: 25%;
+    background-color: lightgray;
+    width: 35%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
-/* .body {
+.publicity {
+    margin: auto;
+}
+
+.bodyCourses {
     display: flex;
     flex-direction: column;
-} */
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
 
-/* .journey {
-
-} */
+.unitButton {
+    padding-top: 2%;
+    margin-bottom: 1%;
+    cursor: pointer;
+}
 
 .coursesButton {
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin: 50% 0px 50% 0px;
 }
 
-.coursesButtonFront {
-    width: 1vw;
-    height: 1vw;
+.coursesButton .coursesButtonFront {
     border-radius: 50%;
-    filter:saturate(0); /*play with the saturation to say if the stage is completed*/
+    width: 0px;
+    height: 40px;
+}
+
+.journey button:nth-child(2) {
+    transform: translate(-60px, 0px);
+}
+
+.journey button:nth-child(3) {
+    transform: translate(-120px, 0px);
+}
+
+.journey button:nth-child(4) {
+    transform: translate(-60px, 0px);
 }
 
 @media (max-width: 880px) {
@@ -73,7 +102,7 @@
     }
 
     .icon {
-        width: 5vw;
-        height: 5vw;
+        width: 10vw;
+        height: 10vw;
     }
 }
