@@ -18,32 +18,30 @@ const LoginSignup: React.FC = () => {
 
     if (Object.keys(validationErrors).length > 0) return;
 
-    // Redirect to /lesson after successful sign up
-    navigate('/coursesJourney/home');
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:5000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    // try {
-    //   setLoading(true);
-    //   const response = await fetch('http://localhost:5000/signup', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ email, password }),
-    //   });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to sign up');
+      }
 
-    //   if (!response.ok) {
-    //     const errorData = await response.json();
-    //     throw new Error(errorData.message || 'Failed to sign up');
-    //   }
-
-    //   const data = await response.json();
-    //   localStorage.setItem('token', data.token);
-    //   console.log('Success:', data);
-    // } catch (error: any) {
-    //   setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
-    // } finally {
-    //   setLoading(false);
-    // }
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      console.log('Success:', data);
+      navigate('/coursesJourney/home');
+    } catch (error: any) {
+      setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleLogin = async () => {
