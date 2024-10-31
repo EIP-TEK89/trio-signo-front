@@ -55,8 +55,18 @@ const Courses: React.FC = () => {
 
     const [texte, setTexte] = useState<string>('');
     const handleSubmit = (event: React.FormEvent, message: string) => {
+        // here the traitment is needed
         if (message === texte)
             handleNextExo()
+    };
+
+    const [activeButton, setActiveButton] = useState<number | null>(null);
+    const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
+
+    const handleButtonClick = (index: number | null, answer: string | null) => {
+        setActiveButton(activeButton === index ? null : index);
+        console.log(answer)
+        setButtonAnswer(answer)
     };
 
     const capture = React.useCallback(async () => {
@@ -126,35 +136,21 @@ const Courses: React.FC = () => {
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <div className='image-selection'>
-                                <button className="Img-Button">
-                                    <img
-                                        src={typeof currentExo.reponse[0] === 'object' && 'name' in currentExo.reponse[0] ? imageMap[currentExo.reponse[0].name] : ''}
-                                        alt="image"
-                                        className='choice-img'
-                                    />
-                                </button>
-                                <button className="Img-Button">
-                                    <img
-                                        src={typeof currentExo.reponse[1] === 'object' && 'name' in currentExo.reponse[1] ? imageMap[currentExo.reponse[1].name] : ''}
-                                        alt="image"
-                                        className='choice-img'
-                                    />
-                                </button>
-                                <button className="Img-Button">
-                                    <img
-                                        src={typeof currentExo.reponse[2] === 'object' && 'name' in currentExo.reponse[2] ? imageMap[currentExo.reponse[2].name] : ''}
-                                        alt="image"
-                                        className='choice-img'
-                                    />
-                                </button>
-                                <button className="Img-Button">
-                                    <img
-                                        src={typeof currentExo.reponse[3] === 'object' && 'name' in currentExo.reponse[3] ? imageMap[currentExo.reponse[3].name] : ''}
-                                        alt="image"
-                                        className='choice-img'
-                                    />
-                                </button>
+                                {currentExo.reponse.map((reponse, index) => (
+                                    <button
+                                        key={index}
+                                        className={`Img-Button ${activeButton === index ? 'active' : ''}`}
+                                        onClick={() => handleButtonClick(index, typeof reponse === 'object' && 'name' in reponse ? reponse.name : null)}
+                                    >
+                                        <img
+                                            src={typeof reponse === 'object' && 'name' in reponse ? imageMap[reponse.name] : ''}
+                                            alt="image"
+                                            className='choice-img'
+                                        />
+                                    </button>
+                                ))}
                             </div>
+
                             <button className="pushable" onClick={handleNextExo}>
                                 <span className="front">
                                     Validé
@@ -170,9 +166,10 @@ const Courses: React.FC = () => {
                                 alt="image"
                                 className='write-img'
                             />
-                            <form onSubmit={(e) => handleSubmit(e, currentExo.reponse_attendue)}>
+                            <form className='form-answer' onSubmit={(e) => handleSubmit(e, currentExo.reponse_attendue)}>
                                 <input
                                     type="text"
+                                    className='form-answer-input'
                                     value={texte}
                                     onChange={(e) => setTexte(e.target.value)}
                                 />
@@ -193,11 +190,16 @@ const Courses: React.FC = () => {
                                 alt="image"
                                 className='multiple-choice-img'
                             />
-                            <div>
-                                <button>{typeof currentExo.reponse[0] === 'object' && 'name' in currentExo.reponse[0] ? currentExo.reponse[0].name : ''}</button>
-                                <button>{typeof currentExo.reponse[1] === 'object' && 'name' in currentExo.reponse[1] ? currentExo.reponse[1].name : ''}</button>
-                                <button>{typeof currentExo.reponse[2] === 'object' && 'name' in currentExo.reponse[2] ? currentExo.reponse[2].name : ''}</button>
-                                <button>{typeof currentExo.reponse[3] === 'object' && 'name' in currentExo.reponse[3] ? currentExo.reponse[3].name : ''}</button>
+                            <div className='text-selection'>
+                                {currentExo.reponse.map((reponse, index) => (
+                                    <button
+                                        key={index}
+                                        className={`Text-Button ${activeButton === index ? 'active' : ''}`}
+                                        onClick={() => handleButtonClick(index, typeof reponse === 'object' && 'name' in reponse ? reponse.name : null)}
+                                    >
+                                        {typeof reponse === 'object' && 'name' in reponse ? reponse.name : ''}
+                                    </button>
+                                ))}
                             </div>
                             <button className="pushable" onClick={handleNextExo}>
                                 <span className="front">
@@ -216,12 +218,15 @@ const Courses: React.FC = () => {
                                 width={540}
                                 height={480}
                             />
-                            <button className="Next-Button" onClick={capture}>Capture photo</button>
-                            {/* need the answer in the capture button */}
+                            <button className="pushable" onClick={capture}>
+                                <span className="front">
+                                    Validé
+                                </span>
+                            </button>
                         </div>
                     )}
                 </body>
-            </div>
+            </div >
 
             <div className='pub'>
                 <img src={Pub2} alt="Pub2" className='publicity' />

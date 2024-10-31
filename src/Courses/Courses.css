@@ -95,16 +95,59 @@
 .image-selection {
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 5%;
+    padding-left: 5%; /* not the best option*/
+    padding-bottom: 5%; 
 }
 
 .Img-Button {
-    flex: 50%;
+    margin: 5px 5px 5px 5px;
+    background-color: transparent;
+}
+
+.Img-Button:hover {
+    background-color: var(--hover-color);
+}
+
+.Img-Button.active {
+    border: 2px solid var(--bottom-color);
+    background-color: #f0f8ff;
 }
 
 .choice-img {
     width: 60%;
     height: 200px;
+}
+
+.form-answer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-answer-input {
+    margin-bottom: 10%;
+}
+
+.text-selection {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 5%; 
+}
+
+.Text-Button {
+    margin: 5px 5px 5px 5px;
+    background-color: transparent;
+    color: var(--color);
+}
+
+.Text-Button:hover {
+    background-color: var(--hover-color);
+}
+
+.Text-Button.active {
+    border: 2px solid var(--bottom-color);
+    background-color: #f0f8ff;
 }
 
 
