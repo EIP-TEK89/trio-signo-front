@@ -24,13 +24,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "vite --host",
-    "build": "vite build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "build": "vite build",
+    "lint": "npx eslint 'src/**'",
+    "format": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "browserslist": {
     "production": [
@@ -45,10 +42,14 @@
     ]
   },
   "devDependencies": {
+    "@eslint/js": "^9.14.0",
     "@vitejs/plugin-react": "^4.3.2",
+    "eslint": "^9.14.0",
+    "eslint-plugin-react": "^7.37.2",
+    "globals": "^15.11.0",
+    "prettier": "3.3.3",
+    "typescript-eslint": "^8.12.2",
     "vite": "^5.4.8",
-    "vite-plugin-commonjs": "^0.10.3",
-    "vite-plugin-svgr": "^4.2.0",
-    "vite-tsconfig-paths": "^5.0.1"
+    "vite-plugin-svgr": "^4.2.0"
   }
 }
