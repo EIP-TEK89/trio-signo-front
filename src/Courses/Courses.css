@@ -135,17 +135,17 @@
     padding-bottom: 5%; 
 }
 
-.Text-Button {
+.text-Button {
     margin: 5px 5px 5px 5px;
     background-color: transparent;
     color: var(--color);
 }
 
-.Text-Button:hover {
+.text-Button:hover {
     background-color: var(--hover-color);
 }
 
-.Text-Button.active {
+.text-Button.active {
     border: 2px solid var(--bottom-color);
     background-color: #f0f8ff;
 }

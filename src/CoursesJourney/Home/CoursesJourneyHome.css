@@ -26,11 +26,11 @@
     color: var(--color);
 }
 
-.coursesJourneyPage {
+.courses-journey-page {
     display: flex;
 }
 
-.coursesJourney {
+.courses-journey {
     height: 100vh;
     width: 30%;
 }
@@ -44,11 +44,7 @@
     justify-content: center;
 }
 
-.publicity {
-    margin: auto;
-}
-
-.bodyCourses {
+.body-courses {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,13 +52,13 @@
     font-family: sans-serif;
 }
 
-.unitButton {
+.unit-button {
     padding-top: 2%;
     margin-bottom: 1%;
     cursor: pointer;
 }
 
-.coursesButton {
+.courses-button {
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -73,7 +69,7 @@
     margin: 50% 0px 50% 0px;
 }
 
-.coursesButton .coursesButtonFront {
+.courses-button .courses-button-front {
     border-radius: 50%;
     width: 0px;
     height: 40px;
@@ -96,7 +92,7 @@
         display: none;
     }
 
-    .coursesJourney {
+    .courses-journey {
         height: 100vh;
         width: 100%;
     }
