@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginSignup from './LoginSignup/LoginSignup';
+import LoginSignin from './LoginSignup/LoginSignin';
 import Home from './Home/Home';
 import Courses from './Courses/Courses';
 import CoursesJourneyHome from './CoursesJourney/Home/CoursesJourneyHome';
@@ -14,7 +15,8 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginSignup />} />
+        <Route path="/signup" element={<LoginSignup />} />
+        <Route path="/signin" element={<LoginSignin />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/coursesJourney/home" element={<CoursesJourneyHome />} />
         <Route path="/coursesJourney/profile" element={<CoursesJourneyProfile />} />

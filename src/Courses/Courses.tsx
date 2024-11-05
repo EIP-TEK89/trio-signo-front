@@ -5,19 +5,19 @@ import { useNavigate } from 'react-router-dom';
 
 import './Courses.css';
 
-import coursesData from './courses.json';
+import coursesData from './Courses.json';
 
-import a from '../Assets/hand/a.jpg';
-import b from '../Assets/hand/b.jpg';
-import c from '../Assets/hand/c.jpg';
-import d from '../Assets/hand/d.jpg';
+import a from '../Assets/Hand/a.jpg';
+import b from '../Assets/Hand/b.jpg';
+import c from '../Assets/Hand/c.jpg';
+import d from '../Assets/Hand/d.jpg';
 
-import Life from '../Assets/coursesJourneyHome/life.png';
+import Life from '../Assets/CoursesJourneyHome/life.png';
 
 import Cross from '../Assets/cross-button.png';
 
-import Pub1 from '../Assets/pub/pub1.png';
-import Pub2 from '../Assets/pub/pub2.png';
+import Pub1 from '../Assets/Pub/pub1.png';
+import Pub2 from '../Assets/Pub/pub2.png';
 
 const Courses: React.FC = () => {
     const navigate = useNavigate();
@@ -25,14 +25,6 @@ const Courses: React.FC = () => {
 
     const BackToHome = async () => {
         navigate('/coursesJourney/home');
-    };
-
-    const GoodAnswer = async () => {
-
-    };
-
-    const BadAnswer = async () => {
-
     };
 
     const imageMap: { [key: string]: string } = {
@@ -55,7 +47,6 @@ const Courses: React.FC = () => {
 
     const [texte, setTexte] = useState<string>('');
     const handleSubmit = (event: React.FormEvent, message: string) => {
-        // here the traitment is needed
         if (message === texte)
             handleNextExo()
     };
@@ -69,7 +60,12 @@ const Courses: React.FC = () => {
         setButtonAnswer(answer)
     };
 
-    const capture = React.useCallback(async () => {
+    const BadAnswer = async () => {
+        //call life -1
+        handleNextExo()
+    };
+
+    const capture = React.useCallback(async (answer: string) => {
         if (webcamRef.current !== null) {
             const imageSrc = webcamRef.current.getScreenshot();
 
@@ -86,8 +82,9 @@ const Courses: React.FC = () => {
                         },
                     });
                     console.log(response.data.message);
-                    if (response.data.message == "A")
-                        GoodAnswer()
+                    console.log(answer)
+                    if (response.data.message == answer.toUpperCase())
+                        handleNextExo()
                     else
                         BadAnswer()
                 } catch (error) {
@@ -194,7 +191,7 @@ const Courses: React.FC = () => {
                                 {currentExo.reponse.map((reponse, index) => (
                                     <button
                                         key={index}
-                                        className={`Text-Button ${activeButton === index ? 'active' : ''}`}
+                                        className={`text-Button ${activeButton === index ? 'active' : ''}`}
                                         onClick={() => handleButtonClick(index, typeof reponse === 'object' && 'name' in reponse ? reponse.name : null)}
                                     >
                                         {typeof reponse === 'object' && 'name' in reponse ? reponse.name : ''}
@@ -218,7 +215,7 @@ const Courses: React.FC = () => {
                                 width={540}
                                 height={480}
                             />
-                            <button className="pushable" onClick={capture}>
+                            <button className="pushable" onClick={() => capture(currentExo.reponse_attendue)}>
                                 <span className="front">
                                     Validé
                                 </span>

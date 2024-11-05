@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react';
-import NavBar from '../navBar/navBar';
+import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 import './CoursesJourneyHome.css';
 
-import Flag from '../../Assets/coursesJourneyHome/flag.png';
-import Streak from '../../Assets/coursesJourneyHome/streak.png';
-import Point from '../../Assets/coursesJourneyHome/point.png';
-import Life from '../../Assets/coursesJourneyHome/life.png';
-import Star from '../../Assets/coursesJourneyHome/star.png';
+import Carousel from '../Carousel/Carousel';
 
-import Pub1 from '../../Assets/pub/pub1.png';
-import Pub2 from '../../Assets/pub/pub2.png';
+import Flag from '../../Assets/CoursesJourneyHome/flag.png';
+import Streak from '../../Assets/CoursesJourneyHome/streak.png';
+import Point from '../../Assets/CoursesJourneyHome/point.png';
+import Life from '../../Assets/CoursesJourneyHome/life.png';
+import Star from '../../Assets/CoursesJourneyHome/star.png';
+
+import Pub1 from '../../Assets/Pub/pub1.png';
+import Pub2 from '../../Assets/Pub/pub2.png';
+import Pub3 from '../../Assets/Pub/pub3.png';
+import Pub4 from '../../Assets/Pub/pub4.png';
 
 const CoursesJourneyHome: React.FC = () => {
     const navigate = useNavigate();
@@ -24,6 +28,13 @@ const CoursesJourneyHome: React.FC = () => {
     const [currentChapterName, setCurrentChapterName] = useState<string>("Le bug réseau");
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+
+    const images = [
+        Pub1,
+        Pub2,
+        Pub3,
+        Pub4
+      ];
 
     useEffect(() => {
         fetch('https://api.example.com/data')
@@ -58,21 +69,13 @@ const CoursesJourneyHome: React.FC = () => {
         navigate('/coursesJourney/Training');
     };
 
-    //   if (loading) {
-    //     return <div>Chargement...</div>;
-    //   }
-
-    //   if (error) {
-    //     return <div>{error}</div>;
-    //   }
-
     return (
-        <div className="coursesJourneyPage">
+        <div className="courses-journey-page">
             <div className='pub'>
-                <img src={Pub1} alt="Pub1" className='publicity'/>
+                <Carousel images={images} />
             </div>
 
-            <div className='coursesJourney'>
+            <div className='courses-journey'>
                 <head className="header">
                     <div className="icon-container">
                         <img src={Flag} alt="French flag" className="icon" />
@@ -91,8 +94,8 @@ const CoursesJourneyHome: React.FC = () => {
                     </div>
                 </head>
 
-                <body className='bodyCourses'>
-                    <div className='unitButton'>
+                <body className='body-courses'>
+                    <div className='unit-button'>
                         <button className="pushable " onClick={Training}>
                             <span className="front">
                                 Chapitre {currentChapter}, Unité {currentUnit} <br />
@@ -105,30 +108,29 @@ const CoursesJourneyHome: React.FC = () => {
 
 
                     <div className='journey'>
-                        <button className="pushable coursesButton" onClick={Courses}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        <button className="pushable courses-button" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front courses-button-front" />
                         </button>
-                        <button className="pushable coursesButton" onClick={Courses}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        <button className="pushable courses-button" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front courses-button-front" />
                         </button>
-                        <button className="pushable coursesButton" onClick={Courses}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        <button className="pushable courses-button" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front courses-button-front" />
                         </button>
-                        <button className="pushable coursesButton" onClick={Courses}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        <button className="pushable courses-button" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front courses-button-front" />
                         </button>
-                        <button className="pushable coursesButton" onClick={Courses}>
-                            <img src={Star} alt="Star" className="front coursesButtonFront" />
+                        <button className="pushable courses-button" onClick={Courses}>
+                            <img src={Star} alt="Star" className="front courses-button-front" />
                         </button>
                     </div>
                 </body>
-
 
                 <NavBar />
             </div>
 
             <div className='pub'>
-                <img src={Pub2} alt="Pub2" className='publicity'/>
+                <Carousel images={images} />
             </div>
         </div>
     );
