@@ -20,7 +20,7 @@
     display: block;
     padding: 12px 42px;
     border-radius: 12px;
-    font-size: 1.25rem;
+    font-size: 100%;
     background: var(--color);
     color: var(--text-color);
     transform: translateY(-6px);

@@ -1,57 +1,168 @@
-.lessonSection {
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #fff;
+    z-index: 2;
+    border-bottom: 1px solid lightgray;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icon {
+    width: 3vw;
+    height: 3vw;
+}
+
+.text {
+    font-size: 16px;
+    color: var(--color);
+}
+
+.cross-button {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3vw;
+    height: 3vw;
+}
+
+.cross-button:hover {
+    background-color: transparent;
+}
+
+
+.coursesJourneyPage {
+    display: flex;
+}
+
+.coursesJourney {
+    height: 100vh;
+    width: 30%;
+}
+
+.pub {
+    height: 100vh;
+    background-color: lightgray;
+    width: 35%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.publicity {
+    margin: auto;
+}
+
+.bodyCourses {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
 }
 
-.Sign-Name {
-    margin-top: 1rem;
-    margin-bottom: 5rem;
-    font-size: 5rem;
-}
-
-.Sign-Img {
-    width: 30%;
-    height: auto;
-}
-
-.Sign-Img-Learn {
-    width: 30%;
-    height: auto;
-}
-
-.Next-Button {
-    font-size: 2rem;
-    margin-top: 5rem;
-    margin-bottom: 1rem;
-    display: inline-block;
-    background-color: #873b21;
-    border: none;
-    border-radius: 5px;
-    width: 30%;
-    height: auto;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.Next-Button:hover {
-    background-color: #a76037;
-}
-
-.Sign-Selection {
-    align-items: center;
+.tuto {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+.tuto-img {
+    width: 85%;
+    padding-bottom: 5%;
+}
+
+.multiple-choice-img {
+    width: 50%;
+    padding-bottom: 5%;
+}
+
+.write-img {
+    width: 50%;
+    padding-bottom: 5%;
+}
+
+.image-selection {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 5%; /* not the best option*/
+    padding-bottom: 5%; 
+}
 
 .Img-Button {
-    padding: 0;
-    border: none;
-    background: none;
+    margin: 5px 5px 5px 5px;
+    background-color: transparent;
 }
 
-.Sign-Img {
-    width: 100%;
-    height: auto;
+.Img-Button:hover {
+    background-color: var(--hover-color);
+}
+
+.Img-Button.active {
+    border: 2px solid var(--bottom-color);
+    background-color: #f0f8ff;
+}
+
+.choice-img {
+    width: 60%;
+    height: 200px;
+}
+
+.form-answer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-answer-input {
+    margin-bottom: 10%;
+}
+
+.text-selection {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 5%; 
+}
+
+.text-Button {
+    margin: 5px 5px 5px 5px;
+    background-color: transparent;
+    color: var(--color);
+}
+
+.text-Button:hover {
+    background-color: var(--hover-color);
+}
+
+.text-Button.active {
+    border: 2px solid var(--bottom-color);
+    background-color: #f0f8ff;
+}
+
+
+@media (max-width: 880px) {
+    .pub {
+        display: none;
+    }
+
+    .coursesJourney {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .icon {
+        width: 10vw;
+        height: 10vw;
+    }
 }

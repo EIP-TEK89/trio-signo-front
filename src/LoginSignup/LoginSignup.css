@@ -16,7 +16,7 @@
 
 h2 {
   font-size: 28px;
-  color: #5c27a8;
+  color: var(--color);
   margin-bottom: 20px;
   position: relative;
 }
@@ -26,7 +26,7 @@ h2::after {
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #5c27a8;
+  background-color: var(--color);
   margin: 10px auto;
 }
 
@@ -61,7 +61,9 @@ input::placeholder {
 
 .button-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 button {
@@ -95,4 +97,10 @@ button:hover {
   font-size: 14px;
   margin-top: 20px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .login-signup-container {
+    width: 75vw;
+  }
 }
