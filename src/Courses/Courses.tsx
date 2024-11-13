@@ -5,19 +5,14 @@ import { useNavigate } from 'react-router-dom';
 
 import './Courses.css';
 
-import coursesData from './Courses.json';
+import ProgressBar from "../ProgressionBar/ProgressionBar";
+import Carousel from '../Carousel/Carousel';
 
-import a from '../Assets/Hand/a.jpg';
-import b from '../Assets/Hand/b.jpg';
-import c from '../Assets/Hand/c.jpg';
-import d from '../Assets/Hand/d.jpg';
+import coursesData from './Courses.json';
 
 import Life from '../Assets/CoursesJourneyHome/life.png';
 
 import Cross from '../Assets/cross-button.png';
-
-import Pub1 from '../Assets/Pub/pub1.png';
-import Pub2 from '../Assets/Pub/pub2.png';
 
 const Courses: React.FC = () => {
     const navigate = useNavigate();
@@ -27,18 +22,14 @@ const Courses: React.FC = () => {
         navigate('/coursesJourney/home');
     };
 
-    const imageMap: { [key: string]: string } = {
-        a,
-        b,
-        c,
-        d,
-    };
+    const [step, setStep] = useState(1);
 
     const [currentExoIndex, setCurrentExoIndex] = useState(0);
 
     const handleNextExo = () => {
         if (currentExoIndex < coursesData.exercices.length - 1) {
             setCurrentExoIndex(currentExoIndex + 1);
+            setStep(step + 1)
         }
     };
 
@@ -97,7 +88,7 @@ const Courses: React.FC = () => {
     return (
         <div className="coursesJourneyPage">
             <div className='pub'>
-                <img src={Pub1} alt="Pub1" className='publicity' />
+                <Carousel />
             </div>
 
             <div className='coursesJourney'>
@@ -105,7 +96,7 @@ const Courses: React.FC = () => {
                     <button onClick={BackToHome} className="cross-button">
                         <img src={Cross} alt="cross-img" className="icon" />
                     </button>
-                    <span>progression bar</span>
+                    <ProgressBar currentStep={step} />
                     <div className="icon-container">
                         <img src={Life} alt="Life" className="icon" />
                         <span className="text">5</span>
@@ -118,9 +109,14 @@ const Courses: React.FC = () => {
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
-                                src={typeof currentExo.reponse[0] === 'object' && 'name' in currentExo.reponse[0] ? imageMap[currentExo.reponse[0].name] : ''}
-                                alt="image"
-                                className='tuto-img'
+                                src={
+                                    typeof currentExo.reponse[0] === 'object' && 'name' in currentExo.reponse[0]
+                                        ? `/Assets/Hand/${currentExo.reponse[0].name}.jpg`
+                                        : ''
+                                }
+                                alt={'image'}
+                                className="tuto-img"
+                                onError={(e) => (e.currentTarget.src = `/Assets/Hand/default.jpg`)}
                             />
                             <button className="pushable" onClick={handleNextExo}>
                                 <span className="front">
@@ -140,7 +136,9 @@ const Courses: React.FC = () => {
                                         onClick={() => handleButtonClick(index, typeof reponse === 'object' && 'name' in reponse ? reponse.name : null)}
                                     >
                                         <img
-                                            src={typeof reponse === 'object' && 'name' in reponse ? imageMap[reponse.name] : ''}
+                                            src={typeof reponse === 'object' && 'name' in reponse ? 
+                                            `/Assets/Hand/${reponse.name}.jpg` 
+                                            : ''}
                                             alt="image"
                                             className='choice-img'
                                         />
@@ -159,7 +157,7 @@ const Courses: React.FC = () => {
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
-                                src={imageMap[currentExo.reponse_attendue]}
+                                src={`/Assets/Hand/${currentExo.reponse_attendue}.jpg`}
                                 alt="image"
                                 className='write-img'
                             />
@@ -183,7 +181,7 @@ const Courses: React.FC = () => {
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
-                                src={imageMap[currentExo.reponse_attendue]}
+                                src={`/Assets/Hand/${currentExo.reponse_attendue}.jpg`}
                                 alt="image"
                                 className='multiple-choice-img'
                             />
@@ -226,7 +224,7 @@ const Courses: React.FC = () => {
             </div >
 
             <div className='pub'>
-                <img src={Pub2} alt="Pub2" className='publicity' />
+                <Carousel />
             </div>
         </div >
     );

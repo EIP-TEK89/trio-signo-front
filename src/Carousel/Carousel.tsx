@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './Carousel.css';
 
-interface CarouselProps {
-  images: string[];
-}
+import Pub1 from '../Assets/Pub/pub1.png';
+import Pub2 from '../Assets/Pub/pub2.png';
+import Pub3 from '../Assets/Pub/pub3.png';
+import Pub4 from '../Assets/Pub/pub4.png';
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = [
+    Pub1,
+    Pub2,
+    Pub3,
+    Pub4
+  ];
 
   useEffect(() => {
     const intervalId = setInterval(() => {
