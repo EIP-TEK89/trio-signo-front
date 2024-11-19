@@ -16,22 +16,18 @@
             "titre": "Choisissez le bon signe",
             "type_exo": "choix_multiple_image",
             "question": "Quelle signe représente le signe A ?",
-            "reponse_attendue": "image_1",
+            "reponse_attendue": "a",
             "reponse": [
                 {
-                    "id": "image_1",
                     "name": "a"
                 },
                 {
-                    "id": "image_2",
                     "name": "b"
                 },
                 {
-                    "id": "image_3",
                     "name": "c"
                 },
                 {
-                    "id": "image_4",
                     "name": "d"
                 }
             ]

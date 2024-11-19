@@ -25,30 +25,14 @@ const Courses: React.FC = () => {
     const [step, setStep] = useState(1);
 
     const [currentExoIndex, setCurrentExoIndex] = useState(0);
+    const currentExo = coursesData.exercices[currentExoIndex];
 
     const handleNextExo = () => {
         if (currentExoIndex < coursesData.exercices.length - 1) {
             setCurrentExoIndex(currentExoIndex + 1);
             setStep(step + 1)
         }
-    };
-
-    const currentExo = coursesData.exercices[currentExoIndex];
-
-
-    const [texte, setTexte] = useState<string>('');
-    const handleSubmit = (event: React.FormEvent, message: string) => {
-        if (message === texte)
-            handleNextExo()
-    };
-
-    const [activeButton, setActiveButton] = useState<number | null>(null);
-    const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
-
-    const handleButtonClick = (index: number | null, answer: string | null) => {
-        setActiveButton(activeButton === index ? null : index);
-        console.log(answer)
-        setButtonAnswer(answer)
+        //display publicity on phone
     };
 
     const BadAnswer = async () => {
@@ -56,6 +40,72 @@ const Courses: React.FC = () => {
         handleNextExo()
     };
 
+    /*
+    * Multiple Images answer
+    * Status: OK
+    * 
+    */
+    const [activeButton, setActiveButton] = useState<number | null>(null);
+    const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
+
+    const handleButtonClick = (index: number | null, answer: string | null) => {
+        setActiveButton(activeButton === index ? null : index);
+        setButtonAnswer(answer)
+    };
+
+    const handleMultipleImages = (message: string) => {
+        if (buttonAnswer !== null) {
+            if (message === buttonAnswer)
+                handleNextExo()
+            else
+                BadAnswer()
+        }
+        setActiveButton(null)
+        setButtonAnswer(null)
+    };
+
+
+    /*
+    * Write the answer
+    * Status: OK
+    * 
+    */
+    const [text, setText] = useState<string | undefined>(undefined);
+    const handleSubmit = (message: string) => {
+        if (text !== undefined) {
+            if (message === text)
+                handleNextExo()
+            else
+                BadAnswer()
+        }
+        setText(undefined)
+    };
+
+    /*
+    * Multiple Signification answer
+    * Status: OK
+    * 
+    */
+    const handleMultipleSignification = (message: string) => {
+        if (buttonAnswer !== null) {
+            console.log(message)
+            console.log(buttonAnswer)
+            if (message === buttonAnswer)
+                handleNextExo()
+            else
+                BadAnswer()
+        }
+        setActiveButton(null)
+        setButtonAnswer(null)
+    };
+
+
+
+    /*
+    * Camera
+    * Status: OK
+    * 
+    */
     const capture = React.useCallback(async (answer: string) => {
         if (webcamRef.current !== null) {
             const imageSrc = webcamRef.current.getScreenshot();
@@ -92,7 +142,7 @@ const Courses: React.FC = () => {
             </div>
 
             <div className='coursesJourney'>
-                <head className="header">
+                <header className="header">
                     <button onClick={BackToHome} className="cross-button">
                         <img src={Cross} alt="cross-img" className="icon" />
                     </button>
@@ -102,9 +152,9 @@ const Courses: React.FC = () => {
                         <span className="text">5</span>
                         {/* {heartCount} */}
                     </div>
-                </head>
+                </header>
 
-                <body className='bodyCourses'>
+                <main className='bodyCourses'>
                     {currentExo.type_exo === "tuto" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
@@ -136,9 +186,9 @@ const Courses: React.FC = () => {
                                         onClick={() => handleButtonClick(index, typeof reponse === 'object' && 'name' in reponse ? reponse.name : null)}
                                     >
                                         <img
-                                            src={typeof reponse === 'object' && 'name' in reponse ? 
-                                            `/Assets/Hand/${reponse.name}.jpg` 
-                                            : ''}
+                                            src={typeof reponse === 'object' && 'name' in reponse ?
+                                                `/Assets/Hand/${reponse.name}.jpg`
+                                                : ''}
                                             alt="image"
                                             className='choice-img'
                                         />
@@ -146,7 +196,7 @@ const Courses: React.FC = () => {
                                 ))}
                             </div>
 
-                            <button className="pushable" onClick={handleNextExo}>
+                            <button className="pushable" onClick={() => handleMultipleImages(currentExo.reponse_attendue)}>
                                 <span className="front">
                                     Validé
                                 </span>
@@ -161,12 +211,12 @@ const Courses: React.FC = () => {
                                 alt="image"
                                 className='write-img'
                             />
-                            <form className='form-answer' onSubmit={(e) => handleSubmit(e, currentExo.reponse_attendue)}>
+                            <form className='form-answer' onSubmit={(e) => { e.preventDefault(); handleSubmit(currentExo.reponse_attendue); }}>
                                 <input
                                     type="text"
                                     className='form-answer-input'
-                                    value={texte}
-                                    onChange={(e) => setTexte(e.target.value)}
+                                    value={text}
+                                    onChange={(e) => setText(e.target.value)}
                                 />
                                 <button className="pushable">
                                     <span className="front">
@@ -174,7 +224,6 @@ const Courses: React.FC = () => {
                                     </span>
                                 </button>
                             </form>
-
                         </div>
                     )}
                     {currentExo.type_exo === "choix_multiple_signification" && (
@@ -196,7 +245,7 @@ const Courses: React.FC = () => {
                                     </button>
                                 ))}
                             </div>
-                            <button className="pushable" onClick={handleNextExo}>
+                            <button className="pushable" onClick={() => handleMultipleSignification(currentExo.reponse_attendue)}>
                                 <span className="front">
                                     Validé
                                 </span>
@@ -220,7 +269,7 @@ const Courses: React.FC = () => {
                             </button>
                         </div>
                     )}
-                </body>
+                </main>
             </div >
 
             <div className='pub'>
