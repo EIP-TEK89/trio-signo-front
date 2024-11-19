@@ -31,13 +31,6 @@ body {
     font-family: 'Helvetica', Arial, sans-serif;
 }
 
-.section-title {
-    text-align: center;
-    color: var(--color);
-    font-size: 2.5em;
-    font-weight: bold;
-}
-
 .section-container {
     display: flex;
     justify-content: space-between;
@@ -47,6 +40,13 @@ body {
 
 .section-container:nth-child(even) {
     flex-direction: row-reverse;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--color);
+    font-size: 2.5em;
+    font-weight: bold;
 }
 
 .section-text {
@@ -82,28 +82,6 @@ body {
     width: 300px;
     height: auto;
 }
-
-/* Style for smaller devices */
-@media screen and (max-width: 768px) {
-    .section-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .section-image img {
-        width: 200px;
-        margin-bottom: 20px;
-    }
-
-    .section-subtitle {
-        text-align: center;
-    }
-
-    .section-text p {
-        text-align: center;
-    }
-}
-
 
 .team-section {
     text-align: center;
@@ -181,9 +159,39 @@ body {
 }
 
 @media (max-width: 768px) {
+    .app-header {
+        padding-left: 20%;
+    }
+
+    .login {
+        padding-right: 0%;
+        margin-right: 5%;
+    }
+
+    .section-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-container:nth-child(even) {
+        flex-direction:column;
+    }
+
+    .section-image img {
+        width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+    }
+
+    .section-text p {
+        text-align: center;
+    }
+
     .footer {
         flex-direction: column;
-        align-items: flex-start;
     }
 
     .footer-section {

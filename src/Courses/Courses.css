@@ -10,6 +10,15 @@
     border-bottom: 1px solid lightgray;
 }
 
+.pub {
+    height: 100vh;
+    background-color: lightgray;
+    width: 35%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
 .icon-container {
     display: flex;
     align-items: center;

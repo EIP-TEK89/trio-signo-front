@@ -4,18 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import './CoursesJourneyHome.css';
 
-import Carousel from '../Carousel/Carousel';
+import Carousel from '../../Carousel/Carousel';
 
 import Flag from '../../Assets/CoursesJourneyHome/flag.png';
 import Streak from '../../Assets/CoursesJourneyHome/streak.png';
 import Point from '../../Assets/CoursesJourneyHome/point.png';
 import Life from '../../Assets/CoursesJourneyHome/life.png';
 import Star from '../../Assets/CoursesJourneyHome/star.png';
-
-import Pub1 from '../../Assets/Pub/pub1.png';
-import Pub2 from '../../Assets/Pub/pub2.png';
-import Pub3 from '../../Assets/Pub/pub3.png';
-import Pub4 from '../../Assets/Pub/pub4.png';
 
 const CoursesJourneyHome: React.FC = () => {
     const navigate = useNavigate();
@@ -29,12 +24,6 @@ const CoursesJourneyHome: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const images = [
-        Pub1,
-        Pub2,
-        Pub3,
-        Pub4
-      ];
 
     useEffect(() => {
         fetch('https://api.example.com/data')
@@ -72,7 +61,7 @@ const CoursesJourneyHome: React.FC = () => {
     return (
         <div className="courses-journey-page">
             <div className='pub'>
-                <Carousel images={images} />
+                <Carousel />
             </div>
 
             <div className='courses-journey'>
@@ -130,7 +119,7 @@ const CoursesJourneyHome: React.FC = () => {
             </div>
 
             <div className='pub'>
-                <Carousel images={images} />
+                <Carousel />
             </div>
         </div>
     );
