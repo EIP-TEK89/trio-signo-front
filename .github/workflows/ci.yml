@@ -1,0 +1,33 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Déclenche le workflow uniquement sur les pushs à main.
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout du code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Installation de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Remplacez par la version de Node.js que vous utilisez
+
+      # 3. Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lancer ESLint
+      - name: Run ESLint
+        run: npm run lint
+
+      # 5. Lancer les tests Playwright
+      - name: Run Playwright Tests
+        run: npx playwright test
