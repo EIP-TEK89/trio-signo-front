@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../Store/AuthSlice';
 
 import './LoginSignup.css';
 import Logo from '../Assets/logo.png';
@@ -34,6 +36,9 @@ const LoginSignup: React.FC = () => {
 
       const data = await response.json();
       console.log('User created successfully:', data);
+
+      const dispatch = useDispatch();
+      dispatch(setToken(data));
 
       navigate('/coursesJourney/home');
 
