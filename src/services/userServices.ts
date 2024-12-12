@@ -1,5 +1,6 @@
 import { get, post, put, del } from './apiClient';
 import API_ROUTES from './apiRoutes';
+import { UserCredentials } from '../types/User';
 
 // Call to get all users
 export const fetchAllUsers = async () => {
@@ -12,7 +13,7 @@ export const fetchUserById = async (id: string) => {
 };
 
 // Call to post a user
-export const signUpUser = async (userData: any) => {
+export const signUpUser = async (userData: UserCredentials) => {
   return await post(API_ROUTES.signUp, userData);
 };
 
