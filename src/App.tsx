@@ -9,13 +9,14 @@ import CoursesJourneyCompetition from './CoursesJourney/Competition/CoursesJourn
 import CoursesJourneyProfile from './CoursesJourney/Profile/CoursesJourneyProfile';
 import CoursesJourneyTraining from './CoursesJourney/Training/CoursesJourneyTraining';
 import CoursesJourneyQuests from './CoursesJourney/Quests/CoursesJourneyQuests';
+import SignUp from './SignUp/SignUp';
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<LoginSignup />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<LoginSignin />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/coursesJourney/home" element={<CoursesJourneyHome />} />
@@ -29,4 +30,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

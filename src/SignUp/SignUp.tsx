@@ -45,19 +45,29 @@ const SignUp: React.FC = () => {
       </div>
       <h2>Connection</h2>
       <div className="form-group">
-        <input type="username" placeholder="Surnom" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input
+          type="username"
+          placeholder="Surnom"
+          value={credentials.username}
+          onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+        />
         {errors.username && <p className="error-message">{errors.username}</p>}
       </div>
       <div className="form-group">
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          placeholder="Email"
+          value={credentials.email}
+          onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+        />
         {errors.email && <p className="error-message">{errors.email}</p>}
       </div>
       <div className="form-group">
         <input
           type="password"
           placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={credentials.password}
+          onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
         />
         {errors.password && <p className="error-message">{errors.password}</p>}
       </div>
