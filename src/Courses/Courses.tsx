@@ -10,9 +10,9 @@ import Carousel from '../Carousel/Carousel';
 
 import coursesData from './Courses.json';
 
-import Life from '../Assets/CoursesJourneyHome/life.png';
+import Life from '../assets/CoursesJourneyHome/life.png';
 
-import Cross from '../Assets/cross-button.png';
+import Cross from '../assets/cross-button.png';
 
 const Courses: React.FC = () => {
     const navigate = useNavigate();
@@ -43,7 +43,7 @@ const Courses: React.FC = () => {
     /*
     * Multiple Images answer
     * Status: OK
-    * 
+    *
     */
     const [activeButton, setActiveButton] = useState<number | null>(null);
     const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
@@ -68,7 +68,7 @@ const Courses: React.FC = () => {
     /*
     * Write the answer
     * Status: OK
-    * 
+    *
     */
     const [text, setText] = useState<string | undefined>(undefined);
     const handleSubmit = (message: string) => {
@@ -84,7 +84,7 @@ const Courses: React.FC = () => {
     /*
     * Multiple Signification answer
     * Status: OK
-    * 
+    *
     */
     const handleMultipleSignification = (message: string) => {
         if (buttonAnswer !== null) {
@@ -104,7 +104,7 @@ const Courses: React.FC = () => {
     /*
     * Camera
     * Status: OK
-    * 
+    *
     */
     const capture = React.useCallback(async (answer: string) => {
         if (webcamRef.current !== null) {
@@ -161,12 +161,12 @@ const Courses: React.FC = () => {
                             <img
                                 src={
                                     typeof currentExo.reponse[0] === 'object' && 'name' in currentExo.reponse[0]
-                                        ? `/Assets/Hand/${currentExo.reponse[0].name}.jpg`
+                                        ? `/assets/Hand/${currentExo.reponse[0].name}.jpg`
                                         : ''
                                 }
                                 alt={'image'}
                                 className="tuto-img"
-                                onError={(e) => (e.currentTarget.src = `/Assets/Hand/default.jpg`)}
+                                onError={(e) => (e.currentTarget.src = `/assets/Hand/default.jpg`)}
                             />
                             <button className="pushable" onClick={handleNextExo}>
                                 <span className="front">
@@ -187,7 +187,7 @@ const Courses: React.FC = () => {
                                     >
                                         <img
                                             src={typeof reponse === 'object' && 'name' in reponse ?
-                                                `/Assets/Hand/${reponse.name}.jpg`
+                                                `/assets/Hand/${reponse.name}.jpg`
                                                 : ''}
                                             alt="image"
                                             className='choice-img'
@@ -207,7 +207,7 @@ const Courses: React.FC = () => {
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
-                                src={`/Assets/Hand/${currentExo.reponse_attendue}.jpg`}
+                                src={`/assets/Hand/${currentExo.reponse_attendue}.jpg`}
                                 alt="image"
                                 className='write-img'
                             />
@@ -230,7 +230,7 @@ const Courses: React.FC = () => {
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
-                                src={`/Assets/Hand/${currentExo.reponse_attendue}.jpg`}
+                                src={`/assets/Hand/${currentExo.reponse_attendue}.jpg`}
                                 alt="image"
                                 className='multiple-choice-img'
                             />

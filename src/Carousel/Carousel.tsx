@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Carousel.css';
 
-import Pub1 from '../Assets/Pub/pub1.png';
-import Pub2 from '../Assets/Pub/pub2.png';
-import Pub3 from '../Assets/Pub/pub3.png';
-import Pub4 from '../Assets/Pub/pub4.png';
+import Pub1 from '../assets/Pub/pub1.png';
+import Pub2 from '../assets/Pub/pub2.png';
+import Pub3 from '../assets/Pub/pub3.png';
+import Pub4 from '../assets/Pub/pub4.png';
 
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

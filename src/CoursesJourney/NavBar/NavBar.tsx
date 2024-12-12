@@ -3,11 +3,11 @@ import { useLocation, NavLink } from 'react-router-dom';
 
 import './NavBar.css';
 
-import Home from '../../Assets/NavBar/home.png';
-import Haltere from '../../Assets/NavBar/haltere.png';
-import Trophy from '../../Assets/NavBar/trophy.png';
-import Genie from '../../Assets/NavBar/genie.png';
-import Chest from '../../Assets/NavBar/chest.png';
+import Home from '../../assets/NavBar/home.png';
+import Haltere from '../../assets/NavBar/haltere.png';
+import Trophy from '../../assets/NavBar/trophy.png';
+import Genie from '../../assets/NavBar/genie.png';
+import Chest from '../../assets/NavBar/chest.png';
 
 const NavBar: React.FC = () => {
     const location = useLocation();

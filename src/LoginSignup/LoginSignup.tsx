@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setToken } from '../Store/AuthSlice';
 
 import './LoginSignup.css';
-import Logo from '../Assets/logo.png';
+import Logo from '../assets/logo.png';
 
 const LoginSignup: React.FC = () => {
   const [username, setUsername] = useState('');
