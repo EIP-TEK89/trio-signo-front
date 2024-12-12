@@ -12,9 +12,14 @@ export const fetchUserById = async (id: string) => {
   return await get(API_ROUTES.getUserById(id));
 };
 
-// Call to post a user
+// Call to sign up a user
 export const signUpUser = async (userData: UserCredentials) => {
   return await post(API_ROUTES.signUp, userData);
+};
+
+// Call to log in a user
+export const logInUser = async (userData: UserCredentials) => {
+  return await post(API_ROUTES.logIn, userData);
 };
 
 // Call to update a user

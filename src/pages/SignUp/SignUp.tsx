@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../Store/AuthSlice';
-import { UserCredentials } from '../types/User';
-import { ErrorCredentials } from '../types/Error';
-import { signUpUser } from '../services/userServices';
-import { isApiError } from '../services/isApiError';
-import '../styles/LoginSignup.css';
-import Logo from '../assets/logo.png';
+import { setToken } from '../../store/AuthSlice';
+import { UserCredentials } from '../../types/User';
+import { ErrorCredentials } from '../../types/Error';
+import { signUpUser } from '../../services/userServices';
+import { isApiError } from '../../services/isApiError';
+import '../../styles/LoginSignup.css';
+import Logo from '../../assets/logo.png';
 
 const SignUp: React.FC = () => {
   const [credentials, setCredentials] = React.useState<UserCredentials>({
@@ -33,7 +33,7 @@ const SignUp: React.FC = () => {
       } else if (error instanceof Error) {
         setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
       } else {
-        setErrors((prevErrors) => ({ ...prevErrors, apiError: 'Une erreur inattendue est survenue' }));
+        setErrors((prevErrors) => ({ ...prevErrors, apiError: 'An unknown error occured' }));
       }
     }
   };
