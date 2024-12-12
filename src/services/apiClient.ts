@@ -8,11 +8,11 @@ const apiClient = axios.create({
 // Error handling
 const handleError = (error: any) => {
   if (axios.isAxiosError(error)) {
-    console.error('Erreur API :', error.response?.data || error.message);
-    throw new Error(error.response?.data?.message || 'Une erreur est survenue');
+    console.error('API error :', error.response?.data || error.message);
+    throw new Error(error.response?.data?.message || 'An error occurred');
   } else {
-    console.error('Erreur inconnue :', error);
-    throw new Error('Erreur inconnue');
+    console.error('Unknown error :', error);
+    throw new Error('Unknown error');
   }
 };
 
@@ -29,6 +29,8 @@ export const get = async (url: string, params = {}) => {
 export const post = async (url: string, data: any) => {
   try {
     const response = await apiClient.post(url, data);
+    console.log('response', response);
+
     return response.data;
   } catch (error) {
     handleError(error);

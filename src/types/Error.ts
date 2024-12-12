@@ -5,4 +5,9 @@ type ErrorCredentials = {
   apiError?: string;
 };
 
-export type { ErrorCredentials };
+type ApiError = {
+  message: string;
+  code?: number;
+};
+
+export type { ErrorCredentials, ApiError };

@@ -5,8 +5,9 @@ import { setToken } from '../Store/AuthSlice';
 import { UserCredentials } from '../types/User';
 import { ErrorCredentials } from '../types/Error';
 import { signUpUser } from '../services/userServices';
+import { isApiError } from '../services/isApiError';
 import '../styles/LoginSignup.css';
-import Logo from '../Assets/logo.png';
+import Logo from '../assets/logo.png';
 
 const SignUp: React.FC = () => {
   const [credentials, setCredentials] = React.useState<UserCredentials>({
@@ -16,25 +17,24 @@ const SignUp: React.FC = () => {
   });
   const [errors, setErrors] = React.useState<ErrorCredentials>({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleConnection = async () => {
     try {
-      const response = await signUpUser(credentials);
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error creating user');
-      }
-
-      const data = await response.json();
+      const data = await signUpUser(credentials);
       console.log('User created successfully:', data);
 
-      const dispatch = useDispatch();
       dispatch(setToken(data));
 
       navigate('/coursesJourney/home');
-    } catch (error: any) {
-      setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
+    } catch (error: unknown) {
+      if (isApiError(error)) {
+        setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
+      } else if (error instanceof Error) {
+        setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
+      } else {
+        setErrors((prevErrors) => ({ ...prevErrors, apiError: 'Une erreur inattendue est survenue' }));
+      }
     }
   };
 
