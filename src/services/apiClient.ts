@@ -44,4 +44,13 @@ export const del = async (url: string) => {
   }
 };
 
+export const put = async (url: string, data: any) => {
+  try {
+    const response = await apiClient.put(url, data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 export default apiClient;
