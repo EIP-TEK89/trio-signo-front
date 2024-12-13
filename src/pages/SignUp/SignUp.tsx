@@ -1,13 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
+// local imports
 import { setToken } from '../../store/AuthSlice';
-import { UserCredentials } from '../../types/User';
-import { ErrorCredentials } from '../../types/Error';
 import { signUpUser } from '../../services/userServices';
 import { isApiError } from '../../services/isApiError';
+
+// styles
 import '../../styles/LoginSignup.css';
 import Logo from '../../assets/logo.png';
+
+// types
+import { UserCredentials } from '../../types/User';
+import { ErrorCredentials } from '../../types/Error';
 
 const SignUp: React.FC = () => {
   const [credentials, setCredentials] = React.useState<UserCredentials>({
