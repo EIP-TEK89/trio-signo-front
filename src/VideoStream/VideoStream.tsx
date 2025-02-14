@@ -1,91 +1,128 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-const VideoCaptureUploader: React.FC = () => {
+interface VideoCaptureUploaderProps {
+    handleNextExo: () => void;
+    response: string;
+}
+
+const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ handleNextExo, response }) => {
+    console.log(response)
     const videoRef = useRef<HTMLVideoElement>(null);
-    const mediaStreamRef = useRef<MediaStream | null>(null);
-    const recorderRef = useRef<MediaRecorder | null>(null);
-    const [countdown, setCountdown] = useState<number | null>(null);
-    const [isRecording, setIsRecording] = useState(false);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
+    const [isStreaming, setIsStreaming] = useState(false);
+    const streamingRef = useRef(false); // Référence pour suivre l'état de streaming
 
     const startCaptureProcess = async () => {
-        setCountdown(3);
-        for (let i = 3; i > 0; i--) {
-            setCountdown(i);
-            await new Promise(resolve => setTimeout(resolve, 1000));
-        }
-        setCountdown(null);
-
-        await startRecording();
-    };
-
-    const startRecording = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            mediaStreamRef.current = stream;
-
+            setMediaStream(stream);
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
             }
-            const recordedChunks: Blob[] = [];
-            const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
 
-            recorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    recordedChunks.push(event.data);
-                }
-            };
-
-            recorder.onstop = async () => {
-                const recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
-                await uploadVideo(recordedBlob);
-            };
-
-            recorderRef.current = recorder;
-            recorder.start();
-            setIsRecording(true);
-
-            setTimeout(() => {
-                recorder.stop();
-                stopVideoStream();
-            }, 5000); // Enregistre pendant 5 secondes
-
-        } catch (error) {
-            console.error("Error accessing webcam:", error);
+        } catch (err) {
+            console.error("Error accessing webcam:", err);
         }
     };
 
-    const stopVideoStream = () => {
-        mediaStreamRef.current?.getTracks().forEach(track => track.stop());
-        mediaStreamRef.current = null;
-        setIsRecording(false);
+    const stopStreaming = () => {
+        setIsStreaming(false);
+        streamingRef.current = false; // Met à jour la référence pour arrêter la boucle
     };
 
-    const uploadVideo = async (videoBlob: Blob) => {
-        const formData = new FormData();
-        formData.append("file", videoBlob, "video.webm");
-
-        try {
-            const response = await axios.post("http://localhost:5000/get-alphabet", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-
-            console.log("Server Response:", response.data);
-        } catch (error) {
-            console.error("Error uploading video:", error);
+    const startStreaming = () => {
+        if (!mediaStream) {
+            console.error("No media stream available.");
+            return;
         }
+
+        if (isStreaming) {
+            console.warn("Already streaming.");
+            return;
+        }
+
+        setIsStreaming(true);
+        streamingRef.current = true; // Met à jour la référence pour indiquer que le streaming est actif
+
+        const captureFrames = async () => {
+            if (!streamingRef.current || !canvasRef.current || !videoRef.current) {
+                console.warn("Stopping captureFrames because streaming is off.");
+                return;
+            }
+
+            const canvas = canvasRef.current;
+            const video = videoRef.current;
+            const context = canvas.getContext("2d");
+
+            if (context) {
+                // Configure le canvas selon la taille de la vidéo
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                // Dessine la vidéo sur le canvas
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convertit le canvas en Blob (image)
+                canvas.toBlob(async (blob) => {
+                    if (!blob) return;
+
+                    // Prépare et envoie la requête au backend
+                    const formData = new FormData();
+                    formData.append("file", blob);
+
+                    try {
+                        // console.log("Uploading frame to backend...");
+                        var res = fetch("http://localhost:5000/get-alphabet", {
+                            method: "POST",
+                            body: formData,
+                        })
+                        res
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(data);
+                                if (data.message === response || data.message == response.toUpperCase()) {
+                                    stopStreaming()
+                                    handleNextExo();
+                                }
+                            })
+                            .catch((err) => {
+                                console.error("Error handling response:", err);
+                            });
+                        // console.log("Frame uploaded successfully.", resp.json());
+                        // fetch("http://localhost:5000/get-alphabet-end", {
+                        //   method: "DELETE",
+                        // })
+                    } catch (err) {
+                        console.error("Error uploading frame:", err);
+                    }
+                }, "image/jpeg");
+
+                // Capture la prochaine frame après 100ms
+                setTimeout(captureFrames, 1000 / 30);
+            } else {
+                console.warn("No context available for canvas.");
+            }
+        };
+
+        captureFrames();
     };
+
+    useEffect(() => {
+        startCaptureProcess()
+    }, []);
+
     return (
         <div className="tuto">
             <video ref={videoRef} autoPlay width={540} height={480} />
+            <canvas ref={canvasRef} hidden />
             <button className="pushable"
-                onClick={startCaptureProcess}
-                disabled={isRecording}>
+                onClick={startStreaming}>
                 <span className="front">
-                    {isRecording ? "Recording..." : "Start Capture"}
+                    {isStreaming ? "Recording..." : "Start Capture"}
                 </span>
             </button>
-            {countdown !== null && <p>{countdown}</p>}
         </div>
     );
 };

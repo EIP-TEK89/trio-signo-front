@@ -256,7 +256,7 @@ const Courses: React.FC = () => {
                     {currentExo.type_exo === "camera" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
-                            <VideoStreamUploader />
+                            <VideoStreamUploader handleNextExo={handleNextExo} response={currentExo.reponse_attendue} />
                             {/* <Webcam
                                 audio={false}
                                 ref={webcamRef}
