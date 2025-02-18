@@ -43,7 +43,7 @@ const LoginSignin: React.FC = () => {
             <div className="logo">
                 <img src={Logo} alt="Logo" className="logo" />
             </div>
-            <h2>Connection</h2>
+            <h2>Connexion</h2>
             <div className="form-group">
                 <input
                     type="email"
@@ -63,12 +63,12 @@ const LoginSignin: React.FC = () => {
                 {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
             <p className="forgot-password">
-                Mot de passe oublié ? <a href="#">Clicker Ici</a>
+                Mot de passe oublié ? <a href="#">Clickez Ici</a>
             </p>
             <div className="button-container">
                 <button className="pushable" onClick={handleConnection}>
                     <span className="front">
-                        Connection
+                      Connexion
                     </span>
                 </button>
             </div>
