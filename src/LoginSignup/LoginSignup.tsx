@@ -5,14 +5,11 @@ import { setToken } from '../Store/AuthSlice';
 
 import './LoginSignup.css';
 import Logo from '../Assets/logo.png';
-import Logo from '../Assets/logo.png';
 
 const LoginSignup: React.FC = () => {
   const [username, setUsername] = useState('');
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<{ username?: string; email?: string; password?: string; apiError?: string }>({});
   const [errors, setErrors] = useState<{ username?: string; email?: string; password?: string; apiError?: string }>({});
   const navigate = useNavigate();
 
@@ -21,22 +18,10 @@ const LoginSignup: React.FC = () => {
 
       const response = await fetch("http://localhost:3000/api/auth/sign-up", {
         method: "POST",
-  const handleConnection = async () => {
-    try {
-
-      const response = await fetch("http://localhost:3000/api/auth/sign-up", {
-        method: "POST",
         headers: {
           "accept": "application/json",
           "Content-Type": "application/json"
-          "accept": "application/json",
-          "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          username,
-          email,
-          password
-        }),
         body: JSON.stringify({
           username,
           email,
@@ -103,7 +88,6 @@ const LoginSignup: React.FC = () => {
       <div className="form-group">
         <input
           type="password"
-          placeholder="Mot de passe"
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
