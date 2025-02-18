@@ -32,7 +32,6 @@ const LoginSignup: React.FC = () => {
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Error creating user');
-        throw new Error(errorData.message || 'Error creating user');
       }
 
       const data = await response.json();
@@ -57,16 +56,7 @@ const LoginSignup: React.FC = () => {
       <div className="logo">
         <img src={Logo} alt="Logo" className="logo" />
       </div>
-      <h2>Connection</h2>
-      <div className="form-group">
-        <input
-          type="username"
-          placeholder="Surnom"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {errors.username && <p className="error-message">{errors.username}</p>}
-      </div>
+      <h2>Connexion</h2>
       <div className="form-group">
         <input
           type="username"
@@ -97,20 +87,12 @@ const LoginSignup: React.FC = () => {
       <div className="button-container">
         <button className="pushable" onClick={handleConnection}>
           <span className="front">
-            Connection
-          </span>
-        </button>
-        <button className="pushable" onClick={handleConnection}>
-          <span className="front">
-            Connection
+          Connexion
           </span>
         </button>
       </div>
       <p className="forgot-password">
-        Déjà un compte ? <a href="/signin">Clicker Ici</a>
-      </p>
-      <p className="forgot-password">
-        Déjà un compte ? <a href="/signin">Clicker Ici</a>
+        Déjà un compte ? <a href="/signin">Clickez Ici</a>
       </p>
       {errors.apiError && <p className="api-error-message">{errors.apiError}</p>}
     </div>
