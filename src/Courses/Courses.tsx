@@ -13,6 +13,7 @@ import coursesData from './Courses.json';
 import Life from '../Assets/CoursesJourneyHome/life.png';
 
 import Cross from '../Assets/cross-button.png';
+import VideoStreamUploader from '../VideoStream/VideoStream';
 
 const Courses: React.FC = () => {
     const navigate = useNavigate();
@@ -255,7 +256,8 @@ const Courses: React.FC = () => {
                     {currentExo.type_exo === "camera" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
-                            <Webcam
+                            <VideoStreamUploader handleNextExo={handleNextExo} response={currentExo.reponse_attendue} />
+                            {/* <Webcam
                                 audio={false}
                                 ref={webcamRef}
                                 screenshotFormat="image/png"
@@ -266,7 +268,7 @@ const Courses: React.FC = () => {
                                 <span className="front">
                                     Validé
                                 </span>
-                            </button>
+                            </button> */}
                         </div>
                     )}
                 </main>
