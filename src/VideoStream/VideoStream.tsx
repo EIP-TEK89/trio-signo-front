@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 interface VideoCaptureUploaderProps {
-    handleNextExo: () => void;
+    goodAnswer: () => void;
+    badAnswer: () => void;
     response: string;
 }
 
-const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ handleNextExo, response }) => {
+const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer, badAnswer, response }) => {
     console.log(response)
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -84,7 +85,7 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ handleNextE
                                 console.log(data);
                                 if (data.message === response || data.message == response.toUpperCase()) {
                                     stopStreaming()
-                                    handleNextExo();
+                                    goodAnswer();
                                 }
                             })
                             .catch((err) => {

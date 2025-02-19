@@ -27,18 +27,33 @@ const Courses: React.FC = () => {
 
     const [currentExoIndex, setCurrentExoIndex] = useState(0);
     const currentExo = coursesData.exercises[currentExoIndex];
+    const [borderClass, setBorderClass] = useState<string>('');
 
     const handleNextExo = () => {
         if (currentExoIndex < coursesData.exercises.length - 1) {
             setCurrentExoIndex(currentExoIndex + 1);
             setStep(step + 1)
+        } else {
+            BackToHome()
         }
         //display publicity on phone
     };
 
+    const GoodAnswer = async () => {
+        setBorderClass('green-border');
+        setTimeout(() => {
+            setBorderClass('');
+            handleNextExo();
+        }, 300);
+    };
+
     const BadAnswer = async () => {
-        //call life -1
-        handleNextExo()
+        setBorderClass('red-border');
+        setTimeout(() => {
+            setBorderClass('');
+            //call life -1
+            handleNextExo();
+        }, 300);
     };
 
     /*
@@ -57,7 +72,7 @@ const Courses: React.FC = () => {
     const handleMultipleImages = (message: string) => {
         if (buttonAnswer !== null) {
             if (message === buttonAnswer)
-                handleNextExo()
+                GoodAnswer()
             else
                 BadAnswer()
         }
@@ -75,7 +90,7 @@ const Courses: React.FC = () => {
     const handleSubmit = (message: string) => {
         if (text !== undefined) {
             if (message === text)
-                handleNextExo()
+                GoodAnswer()
             else
                 BadAnswer()
         }
@@ -92,7 +107,7 @@ const Courses: React.FC = () => {
             console.log(message)
             console.log(buttonAnswer)
             if (message === buttonAnswer)
-                handleNextExo()
+                GoodAnswer()
             else
                 BadAnswer()
         }
@@ -126,7 +141,7 @@ const Courses: React.FC = () => {
                     console.log(response.data.message);
                     console.log(answer)
                     if (response.data.message == answer.toUpperCase())
-                        handleNextExo()
+                        GoodAnswer()
                     else
                         BadAnswer()
                 } catch (error) {
@@ -155,7 +170,8 @@ const Courses: React.FC = () => {
                     </div>
                 </header>
 
-                <main className='bodyCourses'>
+
+                <main className={`bodyCourses ${borderClass}`}>
                     {currentExo.exercise_type === "tutorial" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
@@ -256,7 +272,7 @@ const Courses: React.FC = () => {
                     {currentExo.exercise_type === "camera" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
-                            <VideoStreamUploader handleNextExo={handleNextExo} response={currentExo.expected_answer} />
+                            <VideoStreamUploader goodAnswer={GoodAnswer} badAnswer={BadAnswer} response={currentExo.expected_answer} />
                         </div>
                     )}
                 </main>

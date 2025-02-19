@@ -159,6 +159,16 @@
     background-color: #f0f8ff;
 }
 
+.green-border {
+    box-shadow: 0 0 15px 5px rgba(0, 255, 0, 0.5);
+    background: radial-gradient(rgba(0, 255, 0, 0.2), transparent);
+}
+
+.red-border {
+    box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.5);
+    background: radial-gradient(rgba(255, 0, 0, 0.2), transparent);
+}
+
 
 @media (max-width: 880px) {
     .pub {
