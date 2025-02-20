@@ -20,7 +20,7 @@ const CoursesJourneyHome: React.FC = () => {
     const [heartCount, setHeartCount] = useState<number>(0);
     const [currentUnit, setCurrentUnit] = useState<number>(0);
     const [currentChapter, setCurrentChapter] = useState<number>(0);
-    const [currentChapterName, setCurrentChapterName] = useState<string>("Le bug réseau");
+    const [currentChapterName, setCurrentChapterName] = useState<string>("L'alphabet");
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 

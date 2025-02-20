@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
+import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+
+
 interface VideoCaptureUploaderProps {
     goodAnswer: () => void;
     badAnswer: () => void;
@@ -75,7 +78,7 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer,
 
                     try {
                         // console.log("Uploading frame to backend...");
-                        var res = fetch("http://localhost:5000/get-alphabet", {
+                        var res = fetch(getBaseUrl() + ":5000/get-alphabet", {
                             method: "POST",
                             body: formData,
                         })
@@ -92,7 +95,7 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer,
                                 console.error("Error handling response:", err);
                             });
                         // console.log("Frame uploaded successfully.", resp.json());
-                        // fetch("http://localhost:5000/get-alphabet-end", {
+                        // fetch(getBaseUrl() + ":5000/get-alphabet-end", {
                         //   method: "DELETE",
                         // })
                     } catch (err) {
@@ -121,7 +124,7 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer,
             <button className="pushable"
                 onClick={startStreaming}>
                 <span className="front">
-                    {isStreaming ? "Recording..." : "Start Capture"}
+                    {isStreaming ? "Enregistrement en cours..." : "Démarrer l'enregistrement"}
                 </span>
             </button>
         </div>

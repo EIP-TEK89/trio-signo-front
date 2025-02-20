@@ -5,4 +5,3 @@ test('has title', async ({ page }) => {
 
   await expect(page.getByText('Signify').first()).toBeVisible()
 });
-

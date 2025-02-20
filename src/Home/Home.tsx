@@ -147,7 +147,7 @@ const Home: React.FC = () => {
         <h2 className="section-title">Essayez une leçon maintenant</h2>
         <button className="pushable" onClick={Courses}>
           <span className="front">
-            ESSAYER
+            Essayer
           </span>
         </button>
 

@@ -6,6 +6,8 @@ import { setToken } from '../Store/AuthSlice';
 import './LoginSignup.css';
 import Logo from '../Assets/logo.png';
 
+import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+
 const LoginSignup: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -16,7 +18,7 @@ const LoginSignup: React.FC = () => {
   const handleConnection = async () => {
     try {
 
-      const response = await fetch("http://localhost:3000/api/auth/sign-up", {
+      const response = await fetch(getBaseUrl() + ":3000/api/auth/sign-up", {
         method: "POST",
         headers: {
           "accept": "application/json",
@@ -92,7 +94,7 @@ const LoginSignup: React.FC = () => {
         </button>
       </div>
       <p className="forgot-password">
-        Déjà un compte ? <a href="/signin">Clickez Ici</a>
+        Déjà un compte ? <a href="/signin">Cliquez Ici</a>
       </p>
       {errors.apiError && <p className="api-error-message">{errors.apiError}</p>}
     </div>

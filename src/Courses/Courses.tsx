@@ -15,6 +15,8 @@ import Life from '../Assets/CoursesJourneyHome/life.png';
 import Cross from '../Assets/cross-button.png';
 import VideoStreamUploader from '../VideoStream/VideoStream';
 
+import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+
 const Courses: React.FC = () => {
     const navigate = useNavigate();
     const webcamRef = React.useRef<Webcam>(null);
@@ -59,7 +61,7 @@ const Courses: React.FC = () => {
     /*
     * Multiple Images answer
     * Status: OK
-    * 
+    *
     */
     const [activeButton, setActiveButton] = useState<number | null>(null);
     const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
@@ -84,7 +86,7 @@ const Courses: React.FC = () => {
     /*
     * Write the answer
     * Status: OK
-    * 
+    *
     */
     const [text, setText] = useState<string | undefined>(undefined);
     const handleSubmit = (message: string) => {
@@ -100,7 +102,7 @@ const Courses: React.FC = () => {
     /*
     * Multiple Signification answer
     * Status: OK
-    * 
+    *
     */
     const handleMultipleSignification = (message: string) => {
         if (buttonAnswer !== null) {
@@ -120,7 +122,7 @@ const Courses: React.FC = () => {
     /*
     * Camera
     * Status: OK
-    * 
+    *
     */
     const capture = React.useCallback(async (answer: string) => {
         if (webcamRef.current !== null) {
@@ -133,7 +135,7 @@ const Courses: React.FC = () => {
                 formData.append('file', blob, 'image.jpg');
 
                 try {
-                    const response = await axios.post('http://localhost:5000/get-alphabet', formData, {
+                    const response = await axios.post(getBaseUrl() + ':5000/get-alphabet', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
@@ -187,7 +189,7 @@ const Courses: React.FC = () => {
                             />
                             <button className="pushable" onClick={handleNextExo}>
                                 <span className="front">
-                                    Validé
+                                    Valider
                                 </span>
                             </button>
                         </div>
@@ -215,7 +217,7 @@ const Courses: React.FC = () => {
 
                             <button className="pushable" onClick={() => handleMultipleImages(currentExo.expected_answer)}>
                                 <span className="front">
-                                    Validé
+                                    Valider
                                 </span>
                             </button>
                         </div>
@@ -237,7 +239,7 @@ const Courses: React.FC = () => {
                                 />
                                 <button className="pushable">
                                     <span className="front">
-                                        Validé
+                                        Valider
                                     </span>
                                 </button>
                             </form>
@@ -264,7 +266,7 @@ const Courses: React.FC = () => {
                             </div>
                             <button className="pushable" onClick={() => handleMultipleSignification(currentExo.expected_answer)}>
                                 <span className="front">
-                                    Validé
+                                    Valider
                                 </span>
                             </button>
                         </div>
