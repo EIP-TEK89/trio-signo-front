@@ -51,6 +51,7 @@
 
 .coursesJourneyPage {
     display: flex;
+    justify-content: center;
 }
 
 .coursesJourney {
@@ -105,7 +106,7 @@
     display: flex;
     flex-wrap: wrap;
     padding-left: 5%; /* not the best option*/
-    padding-bottom: 5%; 
+    padding-bottom: 5%;
 }
 
 .Img-Button {
@@ -141,7 +142,7 @@
 .text-selection {
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 5%; 
+    padding-bottom: 5%;
 }
 
 .text-Button {

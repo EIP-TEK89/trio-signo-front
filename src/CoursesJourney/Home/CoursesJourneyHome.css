@@ -28,6 +28,7 @@
 
 .courses-journey-page {
     display: flex;
+    justify-content: center;
 }
 
 .courses-journey {

@@ -155,9 +155,9 @@ const Courses: React.FC = () => {
 
     return (
         <div className="coursesJourneyPage">
-            <div className='pub'>
+            {/* <div className='pub'>
                 <Carousel />
-            </div>
+            </div> */}
 
             <div className='coursesJourney'>
                 <header className="header">
@@ -280,9 +280,9 @@ const Courses: React.FC = () => {
                 </main>
             </div >
 
-            <div className='pub'>
+            {/* <div className='pub'>
                 <Carousel />
-            </div>
+            </div> */}
         </div >
     );
 };
