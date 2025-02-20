@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
 import Logo from '../Assets/logo.png';
 
+import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+
 const LoginSignin: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,8 +13,8 @@ const LoginSignin: React.FC = () => {
 
     const handleConnection = async () => {
         try {
-    
-          const response = await fetch("http://localhost:3000/api/auth/log-in", {
+
+          const response = await fetch(getBaseUrl() + ":3000/api/auth/log-in", {
             method: "POST",
             headers: {
               "accept": "application/json",
@@ -23,16 +25,16 @@ const LoginSignin: React.FC = () => {
               password
             }),
           });
-    
+
           if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || 'Error creating user');
           }
-    
+
           const data = await response.json();
-          console.log('User created successfully:', data);   
+          console.log('User created successfully:', data);
           navigate('/coursesJourney/home');
-    
+
         } catch (error: any) {
           setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
         }
@@ -63,7 +65,7 @@ const LoginSignin: React.FC = () => {
                 {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
             <p className="forgot-password">
-                Mot de passe oublié ? <a href="#">Clickez Ici</a>
+                Mot de passe oublié ? <a href="#">Cliquez Ici</a>
             </p>
             <div className="button-container">
                 <button className="pushable" onClick={handleConnection}>

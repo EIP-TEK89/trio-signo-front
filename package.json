@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "vite --host",
+    "start": "vite --host --port 4000",
     "build": "vite build",
     "lint": "npx eslint 'src/**'",
     "format": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",

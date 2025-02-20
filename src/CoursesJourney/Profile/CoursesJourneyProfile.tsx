@@ -8,7 +8,7 @@ import Carousel from '../../Carousel/Carousel';
 
 const CoursesJourneyProfile: React.FC = () => {
     const navigate = useNavigate();
-    
+
     return (
         <div className="courses-journey-page">
             <div className='pub'>
@@ -17,7 +17,7 @@ const CoursesJourneyProfile: React.FC = () => {
 
             <div className='courses-journey'>
                 <body className='body-courses'>
-                    
+
                 </body>
 
                 <NavBar />

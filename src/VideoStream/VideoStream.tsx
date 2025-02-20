@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
+import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+
+
 interface VideoCaptureUploaderProps {
-    handleNextExo: () => void;
+    goodAnswer: () => void;
+    badAnswer: () => void;
     response: string;
 }
 
-const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ handleNextExo, response }) => {
+const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer, badAnswer, response }) => {
     console.log(response)
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -74,7 +78,7 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ handleNextE
 
                     try {
                         // console.log("Uploading frame to backend...");
-                        var res = fetch("http://localhost:5000/get-alphabet", {
+                        var res = fetch(getBaseUrl() + ":5000/get-alphabet", {
                             method: "POST",
                             body: formData,
                         })
@@ -84,14 +88,14 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ handleNextE
                                 console.log(data);
                                 if (data.message === response || data.message == response.toUpperCase()) {
                                     stopStreaming()
-                                    handleNextExo();
+                                    goodAnswer();
                                 }
                             })
                             .catch((err) => {
                                 console.error("Error handling response:", err);
                             });
                         // console.log("Frame uploaded successfully.", resp.json());
-                        // fetch("http://localhost:5000/get-alphabet-end", {
+                        // fetch(getBaseUrl() + ":5000/get-alphabet-end", {
                         //   method: "DELETE",
                         // })
                     } catch (err) {
@@ -120,7 +124,7 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ handleNextE
             <button className="pushable"
                 onClick={startStreaming}>
                 <span className="front">
-                    {isStreaming ? "Recording..." : "Start Capture"}
+                    {isStreaming ? "Enregistrement en cours..." : "Démarrer l'enregistrement"}
                 </span>
             </button>
         </div>
