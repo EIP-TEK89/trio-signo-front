@@ -11,9 +11,9 @@ const CoursesJourneyProfile: React.FC = () => {
 
     return (
         <div className="courses-journey-page">
-            <div className='pub'>
+            {/* <div className='pub'>
                 <Carousel />
-            </div>
+            </div> */}
 
             <div className='courses-journey'>
                 <body className='body-courses'>
@@ -23,9 +23,9 @@ const CoursesJourneyProfile: React.FC = () => {
                 <NavBar />
             </div>
 
-            <div className='pub'>
+            {/* <div className='pub'>
                 <Carousel />
-            </div>
+            </div> */}
         </div>
     );
 };
