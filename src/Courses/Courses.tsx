@@ -26,19 +26,34 @@ const Courses: React.FC = () => {
     const [step, setStep] = useState(1);
 
     const [currentExoIndex, setCurrentExoIndex] = useState(0);
-    const currentExo = coursesData.exercices[currentExoIndex];
+    const currentExo = coursesData.exercises[currentExoIndex];
+    const [borderClass, setBorderClass] = useState<string>('');
 
     const handleNextExo = () => {
-        if (currentExoIndex < coursesData.exercices.length - 1) {
+        if (currentExoIndex < coursesData.exercises.length - 1) {
             setCurrentExoIndex(currentExoIndex + 1);
             setStep(step + 1)
+        } else {
+            BackToHome()
         }
         //display publicity on phone
     };
 
+    const GoodAnswer = async () => {
+        setBorderClass('green-border');
+        setTimeout(() => {
+            setBorderClass('');
+            handleNextExo();
+        }, 300);
+    };
+
     const BadAnswer = async () => {
-        //call life -1
-        handleNextExo()
+        setBorderClass('red-border');
+        setTimeout(() => {
+            setBorderClass('');
+            //call life -1
+            handleNextExo();
+        }, 300);
     };
 
     /*
@@ -57,7 +72,7 @@ const Courses: React.FC = () => {
     const handleMultipleImages = (message: string) => {
         if (buttonAnswer !== null) {
             if (message === buttonAnswer)
-                handleNextExo()
+                GoodAnswer()
             else
                 BadAnswer()
         }
@@ -75,7 +90,7 @@ const Courses: React.FC = () => {
     const handleSubmit = (message: string) => {
         if (text !== undefined) {
             if (message === text)
-                handleNextExo()
+                GoodAnswer()
             else
                 BadAnswer()
         }
@@ -92,7 +107,7 @@ const Courses: React.FC = () => {
             console.log(message)
             console.log(buttonAnswer)
             if (message === buttonAnswer)
-                handleNextExo()
+                GoodAnswer()
             else
                 BadAnswer()
         }
@@ -126,7 +141,7 @@ const Courses: React.FC = () => {
                     console.log(response.data.message);
                     console.log(answer)
                     if (response.data.message == answer.toUpperCase())
-                        handleNextExo()
+                        GoodAnswer()
                     else
                         BadAnswer()
                 } catch (error) {
@@ -155,14 +170,15 @@ const Courses: React.FC = () => {
                     </div>
                 </header>
 
-                <main className='bodyCourses'>
-                    {currentExo.type_exo === "tuto" && (
+
+                <main className={`bodyCourses ${borderClass}`}>
+                    {currentExo.exercise_type === "tutorial" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
                                 src={
-                                    typeof currentExo.reponse[0] === 'object' && 'name' in currentExo.reponse[0]
-                                        ? `/Assets/Hand/${currentExo.reponse[0].name}.jpg`
+                                    typeof currentExo.answers[0] === 'object' && 'name' in currentExo.answers[0]
+                                        ? `/Assets/Hand/${currentExo.answers[0].name}.jpg`
                                         : ''
                                 }
                                 alt={'image'}
@@ -176,19 +192,19 @@ const Courses: React.FC = () => {
                             </button>
                         </div>
                     )}
-                    {currentExo.type_exo === "choix_multiple_image" && (
+                    {currentExo.exercise_type === "multiple_choice_image" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <div className='image-selection'>
-                                {currentExo.reponse.map((reponse, index) => (
+                                {currentExo.answers.map((answers, index) => (
                                     <button
                                         key={index}
                                         className={`Img-Button ${activeButton === index ? 'active' : ''}`}
-                                        onClick={() => handleButtonClick(index, typeof reponse === 'object' && 'name' in reponse ? reponse.name : null)}
+                                        onClick={() => handleButtonClick(index, typeof answers === 'object' && 'name' in answers ? answers.name : null)}
                                     >
                                         <img
-                                            src={typeof reponse === 'object' && 'name' in reponse ?
-                                                `/Assets/Hand/${reponse.name}.jpg`
+                                            src={typeof answers === 'object' && 'name' in answers ?
+                                                `/Assets/Hand/${answers.name}.jpg`
                                                 : ''}
                                             alt="image"
                                             className='choice-img'
@@ -197,22 +213,22 @@ const Courses: React.FC = () => {
                                 ))}
                             </div>
 
-                            <button className="pushable" onClick={() => handleMultipleImages(currentExo.reponse_attendue)}>
+                            <button className="pushable" onClick={() => handleMultipleImages(currentExo.expected_answer)}>
                                 <span className="front">
                                     Validé
                                 </span>
                             </button>
                         </div>
                     )}
-                    {currentExo.type_exo === "ecrire_signe" && (
+                    {currentExo.exercise_type === "write_sign" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
-                                src={`/Assets/Hand/${currentExo.reponse_attendue}.jpg`}
+                                src={`/Assets/Hand/${currentExo.expected_answer}.jpg`}
                                 alt="image"
                                 className='write-img'
                             />
-                            <form className='form-answer' onSubmit={(e) => { e.preventDefault(); handleSubmit(currentExo.reponse_attendue); }}>
+                            <form className='form-answer' onSubmit={(e) => { e.preventDefault(); handleSubmit(currentExo.expected_answer); }}>
                                 <input
                                     type="text"
                                     className='form-answer-input'
@@ -227,48 +243,36 @@ const Courses: React.FC = () => {
                             </form>
                         </div>
                     )}
-                    {currentExo.type_exo === "choix_multiple_signification" && (
+                    {currentExo.exercise_type === "multiple_choice_meaning" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
                             <img
-                                src={`/Assets/Hand/${currentExo.reponse_attendue}.jpg`}
+                                src={`/Assets/Hand/${currentExo.expected_answer}.jpg`}
                                 alt="image"
                                 className='multiple-choice-img'
                             />
                             <div className='text-selection'>
-                                {currentExo.reponse.map((reponse, index) => (
+                                {currentExo.answers.map((answers, index) => (
                                     <button
                                         key={index}
                                         className={`text-Button ${activeButton === index ? 'active' : ''}`}
-                                        onClick={() => handleButtonClick(index, typeof reponse === 'object' && 'name' in reponse ? reponse.name : null)}
+                                        onClick={() => handleButtonClick(index, typeof answers === 'object' && 'name' in answers ? answers.name : null)}
                                     >
-                                        {typeof reponse === 'object' && 'name' in reponse ? reponse.name : ''}
+                                        {typeof answers === 'object' && 'name' in answers ? answers.name : ''}
                                     </button>
                                 ))}
                             </div>
-                            <button className="pushable" onClick={() => handleMultipleSignification(currentExo.reponse_attendue)}>
+                            <button className="pushable" onClick={() => handleMultipleSignification(currentExo.expected_answer)}>
                                 <span className="front">
                                     Validé
                                 </span>
                             </button>
                         </div>
                     )}
-                    {currentExo.type_exo === "camera" && (
+                    {currentExo.exercise_type === "camera" && (
                         <div className='tuto'>
                             <h1>{currentExo.question}</h1>
-                            <VideoStreamUploader handleNextExo={handleNextExo} response={currentExo.reponse_attendue} />
-                            {/* <Webcam
-                                audio={false}
-                                ref={webcamRef}
-                                screenshotFormat="image/png"
-                                width={540}
-                                height={480}
-                            />
-                            <button className="pushable" onClick={() => capture(currentExo.reponse_attendue)}>
-                                <span className="front">
-                                    Validé
-                                </span>
-                            </button> */}
+                            <VideoStreamUploader goodAnswer={GoodAnswer} badAnswer={BadAnswer} response={currentExo.expected_answer} />
                         </div>
                     )}
                 </main>
