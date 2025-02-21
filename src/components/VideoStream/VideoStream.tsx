@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
 
 interface VideoCaptureUploaderProps {

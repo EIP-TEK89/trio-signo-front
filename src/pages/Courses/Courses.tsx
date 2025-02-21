@@ -5,17 +5,17 @@ import { useNavigate } from 'react-router-dom';
 
 import './Courses.css';
 
-import ProgressBar from "../ProgressionBar/ProgressionBar";
-import Carousel from '../Carousel/Carousel';
+import ProgressBar from '$components/ProgressionBar/ProgressionBar';
+import Carousel from '$components/Carousel/Carousel';
 
 import coursesData from './Courses.json';
 
-import Life from '../Assets/CoursesJourneyHome/life.png';
+import Life from '$assets/CoursesJourneyHome/life.png';
 
-import Cross from '../Assets/cross-button.png';
-import VideoStreamUploader from '../VideoStream/VideoStream';
+import Cross from '$assets/cross-button.png';
+import VideoStreamUploader from '$components/VideoStream/VideoStream';
 
-import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
 const Courses: React.FC = () => {
     const navigate = useNavigate();

@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Acces from '../Assets/acces.png';
-import Fun from '../Assets/fun.png';
-import Free from '../Assets/free.png';
-import IA from '../Assets/IA.png';
+import Acces from '$assets/acces.png';
+import Fun from '$assets/fun.png';
+import Free from '$assets/free.png';
+import IA from '$assets/IA.png';
 
 
-import Enzo from '../Assets/Team/Enzo.png';
-import Yann from '../Assets/Team/Yann.png';
-import Jp from '../Assets/Team/Jp.png';
-import Lenny from '../Assets/Team/Lenny.png';
-import Valentin from '../Assets/Team/Valentin.png';
-import Antoine from '../Assets/Team/Antoine.png';
+import Enzo from '$assets/Team/Enzo.png';
+import Yann from '$assets/Team/Yann.png';
+import Jp from '$assets/Team/Jp.png';
+import Lenny from '$assets/Team/Lenny.png';
+import Valentin from '$assets/Team/Valentin.png';
+import Antoine from '$assets/Team/Antoine.png';
 
 import './Home.css';
-import '../App.css';
+import '../../App.css';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();

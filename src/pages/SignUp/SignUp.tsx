@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../Store/AuthSlice';
+import { setToken } from '$store/AuthSlice';
 
-import './LoginSignup.css';
-import Logo from '../Assets/logo.png';
+import '$styles/LoginSignup.css';
+import Logo from '$assets/logo.png';
 
-import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
 const LoginSignup: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -14,6 +14,7 @@ const LoginSignup: React.FC = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ username?: string; email?: string; password?: string; apiError?: string }>({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleConnection = async () => {
     try {
@@ -39,7 +40,6 @@ const LoginSignup: React.FC = () => {
       const data = await response.json();
       console.log('User created successfully:', data);
 
-      const dispatch = useDispatch();
       dispatch(setToken(data));
 
       navigate('/coursesJourney/home');

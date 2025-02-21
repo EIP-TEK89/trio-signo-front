@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './LoginSignup.css';
-import Logo from '../Assets/logo.png';
+import '$styles/LoginSignup.css';
+import Logo from '$assets/logo.png';
 
-import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
 const LoginSignin: React.FC = () => {
     const [email, setEmail] = useState('');

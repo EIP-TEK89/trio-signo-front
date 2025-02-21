@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '$components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
-import './CoursesJourneyQuests.css';
+import './CoursesJourneyTraining.css';
 
-import Carousel from '../../Carousel/Carousel';
+import Carousel from '$components/Carousel/Carousel/';
 
-const CoursesJourneyQuests: React.FC = () => {
+const CoursesJourneyTraining: React.FC = () => {
     const navigate = useNavigate();
 
     return (
@@ -30,4 +30,4 @@ const CoursesJourneyQuests: React.FC = () => {
     );
 };
 
-export default CoursesJourneyQuests;
+export default CoursesJourneyTraining;
