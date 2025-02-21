@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../Store/AuthSlice';
+import { setToken } from '$store/AuthSlice';
 
-import './LoginSignup.css';
-import Logo from '../Assets/logo.png';
+import '$styles/LoginSignup.css';
+import Logo from '$assets/logo.png';
 
-import { getBaseUrl, getBaseUrlWithPort } from '../getBaseUrl';
+import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
 const LoginSignup: React.FC = () => {
   const [username, setUsername] = useState('');

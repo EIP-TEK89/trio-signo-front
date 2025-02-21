@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '$components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 import './CoursesJourneyHome.css';
 
-import Carousel from '../../Carousel/Carousel';
+import Carousel from '$components/Carousel/Carousel';
 
-import Flag from '../../Assets/CoursesJourneyHome/flag.png';
-import Streak from '../../Assets/CoursesJourneyHome/streak.png';
-import Point from '../../Assets/CoursesJourneyHome/point.png';
-import Life from '../../Assets/CoursesJourneyHome/life.png';
-import Star from '../../Assets/CoursesJourneyHome/star.png';
+import Flag from '$assets/CoursesJourneyHome/flag.png';
+import Streak from '$assets/CoursesJourneyHome/streak.png';
+import Point from '$assets/CoursesJourneyHome/point.png';
+import Life from '$assets/CoursesJourneyHome/life.png';
+import Star from '$assets/CoursesJourneyHome/star.png';
 
 const CoursesJourneyHome: React.FC = () => {
     const navigate = useNavigate();
