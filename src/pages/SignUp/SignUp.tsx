@@ -14,6 +14,7 @@ const LoginSignup: React.FC = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ username?: string; email?: string; password?: string; apiError?: string }>({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleConnection = async () => {
     try {
@@ -39,7 +40,6 @@ const LoginSignup: React.FC = () => {
       const data = await response.json();
       console.log('User created successfully:', data);
 
-      const dispatch = useDispatch();
       dispatch(setToken(data));
 
       navigate('/coursesJourney/home');
