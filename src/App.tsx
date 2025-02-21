@@ -8,7 +8,7 @@ import CoursesJourneyProfile from './pages/CoursesJourney/Profile/CoursesJourney
 import CoursesJourneyTraining from './pages/CoursesJourney/Training/CoursesJourneyTraining';
 import CoursesJourneyQuests from './pages/CoursesJourney/Quests/CoursesJourneyQuests';
 import SignUp from './pages/SignUp/SignUp';
-import LogIn from './pages/LogIn/LogIn';
+import LogIn from '$pages/LogIn/LogIn';
 
 const App: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LogIn />} />
+        <Route path="/signin" element={<LogIn />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/coursesJourney/home" element={<CoursesJourneyHome />} />
         <Route path="/coursesJourney/profile" element={<CoursesJourneyProfile />} />

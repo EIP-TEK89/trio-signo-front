@@ -1,92 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import '$styles/LoginSignup.css';
+import Logo from '$assets/logo.png';
 
-// local imports
-import { setToken } from '../../store/AuthSlice';
-import { isApiError } from '../../services/isApiError';
-import { logInUser } from '../../services/userServices';
+import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
-// styles
-import '../../styles/LoginSignup.css';
-import Logo from '../../assets/logo.png';
+const LoginSignin: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState<{ username?: string; email?: string; password?: string; apiError?: string }>({});
+    const navigate = useNavigate();
 
-// types
-import { UserCredentials } from '../../types/User';
-import { ErrorCredentials } from '../../types/Error';
+    const handleConnection = async () => {
+        try {
 
-const LogIn: React.FC = () => {
-  const [credentials, setCredentials] = React.useState<UserCredentials>({
-    email: '',
-    password: '',
-  });
-  const [errors, setErrors] = React.useState<ErrorCredentials>({});
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+          const response = await fetch(getBaseUrl() + ":3000/api/auth/log-in", {
+            method: "POST",
+            headers: {
+              "accept": "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email,
+              password
+            }),
+          });
 
-  const handleConnection = async () => {
-    try {
-      const data = await logInUser(credentials);
-      console.log('User connected successfully:', data);
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Error creating user');
+          }
 
-      dispatch(setToken(data));
+          const data = await response.json();
+          console.log('User created successfully:', data);
+          navigate('/coursesJourney/home');
 
-      navigate('/coursesJourney/home');
-    } catch (error: unknown) {
-      if (isApiError(error)) {
-        setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
-      } else if (error instanceof Error) {
-        setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
-      } else {
-        setErrors((prevErrors) => ({ ...prevErrors, apiError: 'An unknown error occured' }));
-      }
-    }
-  };
+        } catch (error: any) {
+          setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
+        }
+      };
 
-  return (
-    <div className="login-signup-container">
-      <div className="logo">
-        <img src={Logo} alt="Logo" className="logo" />
-      </div>
-      <h2>Connection</h2>
-      <div className="form-group">
-        <input
-          type="username"
-          placeholder="Surnom"
-          value={credentials.username}
-          onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-        />
-        {errors.username && <p className="error-message">{errors.username}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="email"
-          placeholder="Email"
-          value={credentials.email}
-          onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
-        />
-        {errors.email && <p className="error-message">{errors.email}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          value={credentials.password}
-          onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-        />
-        {errors.password && <p className="error-message">{errors.password}</p>}
-      </div>
-      <div className="button-container">
-        <button className="pushable" onClick={handleConnection}>
-          <span className="front">Connection</span>
-        </button>
-      </div>
-      <p className="forgot-password">
-        Déjà un compte ? <a href="/signin">Clicker Ici</a>
-      </p>
-      {errors.apiError && <p className="api-error-message">{errors.apiError}</p>}
-    </div>
-  );
+    return (
+        <div className="login-signup-container">
+            <div className="logo">
+                <img src={Logo} alt="Logo" className="logo" />
+            </div>
+            <h2>Connexion</h2>
+            <div className="form-group">
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                {errors.email && <p className="error-message">{errors.email}</p>}
+            </div>
+            <div className="form-group">
+                <input
+                    type="password"
+                    placeholder="Mot de passe"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {errors.password && <p className="error-message">{errors.password}</p>}
+            </div>
+            <p className="forgot-password">
+                Mot de passe oublié ? <a href="#">Cliquez Ici</a>
+            </p>
+            <div className="button-container">
+                <button className="pushable" onClick={handleConnection}>
+                    <span className="front">
+                      Connexion
+                    </span>
+                </button>
+            </div>
+            <p className="forgot-password">
+                Créer un nouveau compte <a href="/signup">Ici</a>
+            </p>
+            {errors.apiError && <p className="api-error-message">{errors.apiError}</p>}
+        </div>
+    );
 };
 
-export default LogIn;
+export default LoginSignin;
