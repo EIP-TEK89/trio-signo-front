@@ -9,6 +9,7 @@ import CoursesJourneyTraining from './pages/CoursesJourney/Training/CoursesJourn
 import CoursesJourneyQuests from './pages/CoursesJourney/Quests/CoursesJourneyQuests';
 import SignUp from './pages/SignUp/SignUp';
 import LogIn from '$pages/LogIn/LogIn';
+import SignRecon from '$pages/SignRecon/SignRecon';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route path="/coursesJourney/competition" element={<CoursesJourneyCompetition />} />
         <Route path="/coursesJourney/training" element={<CoursesJourneyTraining />} />
         <Route path="/coursesJourney/quests" element={<CoursesJourneyQuests />} />
+        <Route path="/sign-recon" element={<SignRecon />} />
       </Routes>
     </Router>
   );
