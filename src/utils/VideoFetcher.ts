@@ -43,13 +43,14 @@ export default class VideoFetcher {
 
     async toggleCamera(): Promise<boolean> {
         if (this.stream) {
-            return this.stopCamera();
+            return await this.stopCamera();
         } else {
-            return this.startCamera();
+            return await this.startCamera();
         }
     }
 
     getFrame(): HTMLVideoElement | null {
+        console.log(this.isStreaming)
         if (!this.isStreaming) {
             return null;
         }

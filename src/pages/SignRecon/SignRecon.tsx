@@ -13,6 +13,8 @@ import VideoFetcher from '$utils/VideoFetcher';
 import SignRecognizer from "$utils/SignRecognizer"
 import { HandLandmarker, DrawingUtils, HandLandmarkerResult } from '@mediapipe/tasks-vision';
 
+import { DataSample } from "$utils/Datasample";
+import { Data } from '@mediapipe/drawing_utils';
 
 /** Options for customizing the drawing */
 interface DrawOptions {
@@ -110,14 +112,19 @@ const Courses: React.FC = () => {
 
 
     useEffect(() => {
+        console.log("ta mère")
         videoFetcherRef.current = new VideoFetcher();
         signRecognizerRef.current = new SignRecognizer(getBaseUrl() + ":5000/get-sign-recognizer-model/alphabet", "$assets/models/hand_landmarker.task");
         let timings: Array<number> = [];
         let prevFrame: ImageData | null = null;
         let prevLandmark: HandLandmarkerResult | null = null;
+        let datasample: DataSample = new DataSample("", []);
+        let output_sign: number = -1;
 
         const drawToCanvas = async () => {
-            let video = videoFetcherRef.current.getFrame();
+            let video: HTMLVideoElement | null = videoFetcherRef.current.getFrame();
+
+            // console.log("video", video);
 
 
             if (video && canvasRef.current) {
@@ -132,10 +139,18 @@ const Courses: React.FC = () => {
                         const currentFrame: ImageData = ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
 
                         if (!prevFrame || computeFrameDifference(prevFrame, currentFrame) > 0) {
-                            const landmark: HandLandmarkerResult = await signRecognizerRef.current.detectHands(video);
+                            const landmark: HandLandmarkerResult | null = await signRecognizerRef.current.detectHands(video);
                             if (landmark) {
                                 drawHandLandmarkerResult(ctx, landmark);
+                                datasample.insertGestureFromLandmarks(0, landmark);
+                                while (datasample.gestures.length > 15) {
+                                    datasample.gestures.shift();
+                                }
+                                // output_sign = await signRecognizerRef.current.recognizeSign(datasample);
                             }
+
+
+
                             prevLandmark = landmark;
                         } else if (prevLandmark) {
                             drawHandLandmarkerResult(ctx, prevLandmark);
@@ -148,7 +163,7 @@ const Courses: React.FC = () => {
                     timings.shift();
                 }
                 let average_time: number = timings.reduce((a, b) => a + b) / timings.length;
-                setText("Framerate: " + Math.round(1000 / average_time) + "FPS " + "Average time: " + average_time.toFixed(2) + "ms");
+                setText("Framerate: " + Math.round(1000 / average_time) + "FPS" + " Average time: " + average_time.toFixed(2) + "ms" + " Output sign: " + output_sign);
                 // console.log("Framerate: ", Math.round(1000 / (timings.reduce((a, b) => a + b) / timings.length)), "FPS", "Average time: ", average_time, "ms");
             }
             requestAnimationFrame(drawToCanvas);
