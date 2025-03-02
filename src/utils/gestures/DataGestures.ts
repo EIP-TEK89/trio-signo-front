@@ -142,6 +142,7 @@ export class DataGestures extends Gestures<[number, number, number] | null> {
 
     get1DArray(validFields?: string[]): number[] {
         validFields = getFields(validFields);
+        console.log(validFields)
         return validFields.flatMap(field => (this as any)[field] || [0, 0, 0]);
     }
 

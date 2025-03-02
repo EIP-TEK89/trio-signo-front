@@ -50,7 +50,7 @@ export default class VideoFetcher {
     }
 
     getFrame(): HTMLVideoElement | null {
-        console.log(this.isStreaming)
+        // console.log(this.isStreaming)
         if (!this.isStreaming) {
             return null;
         }

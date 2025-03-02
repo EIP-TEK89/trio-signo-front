@@ -86,7 +86,7 @@ function drawHandLandmarkerResult(
 
 function computeFrameDifference(prevFrame: ImageData, currentFrame: ImageData): number {
     let diff = 0;
-    let step = Math.round(prevFrame.data.length / 10);
+    let step = Math.round(prevFrame.data.length / 100);
     for (let i = 0; i < prevFrame.data.length; i += step) {
         diff += Math.abs(prevFrame.data[i] - currentFrame.data[i]);     // Red
         diff += Math.abs(prevFrame.data[i + 1] - currentFrame.data[i + 1]); // Green
@@ -112,7 +112,7 @@ const Courses: React.FC = () => {
 
 
     useEffect(() => {
-        console.log("ta mère")
+        // console.log("ta mère")
         videoFetcherRef.current = new VideoFetcher();
         signRecognizerRef.current = new SignRecognizer(getBaseUrl() + ":5000/get-sign-recognizer-model/alphabet", "$assets/models/hand_landmarker.task");
         let timings: Array<number> = [];
@@ -144,9 +144,9 @@ const Courses: React.FC = () => {
                                 drawHandLandmarkerResult(ctx, landmark);
                                 datasample.insertGestureFromLandmarks(0, landmark);
                                 while (datasample.gestures.length > 15) {
-                                    datasample.gestures.shift();
+                                    datasample.gestures.pop();
                                 }
-                                // output_sign = await signRecognizerRef.current.recognizeSign(datasample);
+                                output_sign = await signRecognizerRef.current.recognizeSign(datasample);
                             }
 
 
