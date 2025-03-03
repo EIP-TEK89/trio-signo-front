@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: 240px 1fr 300px;
   min-height: 100vh;
-  background-color: #131f24;
-  color: white;
+  background-color: var(--color-background);
+  color: var(--color-text);
   position: relative;
 }
 
@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #58CC02;
+    background-color: var(--color-primary);
     border-radius: 12px;
     padding: 12px;
     gap: 16px;
@@ -43,7 +43,7 @@
     font-size: 24px;
     font-weight: 700;
     margin: 0;
-    color: white;
+    color: var(--color-text);
     letter-spacing: -0.5px;
     line-height: 1.2;
     white-space: nowrap;
@@ -76,9 +76,9 @@
 
 /* Bouton Guide */
 .guide-button {
-    background-color: #58CC02;
-    color: white;
-    border: 2px solid #46a001;
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border: 2px solid var(--color-primary-shadow);
     padding: 8px 16px;
     border-radius: 12px;
     font-size: 15px;
@@ -88,7 +88,7 @@
     align-items: center;
     gap: 8px;
     margin-right: 0;
-    box-shadow: 0 2px 0 #46a001;
+    box-shadow: 0 2px 0 var(--color-primary-shadow);
     white-space: nowrap;
     flex-shrink: 0;
 }
@@ -104,7 +104,7 @@
 }
 
 .guide-button:hover {
-  background-color: #46a001;
+  background-color: var(--color-primary-shadow);
 }
 
 .lesson-path {
@@ -200,7 +200,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2),
               inset 0 -4px 0 rgba(0, 0, 0, 0.1);
@@ -214,14 +213,14 @@
 }
 
 .lesson-node.completed .node-circle {
-  background-color: #58CC02;
-  border: 2px solid #46a001;
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-primary-shadow);
 }
 
 .lesson-node.active .node-circle {
-  background-color: #58CC02;
+  background-color: var(--color-primary);
   animation: pulse 2s infinite;
-  border: 2px solid #46a001;
+  border: 2px solid var(--color-primary-shadow);
 }
 
 .lesson-node.locked .node-circle {
@@ -241,9 +240,9 @@
 }
 
 .start-button {
-  background-color: #131f24;
-  color: #58CC02;
-  border: 2px solid #37464f;
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-border);
   border-radius: 12px;
   padding: 12px 12px;
   font-weight: 700;

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
 import VideoStreamUploader from '$components/VideoStream/VideoStream';
+import ProgressBar from '$components/Progressionbar/Progressionbar';
 
 import './Courses.css';
 import coursesData from './Courses.json';
@@ -155,14 +156,7 @@ const Courses: React.FC = () => {
                 <button onClick={BackToHome} className="cross-button">
                     <img src={Cross} alt="cross-img" className="icon" />
                 </button>
-                <div className="progress-container">
-                    <div 
-                        className="progress-bar" 
-                        style={{ 
-                            width: `${(currentExoIndex / (coursesData.exercises.length - 1)) * 100}%` 
-                        }} 
-                    />
-                </div>
+                <ProgressBar currentStep={step} />
                 <div className="icon-container">
                     <img src={Life} alt="Life" className="icon" />
                     <span className="text">5</span>
@@ -275,28 +269,28 @@ const Courses: React.FC = () => {
                             }}
                             disabled={currentExoIndex === 0}
                         >
-                            Skip
+                            SKIP
                         </button>
                     </div>
                     <div className="footer-buttons">
                         {currentExo.exercise_type === "tutorial" && (
                             <button className="footer-button primary" onClick={handleNextExo}>
-                                Check
+                                CHECK
                             </button>
                         )}
                         {currentExo.exercise_type === "multiple_choice_image" && (
                             <button className="footer-button primary" onClick={() => handleMultipleImages(currentExo.expected_answer)}>
-                                Check
+                                CHECK
                             </button>
                         )}
                         {currentExo.exercise_type === "write_sign" && (
                             <button className="footer-button primary" onClick={() => handleSubmit(currentExo.expected_answer)}>
-                                Check
+                                CHECK
                             </button>
                         )}
                         {currentExo.exercise_type === "multiple_choice_meaning" && (
                             <button className="footer-button primary" onClick={() => handleMultipleSignification(currentExo.expected_answer)}>
-                                Check
+                                CHECK
                             </button>
                         )}
                     </div>
