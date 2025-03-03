@@ -1,188 +1,211 @@
+.courses-container {
+    background-color: #131f24;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    position: relative;
+}
+
+/* Header */
 .header {
-    position: sticky;
-    top: 0;
+    position: relative;
+    width: 60%;
+    margin: 0 auto;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    color: #fff;
+    padding: 0 20px;
+    background-color: #131f24;
     z-index: 2;
-    border-bottom: 1px solid lightgray;
 }
 
-.pub {
-    height: 100vh;
-    background-color: lightgray;
-    width: 35%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
+.progress-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.3s ease;
 }
 
 .icon-container {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
 }
 
 .icon {
-    width: 3vw;
-    height: 3vw;
+    width: 20px;
+    height: 20px;
 }
 
 .text {
+    color: white;
     font-size: 16px;
-    color: var(--color);
+    font-weight: 500;
 }
 
 .cross-button {
     background-color: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3vw;
-    height: 3vw;
 }
 
-.cross-button:hover {
-    background-color: transparent;
-}
-
-
-.coursesJourneyPage {
-    display: flex;
-    justify-content: center;
-}
-
-.coursesJourney {
-    height: 100vh;
-    width: 30%;
-}
-
-.pub {
-    height: 100vh;
-    background-color: lightgray;
-    width: 35%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-}
-
-.publicity {
-    margin: auto;
-}
-
+/* Main Content */
 .bodyCourses {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-family: sans-serif;
+    justify-content: flex-start;
+    /* padding: 40px 20px; */
 }
 
+.exercise-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+    color: white;
+}
+
+.exercise-content {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Exercise Types */
 .tuto {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 24px;
 }
 
-.tuto-img {
-    width: 85%;
-    padding-bottom: 5%;
-}
-
-.multiple-choice-img {
-    width: 50%;
-    padding-bottom: 5%;
-}
-
-.write-img {
-    width: 50%;
-    padding-bottom: 5%;
+.tuto-img, .write-img, .multiple-choice-img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
 }
 
 .image-selection {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 5%; /* not the best option*/
-    padding-bottom: 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    width: 100%;
 }
 
-.Img-Button {
-    margin: 5px 5px 5px 5px;
-    background-color: transparent;
+.Img-Button, .text-Button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.Img-Button:hover {
-    background-color: var(--hover-color);
+.Img-Button:hover, .text-Button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
-.Img-Button.active {
-    border: 2px solid var(--bottom-color);
-    background-color: #f0f8ff;
+.Img-Button.active, .text-Button.active {
+    border-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
 }
 
 .choice-img {
-    width: 60%;
+    width: 100%;
     height: 200px;
+    object-fit: contain;
 }
 
-.form-answer {
+/* Footer */
+.footer {
+    height: 140px;
+    position: sticky;
+    bottom: 0;
+    border-top: 2px solid #37464f;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
-.form-answer-input {
-    margin-bottom: 10%;
-}
-
-.text-selection {
+.footer-content {
+    width: 60%;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
-    padding-bottom: 5%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
-.text-Button {
-    margin: 5px 5px 5px 5px;
+.footer-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-button {
+    border: 2px solid #37464f;
+    margin: 0 8px;
+    padding: 10px 10px;
+    border-radius: 16px;
+    padding: 8px 24px;
+    color: #37464f;
+    width: 150px;
+    height: 50px;
+    box-shadow: 0 3px 0 #37464f;
     background-color: transparent;
-    color: var(--color);
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.text-Button:hover {
-    background-color: var(--hover-color);
+.footer-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.text-Button.active {
-    border: 2px solid var(--bottom-color);
-    background-color: #f0f8ff;
+.footer-button.primary {
+    border: none;
+    background-color: #93d333;
+    color: #131f24;
+    box-shadow: 0 4px 0 #79b933;
 }
 
+.footer-button.primary:hover {
+    background-color: #A9DC5C;
+}
+
+.footer-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Response Feedback */
 .green-border {
-    box-shadow: 0 0 15px 5px rgba(0, 255, 0, 0.5);
-    background: radial-gradient(rgba(0, 255, 0, 0.2), transparent);
+    box-shadow: 0 0 15px 5px rgba(76, 175, 80, 0.3);
 }
 
 .red-border {
-    box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.5);
-    background: radial-gradient(rgba(255, 0, 0, 0.2), transparent);
+    box-shadow: 0 0 15px 5px rgba(244, 67, 54, 0.3);
 }
 
-
-@media (max-width: 880px) {
-    .pub {
-        display: none;
-    }
-
-    .coursesJourney {
-        height: 100vh;
-        width: 100%;
-    }
-
-    .icon {
-        width: 10vw;
-        height: 10vw;
-    }
-}

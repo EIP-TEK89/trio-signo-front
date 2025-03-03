@@ -9,8 +9,16 @@ import ChestIcon from '../../../Assets/CoursesJourney/Home/chest.svg';
 import TrophyIcon from '../../../Assets/CoursesJourney/Home/trophy.svg';
 import BackArrowIcon from '../../../Assets/CoursesJourney/Home/backArrow.svg';
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
+
+  const navigate = useNavigate();
+
+  const GoToCourses = async () => {
+      navigate('/courses');
+  };
+
   return (
     <div className="duolingo-container">
       {/* Left Sidebar */}
@@ -33,12 +41,12 @@ const HomePage: React.FC = () => {
         </header>
 
         <div className="lesson-path">
-          <button className="lesson-node completed">
+          <button onClick={GoToCourses} className="lesson-node completed">
             <div className="node-circle">
               <img src={WhiteOkIcon} alt="Completed" />
             </div>
           </button>
-          <button className="lesson-node active">
+          <button onClick={GoToCourses} className="lesson-node active">
             <div className="node-circle">
               <img src={WhiteStarIcon} alt="Star" />
             </div>
