@@ -1,49 +1,105 @@
-.nav-bar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    width: 30%;
-    padding: 10px 0;
-    border-top: 1px solid lightgray;
+.sidebar {
+  background-color: #131f24;
+  padding: 20px 0;
+  border-right: 2px solid;
+  border-color: #37464f;
+  width: 240px;
 }
 
-.nav-button {
-    background-color: var(--color);
-    border: none;
-    border-radius: 12px;
-    padding: 10px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.logo {
+  padding: 0 20px;
+  margin-bottom: 30px;
 }
 
-
-.nav-button:hover {
-    background-color: var(--hover-color);
-    transform: translateY(-3px);
+.logo img {
+  height: 32px;
 }
 
-.nav-button.active {
-    background-color: var(--bottom-color);
+.nav-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+  background-color: rgba(28, 176, 246, 0.1);
+  border: 2px solid #1cb0f6;
+  margin: 0 8px;
+  padding: 10px 10px;
+  border-radius: 12px;
+}
+
+.nav-item.active .nav-label {
+  color: #1cb0f6;
+}
+
+.nav-item.active:hover {
+  background-color: rgba(28, 176, 246, 0.15);
 }
 
 .nav-icon {
-    width: 3vw;
-    height: 3vw;
+  width: 28px;
+  height: 28px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 880px) {
-    .nav-bar {
-        width: 100%;
-    }
-
-    .nav-icon {
-        width: 5vw;
-        height: 5vw;
-    }
+.nav-icon img {
+  width: 100%;
+  height: 100%;
 }
+
+.profile-icon {
+  background-color: #4b4b4b;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .sidebar {
+    width: auto;
+  }
+  
+  .nav-label {
+    display: none;
+  }
+  
+  .nav-item {
+    justify-content: center;
+  }
+
+  .nav-item.active {
+    margin: 0 4px;
+    padding: 10px 8px;
+  }
+  
+  .nav-icon {
+    margin-right: 0;
+  }
+} 

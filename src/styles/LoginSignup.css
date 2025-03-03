@@ -66,7 +66,7 @@ input::placeholder {
   padding-bottom: 5%;
 }
 
-button {
+/* button {
   background-color: #5c27a8;
   border: none;
   color: white;
@@ -81,7 +81,7 @@ button {
 
 button:hover {
   background-color: #3e1a73;
-}
+} */
 
 /* Error messages */
 .error-message {

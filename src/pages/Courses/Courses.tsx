@@ -5,12 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import './Courses.css';
 
-import ProgressBar from '$components/ProgressionBar/ProgressionBar';
-import Carousel from '$components/Carousel/Carousel';
 
 import coursesData from './Courses.json';
-
-import Life from '$assets/CoursesJourneyHome/life.png';
 
 import Cross from '$assets/cross-button.png';
 import VideoStreamUploader from '$components/VideoStream/VideoStream';
@@ -164,7 +160,6 @@ const Courses: React.FC = () => {
                     <button onClick={BackToHome} className="cross-button">
                         <img src={Cross} alt="cross-img" className="icon" />
                     </button>
-                    <ProgressBar currentStep={step} />
                     <div className="icon-container">
                         <img src={Life} alt="Life" className="icon" />
                         <span className="text">5</span>
