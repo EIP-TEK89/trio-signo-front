@@ -7,12 +7,15 @@
 :root {
     /* Main Colors */
     --color-background: #131f24;
+    --color-background-footer-courses: #202f36;
     --color-primary: #58CC02;
     --color-primary-shadow: #46a001;
     --color-primary-dark: #79b933;
     --color-primary-hover: #A9DC5C;
     --color-success: #4CAF50;
-    --color-error: #FF4444;
+    --color-error: #ee5555;
+    --color-error-shadow: #d84848;
+    --color-error-hover: #FF6B6B;
 
     /* courses colors */
     --color-primary-courses: #93d333;

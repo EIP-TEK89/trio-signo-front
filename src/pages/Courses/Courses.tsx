@@ -12,11 +12,15 @@ import coursesData from './Courses.json';
 
 import Cross from '$assets/Courses/cross.svg';
 import Life from '$assets/Courses/heart.svg';
+import Good from '$assets/Courses/good.svg';
+import Error from '$assets/Courses/error.svg';
 
 
 const Courses: React.FC = () => {
     const navigate = useNavigate();
     const webcamRef = React.useRef<Webcam>(null);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showError, setShowError] = useState(false);
 
     const BackToHome = async () => {
         navigate('/coursesJourney/home');
@@ -29,6 +33,8 @@ const Courses: React.FC = () => {
     const [borderClass, setBorderClass] = useState<string>('');
 
     const handleNextExo = () => {
+        setShowSuccess(false);
+        setShowError(false);
         if (currentExoIndex < coursesData.exercises.length - 1) {
             setCurrentExoIndex(currentExoIndex + 1);
             setStep(step + 1)
@@ -39,19 +45,18 @@ const Courses: React.FC = () => {
     };
 
     const GoodAnswer = async () => {
-        setBorderClass('green-border');
+        setShowSuccess(true);
+        setShowError(false);
         setTimeout(() => {
             setBorderClass('');
-            handleNextExo();
         }, 300);
     };
 
     const BadAnswer = async () => {
-        setBorderClass('red-border');
-        setTimeout(() => {
+        setShowError(true);
+        setShowSuccess(false);
+         setTimeout(() => {
             setBorderClass('');
-            //call life -1
-            handleNextExo();
         }, 300);
     };
 
@@ -256,44 +261,92 @@ const Courses: React.FC = () => {
                 </div>
             </main>
 
-            <footer className="footer">
+            <footer className={`footer ${showSuccess ? 'success-state' : ''} ${showError ? 'error-state' : ''}`}>
                 <div className="footer-content">
-                    <div className="footer-buttons">
-                        <button 
-                            className="footer-button"
-                            onClick={() => {
-                                if (currentExoIndex > 0) {
-                                    setCurrentExoIndex(currentExoIndex - 1);
-                                    setStep(step - 1);
-                                }
-                            }}
-                            disabled={currentExoIndex === 0}
-                        >
-                            SKIP
-                        </button>
-                    </div>
-                    <div className="footer-buttons">
-                        {currentExo.exercise_type === "tutorial" && (
+                    {showSuccess ? (
+                        <>
+                            <div className="success-message-container">
+                                <div className="success-icon-wrapper">
+                                    <img src={Good} alt="success" className="success-icon" />
+                                </div>
+                                <div>
+                                    <div className="success-title">C'est bien !</div>
+                                    <div className="success-message">Ça signifie: {currentExo.expected_answer}</div>
+                                </div>
+                            </div>
                             <button className="footer-button primary" onClick={handleNextExo}>
-                                CHECK
+                                CONTINUER
                             </button>
-                        )}
-                        {currentExo.exercise_type === "multiple_choice_image" && (
-                            <button className="footer-button primary" onClick={() => handleMultipleImages(currentExo.expected_answer)}>
-                                CHECK
+                        </>
+                    ) : showError ? (
+                        <>
+                            <div className="error-message-container">
+                                <div className="error-icon-wrapper">
+                                    <img src={Error} alt="error" className="error-icon" />
+                                </div>
+                                <div>
+                                    <div className="error-title">La bonne réponse est :</div>
+                                    <div className="error-message">{currentExo.expected_answer}</div>
+                                    <div className="error-subtitle">Ça signifie :</div>
+                                    <div className="error-message">L'homme boit de l'eau.</div>
+                                </div>
+                            </div>
+                            <button className="footer-button error" onClick={handleNextExo}>
+                                CONTINUER
                             </button>
-                        )}
-                        {currentExo.exercise_type === "write_sign" && (
-                            <button className="footer-button primary" onClick={() => handleSubmit(currentExo.expected_answer)}>
-                                CHECK
-                            </button>
-                        )}
-                        {currentExo.exercise_type === "multiple_choice_meaning" && (
-                            <button className="footer-button primary" onClick={() => handleMultipleSignification(currentExo.expected_answer)}>
-                                CHECK
-                            </button>
-                        )}
-                    </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="footer-buttons">
+                                <button 
+                                    className="footer-button"
+                                    onClick={() => {
+                                        if (currentExoIndex > 0) {
+                                            setCurrentExoIndex(currentExoIndex - 1);
+                                            setStep(step - 1);
+                                        }
+                                    }}
+                                    disabled={currentExoIndex === 0}
+                                >
+                                    SKIP
+                                </button>
+                            </div>
+                            <div className="footer-buttons">
+                                {currentExo.exercise_type === "tutorial" && (
+                                    <button className="footer-button primary" onClick={handleNextExo}>
+                                        CHECK
+                                    </button>
+                                )}
+                                {currentExo.exercise_type === "multiple_choice_image" && (
+                                    <button 
+                                        className="footer-button primary" 
+                                        onClick={() => handleMultipleImages(currentExo.expected_answer)}
+                                        disabled={activeButton === null}
+                                    >
+                                        CHECK
+                                    </button>
+                                )}
+                                {currentExo.exercise_type === "write_sign" && (
+                                    <button 
+                                        className="footer-button primary" 
+                                        onClick={() => handleSubmit(currentExo.expected_answer)}
+                                        disabled={text === undefined}
+                                    >
+                                        CHECK
+                                    </button>
+                                )}
+                                {currentExo.exercise_type === "multiple_choice_meaning" && (
+                                    <button 
+                                        className="footer-button primary" 
+                                        onClick={() => handleMultipleSignification(currentExo.expected_answer)}
+                                        disabled={activeButton === null}
+                                    >
+                                        CHECK
+                                    </button>
+                                )}
+                            </div>
+                        </>
+                    )}
                 </div>
             </footer>
         </div>

@@ -9,10 +9,15 @@
 .logo {
   padding: 0 20px;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .logo img {
   height: 32px;
+}
+
+.logo-small {
+  display: none;
 }
 
 .nav-items {
@@ -101,5 +106,13 @@
   
   .nav-icon {
     margin-right: 0;
+  }
+
+  .logo-full {
+    display: none;
+  }
+
+  .logo-small {
+    display: block;
   }
 } 

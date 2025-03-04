@@ -7,6 +7,8 @@ import ligueIcon from '../../Assets/components/Navbar/ligue.svg';
 import questsIcon from '../../Assets/components/Navbar/quests.svg';
 import shopIcon from '../../Assets/components/Navbar/shop.svg';
 import plusIcon from '../../Assets/components/Navbar/plus.svg';
+import logoFull from '../../Assets/components/Navbar/logoFull.svg';
+import logoSmall from '../../Assets/components/Navbar/logoSmall.svg';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -15,7 +17,8 @@ const Navbar: React.FC = () => {
   return (
     <nav className="sidebar">
       <div className="logo">
-        <img src="/duolingo-logo.svg" alt="Duolingo" />
+        <img src={logoFull} alt="Duolingo" className="logo-full" />
+        <img src={logoSmall} alt="Duolingo" className="logo-small" />
       </div>
       <ul className="nav-items">
         <NavLink to={`${basePath}/home`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
