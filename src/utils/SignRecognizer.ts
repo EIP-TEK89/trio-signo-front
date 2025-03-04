@@ -22,6 +22,28 @@ export interface ModelConfig {
     ff_dim: number;
 }
 
+export interface LandmarkData {
+    hand: HandLandmarkerResult | null;
+}
+
+export interface ModelsPredictions {
+    signId: number;
+    signLabel: string;
+    landmarks: LandmarkData;
+}
+
+function computeFrameDifference(prevFrame: ImageData, currentFrame: ImageData): number {
+    let diff = 0;
+    let step = Math.round(prevFrame.data.length / 100);
+    for (let i = 0; i < prevFrame.data.length; i += step) {
+        diff += Math.abs(prevFrame.data[i] - currentFrame.data[i]);     // Red
+        diff += Math.abs(prevFrame.data[i + 1] - currentFrame.data[i + 1]); // Green
+        diff += Math.abs(prevFrame.data[i + 2] - currentFrame.data[i + 2]); // Blue
+    }
+    return diff;
+}
+
+
 function ModelConfigFromJson(json: any): ModelConfig {
     return {
         labels: json.labels,
@@ -43,9 +65,23 @@ export default class SignRecognizer {
     private session: ort.InferenceSession | null = null;
     private handLandmarker: HandLandmarker | null = null;
 
+    private isPredicting: boolean = false;
+    private lastPrediction: ModelsPredictions;
+    private datasample: DataSample = new DataSample("test", []);
+    private prevFrame: ImageData | null = null;
+    private canvas: HTMLCanvasElement = document.createElement("canvas");
+
     constructor(onnxModelPath: string, handLandmarkerPath: string) {
         this.loadOnnxModel(onnxModelPath)
         this.loadHandLandmarker(handLandmarkerPath)
+
+        this.lastPrediction = {
+            signId: -1,
+            signLabel: "Null",
+            landmarks: {
+                hand: null
+            }
+        };
     }
 
     /** Charger le modèle ONNX */
@@ -85,8 +121,8 @@ export default class SignRecognizer {
         this.sign_recongnizer_config = ModelConfigFromJson(JSON.parse(jsonFileText));
 
         // console.log("ONNX Model URL:", modelUrl);
-        console.log("JSON Config:", this.sign_recongnizer_config);
-        console.log("Active Fields:", this.sign_recongnizer_config.active_gestures.getActiveFields());
+        // console.log("JSON Config:", this.sign_recongnizer_config);
+        // console.log("Active Fields:", this.sign_recongnizer_config.active_gestures.getActiveFields());
 
         this.session = await ort.InferenceSession.create(modelUrl, {
             executionProviders: ['wasm'], // ✅ Ensure WebAssembly is used
@@ -111,7 +147,60 @@ export default class SignRecognizer {
         console.log("Hand Landmarker model loaded !");
     }
 
-    async detectHands(elem: HTMLCanvasElement | HTMLImageElement | HTMLVideoElement): Promise<HandLandmarkerResult | null> {
+    async predictAsync(elem: HTMLVideoElement, lazy: boolean = true): Promise<ModelsPredictions> {
+
+        if (this.isPredicting) {
+            return this.lastPrediction
+        }
+        this.isPredicting = true;
+        if (lazy && this.canvas) {
+            this.canvas.width = elem.videoWidth;
+            this.canvas.height = elem.videoHeight;
+            const ctx = this.canvas.getContext("2d");
+            if (!ctx || this.canvas.height === 0 || this.canvas.width === 0) {
+                this.isPredicting = false;
+                return this.lastPrediction;
+            }
+            ctx.drawImage(elem, 0, 0, this.canvas.width, this.canvas.height);
+            const currentFrame: ImageData = ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+
+            if (this.prevFrame && computeFrameDifference(this.prevFrame, currentFrame) === 0) {
+                this.isPredicting = false;
+                return this.lastPrediction;
+            }
+            this.prevFrame = currentFrame;
+        }
+        const handlandmark: HandLandmarkerResult | null = await this.detectHands(elem);
+
+        this.lastPrediction.landmarks.hand = handlandmark;
+        if (handlandmark) {
+            this.datasample.insertGestureFromLandmarks(0, handlandmark);
+            if (!this.sign_recongnizer_config) {
+                console.error("Sign recognizer config is not loaded yet!");
+                this.isPredicting = false;
+                return this.lastPrediction;
+            }
+            while (this.datasample.gestures.length > this.sign_recongnizer_config.memory_frame) {
+                this.datasample.gestures.pop();
+            }
+            this.lastPrediction.signId = await this.recognizeSign(this.datasample);
+            this.lastPrediction.signLabel = this.sign_recongnizer_config.labels[this.lastPrediction.signId];
+        } else {
+            this.lastPrediction.signId = -1;
+            this.lastPrediction.signLabel = "Null";
+        }
+        this.isPredicting = false;
+        return this.lastPrediction;
+    }
+
+    predict(elem: HTMLVideoElement, lazy: boolean = true): ModelsPredictions {
+        if (!this.isPredicting) {
+            this.predictAsync(elem);
+        }
+        return this.lastPrediction;
+    }
+
+    async detectHands(elem: HTMLVideoElement): Promise<HandLandmarkerResult | null> {
         if (!this.handLandmarker) {
             console.error("Hand Landmarker model is not loaded yet!");
             return null;
@@ -149,19 +238,10 @@ export default class SignRecognizer {
         const outputName = this.session.outputNames[0];  // Get the output name dynamically
         const outputData = outputTensor[outputName].data;
 
-        // let bestIndex: number = 0;
-        // let bestValue = outputData[0];
-        // for (let i = 1; i < outputTensor.output.data.length; i++) {
-            //     if (outputTensor.output.data[i] > bestValue) {
-                //         bestValue = outputTensor.output.data[i];
-                //         bestIndex = i;
-                //     }
-                // }
-
         const probabilities = softmax(outputData);
 
-        console.log(datasample.gestures[0], tensor)
-        console.log("Output tensor:", outputData, probabilities);
+        // console.log(datasample.gestures[0], tensor)
+        // console.log("Output tensor:", outputData, probabilities);
 
         return probabilities.indexOf(Math.max(...probabilities));;
     }

@@ -2,6 +2,7 @@ import { HandLandmarkerResult } from '@mediapipe/tasks-vision';
 
 import { Gestures, FIELDS, FIELD_DIMENSION } from "$utils/gestures/Gestures"
 import { HANDS_POINTS, HANDS_POSITION } from "$utils/gestures/PointPresets"
+import { rot3dX, rot3dY, rot3dZ } from "$utils/Rot3D"
 
 const CACHE_HANDS_POINTS: string[] = HANDS_POINTS.getActiveFields()
 const CACHE_HANDS_POSITION: string[] = HANDS_POSITION.getActiveFields()
@@ -53,7 +54,7 @@ export class DataGestures extends Gestures<[number, number, number] | null> {
 
         for (let i = 0; i < landmarkResult.worldLandmarks.length; i++) {
             const handLandmark = landmarkResult.landmarks[i];
-            const handWorldLandmark = landmarkResult.landmarks[i];
+            const handWorldLandmark = landmarkResult.worldLandmarks[i];
 
             if (landmarkResult.handedness[i][0].categoryName === "Right") {
                 if (!validFields || validFields.includes("r_hand_position")) {
@@ -62,7 +63,9 @@ export class DataGestures extends Gestures<[number, number, number] | null> {
 
                 handFields.forEach((field, j) => {
                     if (!validFields || validFields.includes(`r_${field}`)) {
-                        (this as any)[`r_${field}`] = [handWorldLandmark[j].x, handWorldLandmark[j].y, handWorldLandmark[j].z];
+                        // Negate X and Z axis otherwise the model recognize sign only when they are done with the back of the hand is shown
+                        // I am unable to tell if this difference is due to the language difference or a bug before or after this point
+                        (this as any)[`r_${field}`] = [-handWorldLandmark[j].x, handWorldLandmark[j].y, -handWorldLandmark[j].z];
                     }
                 });
             } else {
@@ -72,7 +75,9 @@ export class DataGestures extends Gestures<[number, number, number] | null> {
 
                 handFields.forEach((field, j) => {
                     if (!validFields || validFields.includes(`l_${field}`)) {
-                        (this as any)[`l_${field}`] = [handWorldLandmark[j].x, handWorldLandmark[j].y, handWorldLandmark[j].z];
+                        // Negate X and Z axis otherwise the model recognize sign only when they are done with the back of the hand is shown
+                        // I am unable to tell if this difference is due to the language difference or a bug before or after this point
+                        (this as any)[`l_${field}`] = [-handWorldLandmark[j].x, handWorldLandmark[j].y, -handWorldLandmark[j].z];
                     }
                 });
             }
@@ -142,7 +147,6 @@ export class DataGestures extends Gestures<[number, number, number] | null> {
 
     get1DArray(validFields?: string[]): number[] {
         validFields = getFields(validFields);
-        console.log(validFields)
         return validFields.flatMap(field => (this as any)[field] || [0, 0, 0]);
     }
 

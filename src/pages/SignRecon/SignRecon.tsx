@@ -10,11 +10,11 @@ import '$pages/Courses/Courses.css';
 
 import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 import VideoFetcher from '$utils/VideoFetcher';
-import SignRecognizer from "$utils/SignRecognizer"
+import SignRecognizer, { ModelsPredictions } from "$utils/SignRecognizer"
 import { HandLandmarker, DrawingUtils, HandLandmarkerResult } from '@mediapipe/tasks-vision';
 
 import { DataSample } from "$utils/Datasample";
-import { Data } from '@mediapipe/drawing_utils';
+import { DataGestures } from "$utils/gestures/DataGestures";
 
 /** Options for customizing the drawing */
 interface DrawOptions {
@@ -84,16 +84,6 @@ function drawHandLandmarkerResult(
 }
 
 
-function computeFrameDifference(prevFrame: ImageData, currentFrame: ImageData): number {
-    let diff = 0;
-    let step = Math.round(prevFrame.data.length / 100);
-    for (let i = 0; i < prevFrame.data.length; i += step) {
-        diff += Math.abs(prevFrame.data[i] - currentFrame.data[i]);     // Red
-        diff += Math.abs(prevFrame.data[i + 1] - currentFrame.data[i + 1]); // Green
-        diff += Math.abs(prevFrame.data[i + 2] - currentFrame.data[i + 2]); // Blue
-    }
-    return diff;
-}
 
 
 const Courses: React.FC = () => {
@@ -112,54 +102,36 @@ const Courses: React.FC = () => {
 
 
     useEffect(() => {
-        // console.log("ta mère")
         videoFetcherRef.current = new VideoFetcher();
         signRecognizerRef.current = new SignRecognizer(getBaseUrl() + ":5000/get-sign-recognizer-model/alphabet", "$assets/models/hand_landmarker.task");
         let timings: Array<number> = [];
-        let prevFrame: ImageData | null = null;
-        let prevLandmark: HandLandmarkerResult | null = null;
-        let datasample: DataSample = new DataSample("", []);
-        let output_sign: number = -1;
+        let output_sign: string;
 
         const drawToCanvas = async () => {
             let video: HTMLVideoElement | null = videoFetcherRef.current.getFrame();
 
+
             // console.log("video", video);
 
 
-            if (video && canvasRef.current) {
-                let start_time = performance.now();
+            let start_time = performance.now();
+            if (video && canvasRef.current && signRecognizerRef.current) {
+                const ctx = canvasRef.current.getContext("2d");
                 canvasRef.current.width = video.videoWidth;
                 canvasRef.current.height = video.videoHeight;
-                const ctx = canvasRef.current.getContext("2d");
                 if (ctx) {
                     ctx.drawImage(video, 0, 0, canvasRef.current.width, canvasRef.current.height);
 
-                    if (video.videoWidth > 0 && video.videoHeight > 0) {
-                        const currentFrame: ImageData = ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
+                    const prediction_results: ModelsPredictions = signRecognizerRef.current.predict(video);
 
-                        if (!prevFrame || computeFrameDifference(prevFrame, currentFrame) > 0) {
-                            const landmark: HandLandmarkerResult | null = await signRecognizerRef.current.detectHands(video);
-                            if (landmark) {
-                                drawHandLandmarkerResult(ctx, landmark);
-                                datasample.insertGestureFromLandmarks(0, landmark);
-                                while (datasample.gestures.length > 15) {
-                                    datasample.gestures.pop();
-                                }
-                                output_sign = await signRecognizerRef.current.recognizeSign(datasample);
-                            }
-
-
-
-                            prevLandmark = landmark;
-                        } else if (prevLandmark) {
-                            drawHandLandmarkerResult(ctx, prevLandmark);
-                        }
-                        prevFrame = currentFrame;
+                    if (prediction_results.landmarks.hand) {
+                        drawHandLandmarkerResult(ctx, prediction_results.landmarks.hand);
                     }
+
+                    output_sign = prediction_results.signLabel;
                 }
                 timings.push(performance.now() - start_time);
-                while (timings.length > 60) {
+                while (timings.length > 10) {
                     timings.shift();
                 }
                 let average_time: number = timings.reduce((a, b) => a + b) / timings.length;
