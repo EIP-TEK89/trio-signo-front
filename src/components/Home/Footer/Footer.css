@@ -1,0 +1,170 @@
+.site-footer {
+  padding-top: 32px;
+  /* padding-bottom: 32px; */
+  background-color: #FAFAFA;
+}
+
+.footer-container {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20%;
+  gap: 16px;
+  justify-content: start;
+}
+
+.footer-brand {
+  grid-column: span 1;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  background-color: #58CC02;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon {
+  color: white;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+.brand-text {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  max-width: 200px;
+}
+
+.social-list {
+  display: flex;
+  gap: 16px;
+}
+
+.social-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.social-btn:hover {
+  background-color: #E5E7EB;
+}
+
+.social-icon {
+  width: 16px;
+  height: 16px;
+  color: #374151;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #111827;
+}
+
+.footer-bottom {
+  margin-top: 48px;
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  color: #666;
+  font-size: 14px;
+}
+
+.legal-list {
+  display: flex;
+  gap: 24px;
+}
+
+.legal-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.legal-link:hover {
+  color: #111827;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand {
+    grid-column: span 1;
+  }
+}

@@ -9,7 +9,7 @@ import TrainingPage from './pages/CoursesJourney/Training/Training';
 import QuestsPage from './pages/CoursesJourney/Quests/Quests';
 import ShopPage from './pages/CoursesJourney/Shop/Shop';
 import SignUp from './pages/SignUp/SignUp';
-//import LogIn from '$pages/LogIn/LogIn';
+import LogIn from './pages/LogIn/LogIn';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +17,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<LogIn />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/coursesJourney/home" element={<HomePage />} />
         <Route path="/coursesJourney/quests" element={<QuestsPage />} />

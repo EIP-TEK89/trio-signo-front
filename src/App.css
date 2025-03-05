@@ -34,6 +34,11 @@
     --color-streak: #FFD700;
     --color-gems: #84D8FF;
     --color-hearts: #FF6B6B;
+
+    /* Blue Colors */
+    --color-blue: #1cb0f6;
+    --color-blue-shadow: #1899d6;
+    --color-text-blue: #52656d;
 }
 
 .pushable {
