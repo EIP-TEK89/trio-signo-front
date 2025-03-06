@@ -1,5 +1,5 @@
 import * as ort from "onnxruntime-web";
-import { HandLandmarker, FilesetResolver, NormalizedLandmark, DrawingUtils, HandLandmarkerResult } from "@mediapipe/tasks-vision";
+import { HandLandmarker, FilesetResolver, HandLandmarkerResult } from "@mediapipe/tasks-vision";
 
 import { FIELDS, FIELD_DIMENSION } from "$utils/gestures/Gestures";
 import { ActiveGestures } from "./gestures/ActiveGestures";
@@ -7,6 +7,7 @@ import { DataSample } from "$utils/Datasample";
 
 import axios, { AxiosResponse } from "axios";
 import JSZip from "jszip";
+import { Clock } from "$utils/Clock";
 
 export interface ModelConfig {
     labels: string[];
@@ -22,13 +23,16 @@ export interface ModelConfig {
     ff_dim: number;
 }
 
+// This where all tracking will be stored in the future
 export interface LandmarkData {
     hand: HandLandmarkerResult | null;
+    // body: BodyLandmarkerResult | null;
+    // face: FaceLandmarkerResult | null;
 }
 
 export interface ModelsPredictions {
     signId: number;
-    signLabel: string;
+    signLabel: string; // Where you can get the name of the recognized sign
     landmarks: LandmarkData;
 }
 
@@ -42,7 +46,6 @@ function computeFrameDifference(prevFrame: ImageData, currentFrame: ImageData): 
     }
     return diff;
 }
-
 
 function ModelConfigFromJson(json: any): ModelConfig {
     return {
@@ -60,18 +63,24 @@ function ModelConfigFromJson(json: any): ModelConfig {
     };
 }
 
+const HANDLANDMARKER_MODEL_PATH: string = `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`
+
 export default class SignRecognizer {
     public sign_recongnizer_config: ModelConfig | null = null;
     private session: ort.InferenceSession | null = null;
-    private handLandmarker: HandLandmarker | null = null;
 
     private isPredicting: boolean = false;
     private lastPrediction: ModelsPredictions;
     private datasample: DataSample = new DataSample("test", []);
     private prevFrame: ImageData | null = null;
     private canvas: HTMLCanvasElement = document.createElement("canvas");
+    private clock: Clock = new Clock(30);
 
-    constructor(onnxModelPath: string, handLandmarkerPath: string) {
+    // Handlandmarker variables
+    private handLandmarker: HandLandmarker | null = null;
+
+
+    constructor(onnxModelPath: string, handLandmarkerPath: string = HANDLANDMARKER_MODEL_PATH) {
         this.loadOnnxModel(onnxModelPath)
         this.loadHandLandmarker(handLandmarkerPath)
 
@@ -112,8 +121,6 @@ export default class SignRecognizer {
         if (!onnxFileBlob) throw new Error("No .onnx file found in ZIP.");
         if (!jsonFileText) throw new Error("No .json file found in ZIP.");
 
-
-
         // Convert ONNX blob to URL for ONNX Runtime Web
         const modelUrl = URL.createObjectURL(onnxFileBlob);
 
@@ -130,7 +137,6 @@ export default class SignRecognizer {
         console.log("ONNX model loaded !");
     }
 
-    /** Charger le modèle MediaPipe Hand Landmarker */
     async loadHandLandmarker(path: string): Promise<void> {
         console.log("Loading Hand Landmarker model...");
         const vision = await FilesetResolver.forVisionTasks(
@@ -138,7 +144,7 @@ export default class SignRecognizer {
         );
         this.handLandmarker = await HandLandmarker.createFromOptions(vision, {
             baseOptions: {
-                modelAssetPath: `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`,
+                modelAssetPath: path,
                 delegate: "GPU"
             },
             runningMode: "VIDEO",
@@ -149,7 +155,7 @@ export default class SignRecognizer {
 
     async predictAsync(elem: HTMLVideoElement, lazy: boolean = true): Promise<ModelsPredictions> {
 
-        if (this.isPredicting) {
+        if (this.isPredicting || elem.videoHeight === 0 || elem.videoWidth === 0) {
             return this.lastPrediction
         }
         this.isPredicting = true;
@@ -173,29 +179,37 @@ export default class SignRecognizer {
         const handlandmark: HandLandmarkerResult | null = await this.detectHands(elem);
 
         this.lastPrediction.landmarks.hand = handlandmark;
-        if (handlandmark) {
-            this.datasample.insertGestureFromLandmarks(0, handlandmark);
-            if (!this.sign_recongnizer_config) {
-                console.error("Sign recognizer config is not loaded yet!");
-                this.isPredicting = false;
-                return this.lastPrediction;
+        if (this.clock.isTimeToRun()) {
+            if (handlandmark) {
+                this.datasample.insertGestureFromLandmarks(0, handlandmark);
+                if (!this.sign_recongnizer_config) {
+                    console.error("Sign recognizer config is not loaded yet!");
+                    this.isPredicting = false;
+                    return this.lastPrediction;
+                }
+                while (this.datasample.gestures.length > this.sign_recongnizer_config.memory_frame) {
+                    this.datasample.gestures.pop();
+                }
+                this.lastPrediction.signId = await this.recognizeSign(this.datasample);
+                this.lastPrediction.signLabel = this.sign_recongnizer_config.labels[this.lastPrediction.signId];
+            } else {
+                this.lastPrediction.signId = -1;
+                this.lastPrediction.signLabel = "Null";
             }
-            while (this.datasample.gestures.length > this.sign_recongnizer_config.memory_frame) {
-                this.datasample.gestures.pop();
-            }
-            this.lastPrediction.signId = await this.recognizeSign(this.datasample);
-            this.lastPrediction.signLabel = this.sign_recongnizer_config.labels[this.lastPrediction.signId];
-        } else {
-            this.lastPrediction.signId = -1;
-            this.lastPrediction.signLabel = "Null";
         }
         this.isPredicting = false;
         return this.lastPrediction;
     }
 
+    /**
+     *
+     * @param elem Video element where the sign to recognize is
+     * @param lazy Optimize the prediction by skipping similar frames, I recommend to set it false only if you want to debug
+     * @returns
+     */
     predict(elem: HTMLVideoElement, lazy: boolean = true): ModelsPredictions {
         if (!this.isPredicting) {
-            this.predictAsync(elem);
+            this.predictAsync(elem, lazy);
         }
         return this.lastPrediction;
     }

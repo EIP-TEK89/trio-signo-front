@@ -69,6 +69,5 @@ class Gestures<T> {
 
 const FIELDS: string[] = Object.keys(new Gestures());
 const FIELD_DIMENSION: number = 3
-console.log(FIELDS)
 
 export { Gestures, FIELDS, FIELD_DIMENSION };
