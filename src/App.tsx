@@ -10,21 +10,37 @@ import QuestsPage from './pages/CoursesJourney/Quests/Quests';
 import ShopPage from './pages/CoursesJourney/Shop/Shop';
 import SignUp from './pages/SignUp/SignUp';
 import LogIn from './pages/LogIn/LogIn';
+import NotFound from './pages/NotFound/NotFound';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import { ROUTES } from './constants/routes';
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<LogIn />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/coursesJourney/home" element={<HomePage />} />
-        <Route path="/coursesJourney/quests" element={<QuestsPage />} />
-        <Route path="/coursesJourney/league" element={<LiguePage />} />
-        <Route path="/coursesJourney/profile" element={<ProfilePage />} />
-        <Route path="/coursesJourney/training" element={<TrainingPage />} />
-        <Route path="/coursesJourney/shop" element={<ShopPage />} />
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.SIGNUP} element={<SignUp />} />
+        <Route path={ROUTES.SIGNIN} element={<LogIn />} />
+        <Route path={ROUTES.COURSES} element={<Courses />} />
+        <Route path={ROUTES.COURSES_JOURNEY.HOME} element={<HomePage />} />
+        
+        {/* Protected Route for Quests */}
+        <Route
+          path={ROUTES.COURSES_JOURNEY.QUESTS}
+          element={
+            <ProtectedRoute>
+              <QuestsPage />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route path={ROUTES.COURSES_JOURNEY.LEAGUE} element={<LiguePage />} />
+        <Route path={ROUTES.COURSES_JOURNEY.PROFILE} element={<ProfilePage />} />
+        <Route path={ROUTES.COURSES_JOURNEY.TRAINING} element={<TrainingPage />} />
+        <Route path={ROUTES.COURSES_JOURNEY.SHOP} element={<ShopPage />} />
+        
+        {/* 404 Page - Catch all unmatched routes */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

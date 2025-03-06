@@ -1,18 +1,13 @@
 import React from 'react';
 import Navbar from '../../../components/Navbar/Navbar';
 import RightSidebar from '../../../components/RightSidebar/RightSidebar';
+import LessonPath from '../../../components/LessonPath/LessonPath';
 import GuideIcon from '../../../Assets/CoursesJourney/Home/guide.svg';
-import WhiteOkIcon from '../../../Assets/CoursesJourney/Home/whiteOk.svg';
-import WhiteStarIcon from '../../../Assets/CoursesJourney/Home/whiteStar.svg';
-import StarIcon from '../../../Assets/CoursesJourney/Home/star.svg';
-import ChestIcon from '../../../Assets/CoursesJourney/Home/chest.svg';
-import TrophyIcon from '../../../Assets/CoursesJourney/Home/trophy.svg';
 import BackArrowIcon from '../../../Assets/CoursesJourney/Home/backArrow.svg';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
-
   const navigate = useNavigate();
 
   const GoToCourses = async () => {
@@ -40,92 +35,84 @@ const HomePage: React.FC = () => {
           </button>
         </header>
 
-        <div className="lesson-path">
-          <button onClick={GoToCourses} className="lesson-node completed">
-            <div className="node-circle">
-              <img src={WhiteOkIcon} alt="Completed" />
-            </div>
-          </button>
-          <button onClick={GoToCourses} className="lesson-node active">
-            <div className="node-circle">
-              <img src={WhiteStarIcon} alt="Star" />
-            </div>
-            <div className="start-button">
-              COMMENCER
-              <div className="start-button-arrow"></div>
-            </div>
-          </button>
-          <button className="lesson-node locked">
-            <div className="node-circle">
-              <img src={StarIcon} alt="Locked Star" />
-            </div>
-          </button>
-          <button className="lesson-node locked">
-            <div className="node-circle">
-              <img src={ChestIcon} alt="Chest" />
-            </div>
-          </button>
-          <button className="lesson-node locked">
-            <div className="node-circle">
-              <img src={TrophyIcon} alt="Trophy" />
-            </div>
-          </button>
-        </div>
-
-        <div className="mascot">
-          <img src="/duo-mascot.svg" alt="Duo" className="duo-image" />
+        {/* Lesson Paths */}
+        <div className="lesson-paths-container">
+          <LessonPath 
+            onStartLesson={GoToCourses} 
+            color="var(--color-primary)" 
+            curveDirection="left"
+            title="Describe people" 
+          />
+          <LessonPath 
+            onStartLesson={GoToCourses} 
+            color="#9B6DFF" 
+            curveDirection="right"
+            title="Family members" 
+          />
+          <LessonPath 
+            onStartLesson={GoToCourses} 
+            color="#FFD700" 
+            curveDirection="left"
+            title="Basic phrases" 
+          />
+          <LessonPath 
+            onStartLesson={GoToCourses} 
+            color="#FF6B6B" 
+            curveDirection="right"
+            title="Common verbs" 
+          />
         </div>
       </main>
 
       {/* Right Sidebar */}
       <RightSidebar
-  stats={{
-    streak: 5,
-    gems: 100,
-    hearts: 3
-  }}
-  cards={[
-    {
-      type: 'super',
-      title: 'Essaie Super Duolingo gratuitement',
-      description: 'Pas de pubs, entraînements personnalisés et Défis Légendaires illimités !',
-      button: {
-        label: 'ESSAYER 2 SEMAINES GRATUITES',
-        onClick: () => {},
-        variant: 'primary'
-      }
-    },
-    {
-      type: 'league',
-      leagueType: 'LIGUES',
-      title: 'Bien joué !',
-      description: 'Tu as terminé n° 15 et sauvé ta place en Division Saphir',
-      button: {
-        label: 'VOIR LES LIGUES',
-        onClick: () => {},
-        variant: 'secondary'
-      }
-    },
-    {
-      type: 'quest',
-      title: 'Quêtes du jour',
-      current: 0,
-      total: 10,
-      reward: 'Gagne 10 XP'
-    },
-    {
-      type: 'badge',
-      title: 'Badges mensuels',
-      badges: [
-        {
-          icon: '/path-to-badge-icon.svg',
-          title: 'Termine 30 quêtes',
-          description: 'pour remporter le badge du mois'
-        }
-      ]
-    }
-  ]}
-/>
+        stats={{
+          streak: 5,
+          gems: 100,
+          hearts: 3
+        }}
+        cards={[
+          {
+            type: 'super',
+            title: 'Essaie Super Duolingo gratuitement',
+            description: 'Pas de pubs, entraînements personnalisés et Défis Légendaires illimités !',
+            button: {
+              label: 'ESSAYER 2 SEMAINES GRATUITES',
+              onClick: () => {},
+              variant: 'primary'
+            }
+          },
+          {
+            type: 'league',
+            leagueType: 'LIGUES',
+            title: 'Bien joué !',
+            description: 'Tu as terminé n° 15 et sauvé ta place en Division Saphir',
+            button: {
+              label: 'VOIR LES LIGUES',
+              onClick: () => {},
+              variant: 'secondary'
+            }
+          },
+          {
+            type: 'quest',
+            title: 'Quêtes du jour',
+            current: 0,
+            total: 10,
+            reward: 'Gagne 10 XP'
+          },
+          {
+            type: 'badge',
+            title: 'Badges mensuels',
+            badges: [
+              {
+                icon: '/path-to-badge-icon.svg',
+                title: 'Termine 30 quêtes',
+                description: 'pour remporter le badge du mois'
+              }
+            ]
+          }
+        ]}
+      />
     </div>
   );
 };
