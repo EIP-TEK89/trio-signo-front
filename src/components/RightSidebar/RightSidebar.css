@@ -1,0 +1,239 @@
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Stats Bar Styles */
+.stats-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.language-selector {
+  width: 32px;
+  height: 25px;
+  overflow: hidden;
+}
+
+.language-selector img {
+  width: 32px;
+  object-fit: cover;
+  object-position: 0 -52px;
+}
+
+.user-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.user-stats img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.stat.streak {
+  color: #FFD700;
+}
+
+.stat.gems {
+  color: #84D8FF;
+}
+
+.stat.hearts {
+  color: #FF6B6B;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  padding: 24px 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Common Card Styles */
+.sidebar-card {
+  border: 2px solid #37464f;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.sidebar-card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: #84D8FF;
+  text-transform: uppercase;
+}
+
+.sidebar-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: white;
+}
+
+.sidebar-card p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Card Button Styles */
+.card-button {
+  width: 100%;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-transform: uppercase;
+}
+
+.card-button.primary {
+  background-color: #58CC02;
+  color: white;
+}
+
+.card-button.primary:hover {
+  background-color: #46a001;
+}
+
+.card-button.secondary {
+  background-color: #1CB0F6;
+  color: white;
+}
+
+.card-button.secondary:hover {
+  background-color: #179ad9;
+}
+
+/* Super Card Styles */
+
+.super-header {
+  margin-bottom: 16px;
+}
+
+.super-badge {
+  background-color: white;
+  color: #1CB0F6;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* Quest Card Styles */
+.quest-card {
+  border: 2px solid #37464f;
+  position: relative;
+}
+
+.quest-card h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #84D8FF;
+  margin-bottom: 24px;
+}
+
+.quest-card .see-all {
+  color: #1CB0F6;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.quest-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.quest-icon {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+}
+
+.quest-info {
+  flex: 1;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #58CC02;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.quest-reward {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Badge Card Styles */
+.badge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge-item img {
+  width: 48px;
+  height: 48px;
+}
+
+.badge-info h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: white;
+}
+
+.badge-info p {
+  font-size: 14px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+} 

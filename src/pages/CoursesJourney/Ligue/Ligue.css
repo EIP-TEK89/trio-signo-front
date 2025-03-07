@@ -1,0 +1,19 @@
+.duolingo-container {
+    display: grid;
+    grid-template-columns: 240px 1fr 300px;
+    min-height: 100vh;
+    background-color: #131f24;
+    color: white;
+    position: relative;
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-x: auto;
+    min-width: 100%;
+  }

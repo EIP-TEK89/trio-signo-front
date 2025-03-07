@@ -1,56 +1,57 @@
-import React, { useState } from 'react';
-import { useLocation, NavLink } from 'react-router-dom';
+import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import './Navbar.css';
+import homeIcon from '../../Assets/components/Navbar/home.svg';
+import trainingIcon from '../../Assets/components/Navbar/training.svg';
+import ligueIcon from '../../Assets/components/Navbar/ligue.svg';
+import questsIcon from '../../Assets/components/Navbar/quests.svg';
+import shopIcon from '../../Assets/components/Navbar/shop.svg';
+import plusIcon from '../../Assets/components/Navbar/plus.svg';
+import logoFull from '../../Assets/components/Navbar/logoFull.svg';
+import logoSmall from '../../Assets/components/Navbar/logoSmall.svg';
 
-import './NavBar.css';
-
-import Home from '$assets/NavBar/home.png';
-import Haltere from '$assets/NavBar/haltere.png';
-import Trophy from '$assets/NavBar/trophy.png';
-import Genie from '$assets/NavBar/genie.png';
-import Chest from '$assets/NavBar/chest.png';
-
-const NavBar: React.FC = () => {
+const Navbar: React.FC = () => {
   const location = useLocation();
-
   const basePath = location.pathname.substring(0, location.pathname.lastIndexOf('/'));
 
   return (
-    <div className="">
-      <nav className="nav-bar">
-        <NavLink to={`${basePath}/home`} className={({ isActive }) => (isActive ? 'nav-button active' : 'nav-button')}>
-          <img src={Home} alt="home nav-icon" className="nav-icon" />
+    <nav className="sidebar">
+      <div className="logo">
+        <img src={logoFull} alt="Duolingo" className="logo-full" />
+        <img src={logoSmall} alt="Duolingo" className="logo-small" />
+      </div>
+      <ul className="nav-items">
+        <NavLink to={`${basePath}/home`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <img src={homeIcon} alt="Mon cours" className="nav-icon" />
+          <span className="nav-label">MON COURS</span>
         </NavLink>
-
-        <NavLink
-          to={`${basePath}/training`}
-          className={({ isActive }) => (isActive ? 'nav-button active' : 'nav-button')}
-        >
-          <img src={Haltere} alt="haltere nav-icon" className="nav-icon" />
+        <NavLink to={`${basePath}/training`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <img src={trainingIcon} alt="Entraînement" className="nav-icon" />
+          <span className="nav-label">ENTRAÎNEMENT</span>
         </NavLink>
-
-        <NavLink
-          to={`${basePath}/competition`}
-          className={({ isActive }) => (isActive ? 'nav-button active' : 'nav-button')}
-        >
-          <img src={Trophy} alt="trophy nav-icon" className="nav-icon" />
+        <NavLink to={`${basePath}/league`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <img src={ligueIcon} alt="Ligues" className="nav-icon" />
+          <span className="nav-label">LIGUES</span>
         </NavLink>
-
-        <NavLink
-          to={`${basePath}/profile`}
-          className={({ isActive }) => (isActive ? 'nav-button active' : 'nav-button')}
-        >
-          <img src={Genie} alt="genie nav-icon" className="nav-icon" />
+        <NavLink to={`${basePath}/quests`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <img src={questsIcon} alt="Quêtes" className="nav-icon" />
+          <span className="nav-label">QUÊTES</span>
         </NavLink>
-
-        <NavLink
-          to={`${basePath}/quests`}
-          className={({ isActive }) => (isActive ? 'nav-button active' : 'nav-button')}
-        >
-          <img src={Chest} alt="chest nav-icon" className="nav-icon" />
+        <NavLink to={`${basePath}/shop`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <img src={shopIcon} alt="Boutique" className="nav-icon" />
+          <span className="nav-label">BOUTIQUE</span>
         </NavLink>
-      </nav>
-    </div>
+        <NavLink to={`${basePath}/profile`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <div className="nav-icon profile-icon">D</div>
+          <span className="nav-label">PROFIL</span>
+        </NavLink>
+        <NavLink to={`${basePath}/plus`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <img src={plusIcon} alt="Plus" className="nav-icon" />
+          <span className="nav-label">PLUS</span>
+        </NavLink>
+      </ul>
+    </nav>
   );
 };
 
-export default NavBar;
+export default Navbar; 
