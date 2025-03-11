@@ -1,0 +1,81 @@
+/* Sign Details Page Styles */
+.sign-details-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.back-button {
+    background-color: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    color: var(--color-primary);
+}
+
+.sign-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--color-text);
+}
+
+.sign-definition {
+    font-size: 24px;
+    color: var(--color-text-secondary);
+    margin-bottom: 32px;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 32px;
+    background-color: var(--color-background-dark);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.sign-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: block;
+}
+
+.sign-realisations {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sign-realisations h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--color-text);
+}
+
+.sign-realisations p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .sign-details-container {
+        width: 90%;
+        padding: 16px;
+    }
+
+    .sign-title {
+        font-size: 24px;
+    }
+
+    .sign-translation {
+        font-size: 20px;
+    }
+} 

@@ -1,0 +1,94 @@
+.dictionary-header {
+    width: 80%;
+    margin-bottom: 40px;
+}
+
+.dictionary-search-container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.dictionary-search-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid var(--color-border);
+    background-color: transparent;
+    color: var(--color-text);
+}
+
+.dictionary-words-container {
+    width: 80%;
+    padding: 0 20px;
+}
+
+.dictionary-word-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+}
+
+.dictionary-word-button {
+    background-color: var(--color-background);
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    color: var(--color-text);
+    text-align: center;
+}
+
+.dictionary-word-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dictionary-letter-section {
+    margin: 20px 0;
+}
+
+.dictionary-letter-button {
+    background-color: var(--color-background);
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.dictionary-letter-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dictionary-separator {
+    height: 2px;
+    background-color: var(--color-border);
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* Media Queries for Mobile */
+@media screen and (max-width: 768px) {
+    .dictionary-search-container {
+        width: 90%;
+    }
+
+    .dictionary-word-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .dictionary-word-button {
+        width: 100%;
+        padding: 16px;
+    }
+}
