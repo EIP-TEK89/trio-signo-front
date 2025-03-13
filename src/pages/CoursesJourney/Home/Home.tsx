@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
         <div className="lesson-paths-container">
           <LessonPath 
             onStartLesson={GoToCourses} 
-            color="var(--color-primary)" 
+            color="var(--color-green-primary)" 
             curveDirection="left"
             title="Describe people" 
           />

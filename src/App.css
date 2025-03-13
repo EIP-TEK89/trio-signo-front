@@ -5,40 +5,42 @@
 }
 
 :root {
-    /* Main Colors */
-    --color-background: #131f24;
+    /* Background Colors */
+    --color-background-main: #131f24;
     --color-background-footer-courses: #202f36;
-    --color-primary: #58CC02;
-    --color-primary-shadow: #46a001;
-    --color-primary-dark: #79b933;
-    --color-primary-hover: #A9DC5C;
-    --color-success: #4CAF50;
-    --color-error: #ee5555;
-    --color-error-shadow: #d84848;
-    --color-error-hover: #FF6B6B;
-
-    /* courses colors */
-    --color-primary-courses: #93d333;
+    --color-background-button: #1f2937;
     
-    /* Text Colors */
-    --color-text: #ffffff;
-    --color-text-dark: #37464f;
+    /* Green Colors */
+    --color-green-primary: #58CC02;
+    --color-green-shadow: #46a001;
+    --color-green-dark: #79b933;
+    --color-green-hover: #A9DC5C;
+    --color-green-courses: #93d333;
+    --color-green-success: #4CAF50;
     
-    /* UI Colors */
-    --color-border: #37464f;
-    --color-button-bg: #1f2937;
-    --color-overlay: rgba(255, 255, 255, 0.1);
-    --color-overlay-hover: rgba(255, 255, 255, 0.15);
-
-    /* Navbar Colors */
-    --color-streak: #FFD700;
-    --color-gems: #84D8FF;
-    --color-hearts: #FF6B6B;
+    /* Red Colors */
+    --color-red-error: #ee5555;
+    --color-red-error-shadow: #d84848;
+    --color-red-error-hover: #FF6B6B;
+    --color-red-hearts: #FF6B6B;
 
     /* Blue Colors */
     --color-blue: #1cb0f6;
     --color-blue-shadow: #1899d6;
     --color-text-blue: #52656d;
+    --color-blue-gems: #84D8FF;
+    
+    /* Yellow Colors */
+    --color-yellow-streak: #FFD700;
+
+    /* Text Colors */
+    --color-text: #ffffff;
+    --color-text-dark: #37464f;
+    
+    /* Border Colors */
+    --color-border: #37464f;
+    --color-border-overlay: rgba(255, 255, 255, 0.1);
+    --color-border-overlay-hover: rgba(255, 255, 255, 0.15);
 }
 
 .pushable {

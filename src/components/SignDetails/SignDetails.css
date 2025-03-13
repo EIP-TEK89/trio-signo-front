@@ -16,7 +16,7 @@
 }
 
 .back-button:hover {
-    color: var(--color-primary);
+    color: var(--color-green-primary);
 }
 
 .sign-title {
@@ -28,7 +28,7 @@
 
 .sign-definition {
     font-size: 24px;
-    color: var(--color-text-secondary);
+    color: var(--color-text-dark);
     margin-bottom: 32px;
 }
 
@@ -36,7 +36,7 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto 32px;
-    background-color: var(--color-background-dark);
+    background-color: var(--color-background-button);
     border-radius: 16px;
     overflow: hidden;
 }

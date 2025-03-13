@@ -1,6 +1,6 @@
 .progress-bar-container {
     width: 100%;
-    background-color: var(--color-overlay);
+    background-color: var(--color-border-overlay);
     border-radius: 8px;
     overflow: hidden;
     height: 20px;
@@ -10,7 +10,7 @@
 
 .progress-bar-fill {
     height: 100%;
-    background-color: var(--color-primary);
+    background-color: var(--color-green-primary);
     transition: width 0.3s ease;
     border-radius: 8px;
 }
