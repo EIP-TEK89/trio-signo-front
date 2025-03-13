@@ -15,9 +15,6 @@
     margin-bottom: 20px;
 }
 
-.back-button:hover {
-    color: var(--color-green-primary);
-}
 
 .sign-title {
     font-size: 32px;
