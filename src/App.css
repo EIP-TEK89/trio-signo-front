@@ -29,12 +29,15 @@
     --color-blue-shadow: #1899d6;
     --color-text-blue: #52656d;
     --color-blue-gems: #84D8FF;
+    --color-blue-super: #3c4dff;
+    --color-blue-super-shadow: #3f22ec;
     
     /* Yellow Colors */
     --color-yellow-streak: #FFD700;
 
     /* Text Colors */
     --color-text: #ffffff;
+    --color-text-light: lightgray;
     --color-text-dark: #37464f;
     
     /* Border Colors */

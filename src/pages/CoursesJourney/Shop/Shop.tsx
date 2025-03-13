@@ -7,7 +7,8 @@ import heartIcon from '../../../Assets/CoursesJourney/Shop/heart.svg';
 import infiniteLivesIcon from '../../../Assets/CoursesJourney/Shop/premiumHeart.svg';
 import streakFreezeIcon from '../../../Assets/CoursesJourney/Shop/freeze.svg';
 import gemsIcon from '../../../Assets/components/RightSidebar/gems.svg';
-import duoMascot from '../../../Assets/CoursesJourney/Shop/mascott.svg';
+import superMascot from '../../../Assets/Super/superMascot.svg';
+import superBadge from '../../../Assets/Super/super.svg';
 
 const ShopPage: React.FC = () => {
   return (
@@ -18,8 +19,8 @@ const ShopPage: React.FC = () => {
       {/* Main Content */}
       <main className="main-content">
         <header className="shop-header">
-          <span className="super-badge">SUPER</span>
-          <img src={duoMascot} alt="Duo" className="duo-mascot" />
+          <img src={superBadge} alt="Duo" className="super-badge" />
+          <img src={superMascot} alt="Duo" className="duo-mascot" />
           <div className="header-content">
             <h1>Commence un essai gratuit de 2 semaines pour profiter des avantages exclusifs Super Duolingo</h1>
             <button className="trial-button">COMMENCER 14 JOURS GRATUITS</button>

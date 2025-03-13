@@ -4,6 +4,7 @@ import flagIcon from '../../Assets/components/RightSidebar/flag.svg';
 import flameIcon from '../../Assets/components/RightSidebar/flame.svg';
 import gemsIcon from '../../Assets/components/RightSidebar/gems.svg';
 import lifeIcon from '../../Assets/components/RightSidebar/life.svg';
+import superBadge from '../../Assets/Super/super.svg';
 
 interface Stats {
   streak: number;
@@ -64,7 +65,7 @@ const SidebarCard: React.FC<Card> = (card) => {
       return (
         <div className="sidebar-card">
           <div className="super-header">
-            <span className="super-badge">SUPER</span>
+            <img src={superBadge} alt="Duo" className="super-badge" />  
           </div>
           <h2>{card.title}</h2>
           <p>{card.description}</p>

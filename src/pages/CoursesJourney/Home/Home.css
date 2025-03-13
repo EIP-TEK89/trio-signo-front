@@ -32,7 +32,7 @@
 /* Conteneur du titre */
 .lesson-title {
     display: flex;
-    color: lightgray;
+    color: var(--color-text-light);
     flex-direction: column;
     padding: 0;
     flex: 1;

@@ -31,15 +31,17 @@ const App: React.FC = () => {
         <Route path={ROUTES.COURSES_JOURNEY.LETTER_DETAILS} element={<LetterDetails />} />
         
         {/* Protected Route for Quests */}
-        <Route
+        {/* <Route
           path={ROUTES.COURSES_JOURNEY.QUESTS}
           element={
             <ProtectedRoute>
               <QuestsPage />
             </ProtectedRoute>
           }
-        />
-        
+        /> */}
+
+
+        <Route path={ROUTES.COURSES_JOURNEY.QUESTS} element={<QuestsPage />}/>
         <Route path={ROUTES.COURSES_JOURNEY.LEAGUE} element={<LiguePage />} />
         <Route path={ROUTES.COURSES_JOURNEY.PROFILE} element={<ProfilePage />} />
         <Route path={ROUTES.COURSES_JOURNEY.TRAINING} element={<TrainingPage />} />

@@ -109,12 +109,13 @@
 }
 
 .card-button.primary {
-  background-color: var(--color-green-primary);
+  background-color: var(--color-blue-super);
+  box-shadow: 0 4px 6px 0 var(--color-blue-super-shadow);
   color: var(--color-text);
 }
 
 .card-button.primary:hover {
-  background-color: var(--color-green-shadow);
+  background-color: var(--color-blue-super-shadow);
 }
 
 .card-button.secondary {
@@ -133,13 +134,7 @@
 }
 
 .super-badge {
-  background-color: var(--color-text);
-  color: var(--color-blue);
-  padding: 4px 12px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
+  background-color: transparent;
 }
 
 /* Quest Card Styles */
