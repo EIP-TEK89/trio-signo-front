@@ -2,8 +2,8 @@
     display: grid;
     grid-template-columns: 240px 1fr 300px;
     min-height: 100vh;
-    background-color: #131f24;
-    color: white;
+    background-color: var(--color-background-main);
+    color: var(--color-text);
     position: relative;
   }
   
@@ -16,4 +16,161 @@
     position: relative;
     overflow-x: auto;
     min-width: 100%;
+  }
+
+  .quests-header {
+    background-color: #c481fc;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    color: #1c1c1c;
+    width: 80%;
+    min-height: 140px;
+  }
+
+  .quests-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    max-width: 70%;
+  }
+
+  .quests-header p {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+  }
+
+  .mascot-circle {
+    position: absolute;
+    right: 40px;
+    bottom: -10px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mascot-image {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+  .quests-container {
+    padding: 20px;
+    width: 80%;
+  }
+
+  .quest-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .quest-title h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-text);
+  }
+
+  .time-remaining {
+    color: var(--color-yellow-text);
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .clock-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .quest-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quest-item {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .quest-item:not(:last-child) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+  }
+
+  .quest-item:not(:first-child) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .quest-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quest-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .quest-content {
+    flex: 1;
+    position: relative;
+  }
+
+  .quest-content h3 {
+    color: var(--color-text);
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 12px 0;
+  }
+
+  .quest-count {
+    font-size: 14px;
+    display: block;
+  }
+
+  .progress-bar {
+    height: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+  }
+
+  .quest-count {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-text);
+    font-size: 14px;
+    z-index: 1;
+  }
+
+  .quest-reward {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-top: 20px;
   }

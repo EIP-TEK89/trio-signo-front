@@ -11,11 +11,11 @@ const TrainingPage: React.FC = () => {
 
       {/* Main Content */}
       <main className="main-content">
-        <header className="quests-header">
+        <header className="training-header">
           
         </header>
 
-        <div className="quests-container">
+        <div className="training-container">
           
         </div>
 

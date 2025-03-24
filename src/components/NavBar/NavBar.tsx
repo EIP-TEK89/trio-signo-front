@@ -9,6 +9,7 @@ import shopIcon from '../../Assets/components/Navbar/shop.svg';
 import plusIcon from '../../Assets/components/Navbar/plus.svg';
 import logoFull from '../../Assets/components/Navbar/logoFull.svg';
 import logoSmall from '../../Assets/components/Navbar/logoSmall.svg';
+import dictionaryIcon from '../../Assets/components/Navbar/find.svg';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -24,6 +25,10 @@ const Navbar: React.FC = () => {
         <NavLink to={`${basePath}/home`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
           <img src={homeIcon} alt="Mon cours" className="nav-icon" />
           <span className="nav-label">MON COURS</span>
+        </NavLink>
+        <NavLink to={`${basePath}/dictionary`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <img src={dictionaryIcon} alt="Dictionnaire" className="nav-icon" />
+          <span className="nav-label">DICTIONNAIRE</span>
         </NavLink>
         <NavLink to={`${basePath}/training`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
           <img src={trainingIcon} alt="Entraînement" className="nav-icon" />

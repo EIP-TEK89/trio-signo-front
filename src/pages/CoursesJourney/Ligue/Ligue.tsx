@@ -11,11 +11,11 @@ const LiguePage: React.FC = () => {
 
       {/* Main Content */}
       <main className="main-content">
-        <header className="quests-header">
+        <header className="ligue-header">
           
         </header>
 
-        <div className="quests-container">
+        <div className="ligue-container">
           
         </div>
 

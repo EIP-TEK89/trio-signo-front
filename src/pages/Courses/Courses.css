@@ -1,5 +1,5 @@
 .courses-container {
-    background-color: var(--color-background);
+    background-color: var(--color-background-main);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    background-color: var(--color-background);
+    background-color: var(--color-background-main);
     z-index: 2;
 }
 
@@ -27,14 +27,14 @@
     transform: translateX(-50%);
     width: 80%;
     height: 16px;
-    background-color: var(--color-overlay);
+    background-color: var(--color-border-overlay);
     border-radius: 16px;
     overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
-    background-color: var(--color-success);
+    background-color: var(--color-green-success);
     transition: width 0.3s ease;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .text {
-    color: var(--color-hearts);
+    color: var(--color-red-hearts);
     font-size: 16px;
     font-weight: 500;
 }
@@ -121,7 +121,7 @@
 }
 
 .Img-Button, .text-Button {
-    background-color: var(--color-background);
+    background-color: var(--color-background-main);
     border: 2px solid var(--color-border);
     border-radius: 8px;
     padding: 12px;
@@ -133,18 +133,18 @@
 }
 
 .Img-Button:hover, .text-Button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--color-border-overlay);
 }
 
 .Img-Button.active, .text-Button.active {
     background-color: rgba(28, 176, 246, 0.1);
-    border: 2px solid #1cb0f6;
+    border: 2px solid var(--color-blue);
     margin: 0 8px;
     border-radius: 12px;
 }
 
 .Img-Button.active:hover, .text-Button.active:hover {
-    background-color: rgba(28, 176, 246, 0.15);
+    background-color: var(--color-border-overlay);
 }
 
 .choice-img {
@@ -163,6 +163,7 @@
 }
 
 .form-answer-input {
+    height: 40px;
     border-radius: 8px;
     border: 2px solid var(--color-border);
     background-color: transparent;
@@ -191,7 +192,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-background);
+    background-color: var(--color-background-main);
     transition: background-color 0.3s ease;
 }
 
@@ -218,7 +219,7 @@
 .success-icon-wrapper {
     width: 86px;
     height: 86px;
-    background-color: var(--color-background);
+    background-color: var(--color-background-main);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -251,18 +252,18 @@
 }
 
 .footer-button:hover {
-    background-color: var(--color-overlay);
+    background-color: var(--color-border-overlay);
 }
 
 .footer-button.primary {
     border: none;
-    background-color: var(--color-primary-courses);
-    color: var(--color-background);
-    box-shadow: 0 4px 0 var(--color-primary-dark);
+    background-color: var(--color-green-primary);
+    color: var(--color-text);
+    box-shadow: 0 4px 0 var(--color-green-shadow);
 }
 
 .footer-button.primary:hover {
-    background-color: var(--color-primary-hover);
+    background-color: var(--color-green-hover);
 }
 
 .footer-button.primary:disabled {
@@ -281,13 +282,13 @@
 
 .footer-button.error {
     border: none;
-    background-color: var(--color-error);
-    color: var(--color-background);
-    box-shadow: 0 4px 0 var(--color-error-shadow);
+    background-color: var(--color-red-error);
+    color: var(--color-text);
+    box-shadow: 0 4px 0 var(--color-red-error-shadow);
 }
 
 .footer-button.error:hover {
-    background-color: var(--color-error-hover);
+    background-color: var(--color-red-error-hover);
 }
 
 .footer-button:disabled {
@@ -296,7 +297,7 @@
 }
 
 .success-title {
-    color: var(--color-success);
+    color: var(--color-green-success);
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 8px;
@@ -307,7 +308,6 @@
     font-size: 16px;
     margin-bottom: 16px;
 }
-
 
 .footer.error-state {
     background-color: var(--color-background-footer-courses);
@@ -324,7 +324,7 @@
 .error-icon-wrapper {
     width: 86px;
     height: 86px;
-    background-color: var(--color-background);
+    background-color: var(--color-background-main);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -339,14 +339,11 @@
 .error-title {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 8px;
 }
 
 .error-subtitle {
     font-size: 24px;
     font-weight: bold;
-    margin-top: 16px;
-    margin-bottom: 8px;
 }
 
 .error-message {
