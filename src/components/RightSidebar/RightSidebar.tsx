@@ -5,6 +5,7 @@ import flameIcon from '../../Assets/components/RightSidebar/flame.svg';
 import gemsIcon from '../../Assets/components/RightSidebar/gems.svg';
 import lifeIcon from '../../Assets/components/RightSidebar/life.svg';
 import superBadge from '../../Assets/Super/super.svg';
+import radioBadge from '../../Assets/components/RightSidebar/radioBadge.svg';
 
 interface Stats {
   streak: number;
@@ -129,7 +130,7 @@ const SidebarCard: React.FC<Card> = (card) => {
           <div className="badge-list">
             {card.badges.map((badge, index) => (
               <div key={index} className="badge-item">
-                <img src={badge.icon} alt={badge.title} />
+                <img src={radioBadge} alt="Radio" className="radio-badge" />
                 <div className="badge-info">
                   <h4>{badge.title}</h4>
                   <p>{badge.description}</p>
