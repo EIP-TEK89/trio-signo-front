@@ -2,24 +2,25 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Webcam from 'react-webcam';
 import { useNavigate } from 'react-router-dom';
+import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
+
+import VideoStreamUploader from '$components/VideoStream/VideoStream';
+import ProgressBar from '$components/Progressionbar/Progressionbar';
 
 import './Courses.css';
-
-import ProgressBar from '$components/ProgressionBar/ProgressionBar';
-import Carousel from '$components/Carousel/Carousel';
-
 import coursesData from './Courses.json';
 
-import Life from '$assets/CoursesJourneyHome/life.png';
+import Cross from '$assets/Courses/cross.svg';
+import Life from '$assets/Courses/heart.svg';
+import Good from '$assets/Courses/good.svg';
+import Error from '$assets/Courses/error.svg';
 
-import Cross from '$assets/cross-button.png';
-import VideoStreamUploader from '$components/VideoStream/VideoStream';
-
-import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 
 const Courses: React.FC = () => {
     const navigate = useNavigate();
     const webcamRef = React.useRef<Webcam>(null);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showError, setShowError] = useState(false);
 
     const BackToHome = async () => {
         navigate('/coursesJourney/home');
@@ -32,6 +33,8 @@ const Courses: React.FC = () => {
     const [borderClass, setBorderClass] = useState<string>('');
 
     const handleNextExo = () => {
+        setShowSuccess(false);
+        setShowError(false);
         if (currentExoIndex < coursesData.exercises.length - 1) {
             setCurrentExoIndex(currentExoIndex + 1);
             setStep(step + 1)
@@ -42,19 +45,18 @@ const Courses: React.FC = () => {
     };
 
     const GoodAnswer = async () => {
-        setBorderClass('green-border');
+        setShowSuccess(true);
+        setShowError(false);
         setTimeout(() => {
             setBorderClass('');
-            handleNextExo();
         }, 300);
     };
 
     const BadAnswer = async () => {
-        setBorderClass('red-border');
-        setTimeout(() => {
+        setShowError(true);
+        setShowSuccess(false);
+         setTimeout(() => {
             setBorderClass('');
-            //call life -1
-            handleNextExo();
         }, 300);
     };
 
@@ -154,29 +156,24 @@ const Courses: React.FC = () => {
     }, [webcamRef]);
 
     return (
-        <div className="coursesJourneyPage">
-            {/* <div className='pub'>
-                <Carousel />
-            </div> */}
+        <div className="courses-container">
+            <header className="header">
+                <button onClick={BackToHome} className="cross-button">
+                    <img src={Cross} alt="cross-img" className="icon" />
+                </button>
+                <ProgressBar currentStep={step} />
+                <div className="icon-container">
+                    <img src={Life} alt="Life" className="icon" />
+                    <span className="text">5</span>
+                </div>
+            </header>
 
-            <div className='coursesJourney'>
-                <header className="header">
-                    <button onClick={BackToHome} className="cross-button">
-                        <img src={Cross} alt="cross-img" className="icon" />
-                    </button>
-                    <ProgressBar currentStep={step} />
-                    <div className="icon-container">
-                        <img src={Life} alt="Life" className="icon" />
-                        <span className="text">5</span>
-                        {/* {heartCount} */}
-                    </div>
-                </header>
-
-
-                <main className={`bodyCourses ${borderClass}`}>
+            <main className={`bodyCourses ${borderClass}`}>
+                <h2 className="exercise-title">{currentExo.question}</h2>
+                
+                <div className="exercise-content">
                     {currentExo.exercise_type === "tutorial" && (
                         <div className='tuto'>
-                            <h1>{currentExo.question}</h1>
                             <img
                                 src={
                                     typeof currentExo.answers[0] === 'object' && 'name' in currentExo.answers[0]
@@ -187,16 +184,11 @@ const Courses: React.FC = () => {
                                 className="tuto-img"
                                 onError={(e) => (e.currentTarget.src = `/Assets/Hand/default.jpg`)}
                             />
-                            <button className="pushable" onClick={handleNextExo}>
-                                <span className="front">
-                                    Valider
-                                </span>
-                            </button>
                         </div>
                     )}
+
                     {currentExo.exercise_type === "multiple_choice_image" && (
                         <div className='tuto'>
-                            <h1>{currentExo.question}</h1>
                             <div className='image-selection'>
                                 {currentExo.answers.map((answers, index) => (
                                     <button
@@ -214,17 +206,11 @@ const Courses: React.FC = () => {
                                     </button>
                                 ))}
                             </div>
-
-                            <button className="pushable" onClick={() => handleMultipleImages(currentExo.expected_answer)}>
-                                <span className="front">
-                                    Valider
-                                </span>
-                            </button>
                         </div>
                     )}
+
                     {currentExo.exercise_type === "write_sign" && (
                         <div className='tuto'>
-                            <h1>{currentExo.question}</h1>
                             <img
                                 src={`/Assets/Hand/${currentExo.expected_answer}.jpg`}
                                 alt="image"
@@ -236,18 +222,14 @@ const Courses: React.FC = () => {
                                     className='form-answer-input'
                                     value={text}
                                     onChange={(e) => setText(e.target.value)}
+                                    placeholder="Écrivez votre réponse..."
                                 />
-                                <button className="pushable">
-                                    <span className="front">
-                                        Valider
-                                    </span>
-                                </button>
                             </form>
                         </div>
                     )}
+
                     {currentExo.exercise_type === "multiple_choice_meaning" && (
                         <div className='tuto'>
-                            <h1>{currentExo.question}</h1>
                             <img
                                 src={`/Assets/Hand/${currentExo.expected_answer}.jpg`}
                                 alt="image"
@@ -264,26 +246,110 @@ const Courses: React.FC = () => {
                                     </button>
                                 ))}
                             </div>
-                            <button className="pushable" onClick={() => handleMultipleSignification(currentExo.expected_answer)}>
-                                <span className="front">
-                                    Valider
-                                </span>
-                            </button>
                         </div>
                     )}
+
                     {currentExo.exercise_type === "camera" && (
                         <div className='tuto'>
-                            <h1>{currentExo.question}</h1>
-                            <VideoStreamUploader goodAnswer={GoodAnswer} badAnswer={BadAnswer} response={currentExo.expected_answer} />
+                            <VideoStreamUploader 
+                                goodAnswer={GoodAnswer} 
+                                badAnswer={BadAnswer} 
+                                response={currentExo.expected_answer} 
+                            />
                         </div>
                     )}
-                </main>
-            </div >
+                </div>
+            </main>
 
-            {/* <div className='pub'>
-                <Carousel />
-            </div> */}
-        </div >
+            <footer className={`footer ${showSuccess ? 'success-state' : ''} ${showError ? 'error-state' : ''}`}>
+                <div className="footer-content">
+                    {showSuccess ? (
+                        <>
+                            <div className="success-message-container">
+                                <div className="success-icon-wrapper">
+                                    <img src={Good} alt="success" className="success-icon" />
+                                </div>
+                                <div>
+                                    <div className="success-title">C'est bien !</div>
+                                    <div className="success-message">Ça signifie: {currentExo.expected_answer}</div>
+                                </div>
+                            </div>
+                            <button className="footer-button primary" onClick={handleNextExo}>
+                                CONTINUER
+                            </button>
+                        </>
+                    ) : showError ? (
+                        <>
+                            <div className="error-message-container">
+                                <div className="error-icon-wrapper">
+                                    <img src={Error} alt="error" className="error-icon" />
+                                </div>
+                                <div>
+                                    <div className="error-title">La bonne réponse est :</div>
+                                    <div className="error-message">{currentExo.expected_answer}</div>
+                                    <div className="error-subtitle">Ça signifie :</div>
+                                    <div className="error-message">L'homme boit de l'eau.</div>
+                                </div>
+                            </div>
+                            <button className="footer-button error" onClick={handleNextExo}>
+                                CONTINUER
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <div className="footer-buttons">
+                                <button 
+                                    className="footer-button"
+                                    onClick={() => {
+                                        if (currentExoIndex > 0) {
+                                            setCurrentExoIndex(currentExoIndex - 1);
+                                            setStep(step - 1);
+                                        }
+                                    }}
+                                    disabled={currentExoIndex === 0}
+                                >
+                                    SKIP
+                                </button>
+                            </div>
+                            <div className="footer-buttons">
+                                {currentExo.exercise_type === "tutorial" && (
+                                    <button className="footer-button primary" onClick={handleNextExo}>
+                                        CHECK
+                                    </button>
+                                )}
+                                {currentExo.exercise_type === "multiple_choice_image" && (
+                                    <button 
+                                        className="footer-button primary" 
+                                        onClick={() => handleMultipleImages(currentExo.expected_answer)}
+                                        disabled={activeButton === null}
+                                    >
+                                        CHECK
+                                    </button>
+                                )}
+                                {currentExo.exercise_type === "write_sign" && (
+                                    <button 
+                                        className="footer-button primary" 
+                                        onClick={() => handleSubmit(currentExo.expected_answer)}
+                                        disabled={text === undefined}
+                                    >
+                                        CHECK
+                                    </button>
+                                )}
+                                {currentExo.exercise_type === "multiple_choice_meaning" && (
+                                    <button 
+                                        className="footer-button primary" 
+                                        onClick={() => handleMultipleSignification(currentExo.expected_answer)}
+                                        disabled={activeButton === null}
+                                    >
+                                        CHECK
+                                    </button>
+                                )}
+                            </div>
+                        </>
+                    )}
+                </div>
+            </footer>
+        </div>
     );
 };
 

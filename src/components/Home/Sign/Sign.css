@@ -1,0 +1,114 @@
+.sign {
+  padding: 6rem 0;
+  background-color: rgb(248, 250, 252);
+}
+
+.sign-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sign-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sign-badge {
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 0.25rem 1rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  color: rgb(14, 165, 233);
+  font-weight: 500;
+}
+
+.sign-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: rgb(17, 24, 39);
+}
+
+@media (min-width: 768px) {
+  .sign-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+.sign-subtitle {
+  color: rgb(107, 114, 128);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.sign-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .sign-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sign-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sign-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(229, 231, 235);
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+
+.sign-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.sign-card-icon {
+  font-size: 1.875rem;
+  margin-bottom: 1rem;
+}
+
+.sign-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: rgb(17, 24, 39);
+}
+
+.sign-card-text {
+  color: rgb(107, 114, 128);
+  margin-bottom: 1rem;
+}
+
+.sign-card-btn {
+  display: inline-flex;
+  align-items: center;
+  color: rgb(14, 165, 233);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.sign-card-btn:hover {
+  color: rgb(2, 132, 199);
+}
+
+.sign-card-arrow {
+  margin-left: 0.25rem;
+  height: 1rem;
+  width: 1rem;
+}

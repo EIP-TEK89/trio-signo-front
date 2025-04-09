@@ -1,0 +1,122 @@
+.journey {
+  padding: 6rem 0;
+  background-color: white;
+}
+
+.journey-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.journey-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.journey-badge {
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 0.25rem 1rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  color: rgb(14, 165, 233);
+  font-weight: 500;
+}
+
+.journey-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .journey-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+.journey-subtitle {
+  color: rgb(107, 114, 128);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.journey-steps {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.journey-item {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.journey-item:last-child {
+  margin-bottom: 0;
+}
+
+.journey-number {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background-color: white;
+  border: 1px solid rgb(229, 231, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(14, 165, 233);
+  font-weight: 700;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-right: 1.5rem;
+}
+
+.journey-number-active {
+  background-color: rgb(14, 165, 233);
+  color: white;
+  border: none;
+}
+
+.journey-content {
+  padding-bottom: 2rem;
+  padding-left: 1.5rem;
+  margin-left: -0.625rem;
+}
+
+.journey-content-border {
+  border-left: 1px solid rgb(229, 231, 235);
+}
+
+.journey-item-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.journey-item-text {
+  color: rgb(107, 114, 128);
+  margin-bottom: 1rem;
+}
+
+.journey-btn {
+  background-color: white;
+  border: 1px solid rgb(229, 231, 235);
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s;
+}
+
+.journey-btn-active {
+  background-color: rgb(14, 165, 233);
+  color: white;
+  border: none;
+}
+
+.journey-btn:hover:not(.journey-btn-active) {
+  border-color: rgb(14, 165, 233);
+  color: rgb(14, 165, 233);
+} 
