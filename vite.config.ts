@@ -24,5 +24,9 @@ export default defineConfig({
     },
   build: {
     outDir: 'build',
+    target: 'esnext', // Ensures latest JS features including WebAssembly
+  },
+  optimizeDeps: {
+    exclude: ['onnxruntime-web'], // Ensures proper handling of WASM
   },
 });

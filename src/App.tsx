@@ -11,6 +11,8 @@ import TrainingPage from './pages/CoursesJourney/Training/Training';
 import QuestsPage from './pages/CoursesJourney/Quests/Quests';
 import ShopPage from './pages/CoursesJourney/Shop/Shop';
 import SignUp from './pages/SignUp/SignUp';
+import LogIn from '$pages/LogIn/LogIn';
+import SignRecon from '$pages/SignRecon/SignRecon';
 import LogIn from './pages/LogIn/LogIn';
 import NotFound from './pages/NotFound/NotFound';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
@@ -21,6 +23,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/sign-recon" element={<SignRecon />} />
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.SIGNUP} element={<SignUp />} />
         <Route path={ROUTES.SIGNIN} element={<LogIn />} />
