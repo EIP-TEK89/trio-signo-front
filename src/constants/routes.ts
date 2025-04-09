@@ -10,5 +10,8 @@ export const ROUTES = {
     PROFILE: '/coursesJourney/profile',
     TRAINING: '/coursesJourney/training',
     SHOP: '/coursesJourney/shop',
+    DICTIONARY: '/coursesJourney/dictionary',
+    DICTIONARY_DETAILS: '/coursesJourney/dictionary/:signId',
+    LETTER_DETAILS: '/coursesJourney/dictionary/letter/:letter',
   },
 } as const; 

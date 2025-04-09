@@ -42,19 +42,19 @@
   gap: 6px;
   font-weight: 700;
   font-size: 15px;
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .stat.streak {
-  color: #FFD700;
+  color: var(--color-yellow-streak);
 }
 
 .stat.gems {
-  color: #84D8FF;
+  color: var(--color-blue-gems);
 }
 
 .stat.hearts {
-  color: #FF6B6B;
+  color: var(--color-red-hearts);
 }
 
 /* Sidebar Content */
@@ -66,7 +66,7 @@
 
 /* Common Card Styles */
 .sidebar-card {
-  border: 2px solid #37464f;
+  border: 2px solid var(--color-border);
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
@@ -76,7 +76,7 @@
   font-size: 14px;
   font-weight: 700;
   margin: 0 0 16px 0;
-  color: #84D8FF;
+  color: var(--color-blue-gems);
   text-transform: uppercase;
 }
 
@@ -84,14 +84,15 @@
   font-size: 20px;
   font-weight: 700;
   margin: 0 0 12px 0;
-  color: white;
+  color: var(--color-text);
 }
 
 .sidebar-card p {
   font-size: 15px;
   line-height: 1.5;
   margin: 0 0 20px 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text);
+  opacity: 0.8;
 }
 
 /* Card Button Styles */
@@ -108,21 +109,22 @@
 }
 
 .card-button.primary {
-  background-color: #58CC02;
-  color: white;
+  background-color: var(--color-blue-super);
+  box-shadow: 0 4px 6px 0 var(--color-blue-super-shadow);
+  color: var(--color-text);
 }
 
 .card-button.primary:hover {
-  background-color: #46a001;
+  background-color: var(--color-blue-super-shadow);
 }
 
 .card-button.secondary {
-  background-color: #1CB0F6;
-  color: white;
+  background-color: var(--color-blue);
+  color: var(--color-text);
 }
 
 .card-button.secondary:hover {
-  background-color: #179ad9;
+  background-color: var(--color-blue-shadow);
 }
 
 /* Super Card Styles */
@@ -132,18 +134,12 @@
 }
 
 .super-badge {
-  background-color: white;
-  color: #1CB0F6;
-  padding: 4px 12px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
+  background-color: transparent;
 }
 
 /* Quest Card Styles */
 .quest-card {
-  border: 2px solid #37464f;
+  border: 2px solid var(--color-border);
   position: relative;
 }
 
@@ -151,12 +147,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #84D8FF;
+  color: var(--color-blue-gems);
   margin-bottom: 24px;
 }
 
 .quest-card .see-all {
-  color: #1CB0F6;
+  color: var(--color-blue);
   font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
@@ -182,7 +178,7 @@
 
 .progress-bar {
   height: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--color-border-overlay);
   border-radius: 4px;
   overflow: hidden;
   margin: 8px 0;
@@ -190,20 +186,21 @@
 
 .progress-fill {
   height: 100%;
-  background-color: #58CC02;
+  background-color: var(--color-green-primary);
   border-radius: 4px;
   transition: width 0.3s ease;
 }
 
 .progress-text {
   font-size: 15px;
-  color: #ffffff;
+  color: var(--color-text);
   font-weight: bold;
 }
 
 .quest-reward {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-text);
+  opacity: 0.6;
   margin: 0;
 }
 
@@ -229,11 +226,12 @@
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 4px 0;
-  color: white;
+  color: var(--color-text);
 }
 
 .badge-info p {
   font-size: 14px;
   margin: 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text);
+  opacity: 0.8;
 } 

@@ -2,8 +2,8 @@
     display: grid;
     grid-template-columns: 240px 1fr 300px;
     min-height: 100vh;
-    background-color: #131f24;
-    color: white;
+    background-color: var(--color-background-main);
+    color: var(--color-text);
     position: relative;
   }
   

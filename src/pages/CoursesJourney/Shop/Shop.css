@@ -2,8 +2,8 @@
     display: grid;
     grid-template-columns: 240px 1fr 300px;
     min-height: 100vh;
-    background-color: #131f24;
-    color: white;
+    background-color: var(--color-background-main);
+    color: var(--color-text);
     position: relative;
   }
   
@@ -17,3 +17,198 @@
     overflow-x: auto;
     min-width: 100%;
   }
+
+.shop-header {
+  max-width: 800px;
+  width: 100%;
+  background: linear-gradient(90deg, #1d4755 0%, #0c344d 100%);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.shop-header .super-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.shop-header .duo-mascot {
+  width: 80px;
+  height: 80px;
+}
+
+.shop-header .header-content {
+  flex: 1;
+}
+
+.shop-header .header-content h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.shop-header .trial-button {
+  background: white;
+  color: #1cb0f6;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.shop-header .trial-button:hover {
+  transform: scale(1.02);
+}
+
+.shop-container {
+  padding: 24px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.shop-section {
+  margin-bottom: 32px;
+}
+
+.shop-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.shop-separator {
+  height: 2px;
+  background-color: var(--color-border-overlay);
+  margin: 32px 0;
+  width: 100%;
+}
+
+.shop-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.shop-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-radius: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.item-content {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.item-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+
+.item-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.item-info p {
+  font-size: 14px;
+  color: var(--color-text);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.active-status {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--color-text);
+  opacity: 0.6;
+  background: var(--color-border-overlay);
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.shop-button {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  text-align: center;
+}
+
+.shop-button.primary {
+  background: #a560ff;
+  color: var(--color-text);
+}
+
+.shop-button.secondary {
+  background: var(--color-border-overlay);
+  color: var(--color-text);
+}
+
+.shop-button.gem-button {
+  background: var(--color-blue);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.shop-button.gem-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.shop-button:hover {
+  transform: scale(1.05);
+}
+
+.shop-button.secondary:hover {
+  background: var(--color-border-overlay);
+  opacity: 0.15;
+}

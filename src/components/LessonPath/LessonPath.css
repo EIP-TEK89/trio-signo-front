@@ -9,7 +9,7 @@
 }
 
 .lesson-path-title {
-    color: var(--color-primary);
+    color: var(--color-green-primary);
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
@@ -133,7 +133,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2),
                 inset 0 -4px 0 rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--color-border-overlay);
 }
 
 .node-circle img {
@@ -154,7 +154,7 @@
 }
 
 .lesson-node.locked .node-circle {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--color-border-overlay);
 }
 
 @keyframes float {
@@ -170,7 +170,7 @@
 }
 
 .start-button {
-    background-color: var(--color-background);
+    background-color: var(--color-background-main);
     color: var(--path-color);
     border: 2px solid var(--color-border);
     border-radius: 12px;
@@ -190,7 +190,7 @@
 
 .start-button:hover {
     transform: translateX(-50%) scale(1.05);
-    background-color: #1a2b32;
+    background-color: var(--color-background-button);
 }
 
 .start-button-arrow {
@@ -202,7 +202,7 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 8px solid #37464f;
+    border-top: 8px solid var(--color-border);
 }
 
 /* .mascot {
