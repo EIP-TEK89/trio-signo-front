@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Webcam from 'react-webcam';
 import { useNavigate } from 'react-router-dom';
-
-import '$pages/Courses/Courses.css';
-
 import { getBaseUrl } from '$utils/getBaseUrl';
 import VideoFetcher from '$utils/VideoFetcher';
 import SignRecognizer, { ModelsPredictions } from "$utils/SignRecognizer"
