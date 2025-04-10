@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '../../../components/Navbar/Navbar';
-import RightSidebar from '../../../components/RightSidebar/RightSidebar';
-import LessonPath from '../../../components/LessonPath/LessonPath';
-import GuideIcon from '../../../Assets/CoursesJourney/Home/guide.svg';
-import BackArrowIcon from '../../../Assets/CoursesJourney/Home/backArrow.svg';
+import Navbar from '$components/NavBar/NavBar';
+import RightSidebar from '$components/RightSidebar/RightSidebar';
+import LessonPath from '$components/LessonPath/LessonPath';
+import GuideIcon from '$assets/CoursesJourney/Home/guide.svg';
+import BackArrowIcon from '$assets/CoursesJourney/Home/backArrow.svg';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 

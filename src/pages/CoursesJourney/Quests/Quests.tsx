@@ -1,17 +1,17 @@
 import React from 'react';
-import Navbar from '../../../components/Navbar/Navbar';
-import RightSidebar from '../../../components/RightSidebar/RightSidebar';
-import energyIcon from '../../../Assets/CoursesJourney/Quests/energy.svg';
-import targetIcon from '../../../Assets/CoursesJourney/Quests/target.svg';
-import rewardBronze from '../../../Assets/CoursesJourney/Quests/rewardBronze.svg';
-import rewardSilver from '../../../Assets/CoursesJourney/Quests/rewardSilver.svg';
-import rewardGold from '../../../Assets/CoursesJourney/Quests/rewardGold.svg';
+import Navbar from '$components/NavBar/NavBar';
+import RightSidebar from '$components/RightSidebar/RightSidebar';
+import energyIcon from '$assets/CoursesJourney/Quests/energy.svg';
+import targetIcon from '$assets/CoursesJourney/Quests/target.svg';
+import rewardBronze from '$assets/CoursesJourney/Quests/rewardBronze.svg';
+import rewardSilver from '$assets/CoursesJourney/Quests/rewardSilver.svg';
+import rewardGold from '$assets/CoursesJourney/Quests/rewardGold.svg';
 import './Quests.css';
 
 const QuestsPage: React.FC = () => {
   return (
     <div className="duolingo-container">
-      <Navbar/>
+      <Navbar />
 
       <main className="main-content">
         <section className="quests-header">

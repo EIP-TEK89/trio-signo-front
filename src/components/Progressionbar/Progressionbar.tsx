@@ -1,5 +1,5 @@
 import React from "react";
-import "./ProgressionBar.css";
+import "./Progressionbar.css";
 
 interface ProgressBarProps {
   currentStep: number;

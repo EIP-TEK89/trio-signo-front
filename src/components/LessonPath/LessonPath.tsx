@@ -1,10 +1,10 @@
 import React from 'react';
-import WhiteOkIcon from '../../Assets/CoursesJourney/Home/whiteOk.svg';
-import WhiteStarIcon from '../../Assets/CoursesJourney/Home/whiteStar.svg';
-import StarIcon from '../../Assets/CoursesJourney/Home/star.svg';
-import ChestIcon from '../../Assets/CoursesJourney/Home/chest.svg';
-import TrophyIcon from '../../Assets/CoursesJourney/Home/trophy.svg';
-import DuoMascot from '../../Assets/CoursesJourney/Home/mascott.svg';
+import WhiteOkIcon from '$assets/CoursesJourney/Home/whiteOk.svg';
+import WhiteStarIcon from '$assets/CoursesJourney/Home/whiteStar.svg';
+import StarIcon from '$assets/CoursesJourney/Home/star.svg';
+import ChestIcon from '$assets/CoursesJourney/Home/chest.svg';
+import TrophyIcon from '$assets/CoursesJourney/Home/trophy.svg';
+import DuoMascot from '$assets/CoursesJourney/Home/mascott.svg';
 import './LessonPath.css';
 
 const hexToRgb = (hex: string): string => {

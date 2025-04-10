@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
+import Navbar from '$components/NavBar/NavBar';
 import RightSidebar from '../RightSidebar/RightSidebar';
 import { ROUTES } from '../../constants/routes';
 import './SignDetails.css';

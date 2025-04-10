@@ -1,20 +1,20 @@
 import React from 'react';
-import Navbar from '../../../components/Navbar/Navbar';
-import RightSidebar from '../../../components/RightSidebar/RightSidebar';
+import Navbar from '$components/NavBar/NavBar';
+import RightSidebar from '$components/RightSidebar/RightSidebar';
 import './Shop.css';
 
-import heartIcon from '../../../Assets/CoursesJourney/Shop/heart.svg';
-import infiniteLivesIcon from '../../../Assets/CoursesJourney/Shop/premiumHeart.svg';
-import streakFreezeIcon from '../../../Assets/CoursesJourney/Shop/freeze.svg';
-import gemsIcon from '../../../Assets/components/RightSidebar/gems.svg';
-import superMascot from '../../../Assets/Super/superMascot.svg';
-import superBadge from '../../../Assets/Super/super.svg';
+import heartIcon from '$assets/CoursesJourney/Shop/heart.svg';
+import infiniteLivesIcon from '$assets/CoursesJourney/Shop/premiumHeart.svg';
+import streakFreezeIcon from '$assets/CoursesJourney/Shop/freeze.svg';
+import gemsIcon from '$assets/components/RightSidebar/gems.svg';
+import superMascot from '$assets/Super/superMascot.svg';
+import superBadge from '$assets/Super/super.svg';
 
 const ShopPage: React.FC = () => {
   return (
     <div className="duolingo-container">
       {/* Left Sidebar */}
-      <Navbar/>
+      <Navbar />
 
       {/* Main Content */}
       <main className="main-content">
