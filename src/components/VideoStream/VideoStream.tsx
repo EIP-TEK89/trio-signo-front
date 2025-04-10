@@ -14,7 +14,6 @@ interface VideoCaptureUploaderProps {
 }
 
 const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer, badAnswer, response }) => {
-    console.log(response)
     const navigate = useNavigate();
     const webcamRef = React.useRef<Webcam>(null);
 
@@ -91,6 +90,8 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer,
                     setText("Framerate: " + timings.length + "FPS" + " Average time: " + (average_ms).toFixed(2) + "ms" + " Output sign: " + output_sign);
                 }
             }
+            if (response === output_sign)
+                goodAnswer()
             // Make sure to call this function again to keep the loop going
             requestAnimationFrame(drawToCanvas);
         }
@@ -105,6 +106,7 @@ const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer,
                 <main>
                     <div className='tuto'>
                         <canvas ref={canvasRef}></canvas>
+                        {/* <p className='text'>{text}</p> */}
                     </div>
                 </main>
             </div >
