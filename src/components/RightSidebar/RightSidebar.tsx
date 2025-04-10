@@ -1,11 +1,11 @@
 import React from 'react';
 import './RightSidebar.css';
-import flagIcon from '../../Assets/components/RightSidebar/flag.svg';
-import flameIcon from '../../Assets/components/RightSidebar/flame.svg';
-import gemsIcon from '../../Assets/components/RightSidebar/gems.svg';
-import lifeIcon from '../../Assets/components/RightSidebar/life.svg';
-import superBadge from '../../Assets/Super/super.svg';
-import radioBadge from '../../Assets/components/RightSidebar/radioBadge.svg';
+import flagIcon from '$assets/components/RightSidebar/flag.svg';
+import flameIcon from '$assets/components/RightSidebar/flame.svg';
+import gemsIcon from '$assets/components/RightSidebar/gems.svg';
+import lifeIcon from '$assets/components/RightSidebar/life.svg';
+import superBadge from '$assets/Super/super.svg';
+import radioBadge from '$assets/components/RightSidebar/radioBadge.svg';
 
 interface Stats {
   streak: number;
@@ -66,12 +66,12 @@ const SidebarCard: React.FC<Card> = (card) => {
       return (
         <div className="sidebar-card">
           <div className="super-header">
-            <img src={superBadge} alt="Duo" className="super-badge" />  
+            <img src={superBadge} alt="Duo" className="super-badge" />
           </div>
           <h2>{card.title}</h2>
           <p>{card.description}</p>
           {card.button && (
-            <button 
+            <button
               className={`card-button ${card.button.variant === 'primary' ? 'primary' : 'secondary'}`}
               onClick={card.button.onClick}
             >
@@ -89,7 +89,7 @@ const SidebarCard: React.FC<Card> = (card) => {
             <h2>{card.title}</h2>
             <p>{card.description}</p>
             {card.button && (
-              <button 
+              <button
                 className={`card-button ${card.button.variant === 'primary' ? 'primary' : 'secondary'}`}
                 onClick={card.button.onClick}
               >
@@ -111,8 +111,8 @@ const SidebarCard: React.FC<Card> = (card) => {
             <img src={flameIcon} alt="Quest" className="quest-icon" />
             <div className="quest-info">
               <div className="progress-bar">
-                <div 
-                  className="progress-fill" 
+                <div
+                  className="progress-fill"
                   style={{ width: `${(card.current / card.total) * 100}%` }}
                 />
               </div>
@@ -150,15 +150,15 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ stats, cards }) => {
         <div className="language-selector">
           <img src={flagIcon} alt="Language" />
         </div>
-          <span className="stat streak">
-            <img src={flameIcon} alt="Streak" /> {stats.streak}
-          </span>
-          <span className="stat gems">
-            <img src={gemsIcon} alt="Gems" /> {stats.gems}
-          </span>
-          <span className="stat hearts">
-            <img src={lifeIcon} alt="Hearts" /> {stats.hearts}
-          </span>
+        <span className="stat streak">
+          <img src={flameIcon} alt="Streak" /> {stats.streak}
+        </span>
+        <span className="stat gems">
+          <img src={gemsIcon} alt="Gems" /> {stats.gems}
+        </span>
+        <span className="stat hearts">
+          <img src={lifeIcon} alt="Hearts" /> {stats.hearts}
+        </span>
       </div>
 
       <div className="sidebar-content">

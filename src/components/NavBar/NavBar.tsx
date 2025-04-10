@@ -1,15 +1,15 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import './Navbar.css';
-import homeIcon from '../../Assets/components/Navbar/home.svg';
-import trainingIcon from '../../Assets/components/Navbar/training.svg';
-import ligueIcon from '../../Assets/components/Navbar/ligue.svg';
-import questsIcon from '../../Assets/components/Navbar/quests.svg';
-import shopIcon from '../../Assets/components/Navbar/shop.svg';
-import plusIcon from '../../Assets/components/Navbar/plus.svg';
-import logoFull from '../../Assets/components/Navbar/logoFull.svg';
-import logoSmall from '../../Assets/components/Navbar/logoSmall.svg';
-import dictionaryIcon from '../../Assets/components/Navbar/find.svg';
+import './NavBar.css';
+import homeIcon from '$assets/components/Navbar/home.svg';
+import trainingIcon from '$assets/components/Navbar/training.svg';
+import ligueIcon from '$assets/components/Navbar/ligue.svg';
+import questsIcon from '$assets/components/Navbar/quests.svg';
+import shopIcon from '$assets/components/Navbar/shop.svg';
+import plusIcon from '$assets/components/Navbar/plus.svg';
+import logoFull from '$assets/components/Navbar/logoFull.svg';
+import logoSmall from '$assets/components/Navbar/logoSmall.svg';
+import dictionaryIcon from '$assets/components/Navbar/find.svg';
 
 const Navbar: React.FC = () => {
   const location = useLocation();

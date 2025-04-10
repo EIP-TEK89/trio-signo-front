@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Navbar from '../../../components/Navbar/Navbar';
-import RightSidebar from '../../../components/RightSidebar/RightSidebar';
+import Navbar from '$components/NavBar/NavBar';
+import RightSidebar from '$components/RightSidebar/RightSidebar';
 import { useNavigate } from 'react-router-dom';
 import './Dictionary.css';
 

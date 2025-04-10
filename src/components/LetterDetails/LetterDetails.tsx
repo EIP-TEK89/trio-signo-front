@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-import RightSidebar from '../RightSidebar/RightSidebar';
+import Navbar from '$components/NavBar/NavBar';
+import RightSidebar from '$components/RightSidebar/RightSidebar';
 import './LetterDetails.css';
 
 const LetterDetails: React.FC = () => {

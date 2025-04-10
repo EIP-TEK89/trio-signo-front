@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Home/Header/Header';
-import Hero from '../../components/Home/Hero/Hero';
-import Introduction from '../../components/Home/Introduction/Introduction';
-import Sign from '../../components/Home/Sign/Sign';
-import Journey from '../../components/Home/Journey/Journey';
-import Footer from '../../components/Home/Footer/Footer';
+import Header from '$components/Home/Header/Header';
+import Hero from '$components/Home/Hero/Hero';
+import Introduction from '$components/Home/Introduction/Introduction';
+import Sign from '$components/Home/Sign/Sign';
+import Journey from '$components/Home/Journey/Journey';
+import Footer from '$components/Home/Footer/Footer';
 
 import './Home.css';
 import '../../App.css';
