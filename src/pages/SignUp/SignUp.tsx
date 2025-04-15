@@ -2,30 +2,31 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from '$store/AuthSlice';
+import Cross from '$assets/Courses/cross.svg';
+import ShowIcon from '$assets/SingInUp/show.svg';
+import HideIcon from '$assets/SingInUp/hide.svg';
+import './SignUp.css';
 
-import '$styles/LoginSignup.css';
-import Logo from '$assets/logo.png';
-
-import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
-
-const LoginSignup: React.FC = () => {
+const SignUp: React.FC = () => {
+  const [age, setAge] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<{ username?: string; email?: string; password?: string; apiError?: string }>({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState<{ age?: string; username?: string; email?: string; password?: string; apiError?: string }>({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleConnection = async () => {
+  const handleSignUp = async () => {
     try {
-
-      const response = await fetch(getBaseUrl() + ":3000/api/auth/sign-up", {
+      const response = await fetch("http://localhost:3000/api/auth/sign-up", {
         method: "POST",
         headers: {
           "accept": "application/json",
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          age: parseInt(age),
           username,
           email,
           password
@@ -34,71 +35,89 @@ const LoginSignup: React.FC = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Error creating user');
+        throw new Error(errorData.message || 'Error creating account');
       }
 
       const data = await response.json();
-      console.log('User created successfully:', data);
-
       dispatch(setToken(data));
-
       navigate('/coursesJourney/home');
-
-      console.log('User created successfully:', data);
-
-      navigate('/coursesJourney/home');
-
     } catch (error: any) {
       setErrors((prevErrors) => ({ ...prevErrors, apiError: error.message }));
     }
   };
 
   return (
-    <div className="login-signup-container">
-      <div className="logo">
-        <img src={Logo} alt="Logo" className="logo" />
-      </div>
-      <h2>Connexion</h2>
-      <div className="form-group">
-        <input
-          type="username"
-          placeholder="Surnom"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {errors.username && <p className="error-message">{errors.username}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {errors.email && <p className="error-message">{errors.email}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {errors.password && <p className="error-message">{errors.password}</p>}
-      </div>
-      <div className="button-container">
-        <button className="pushable" onClick={handleConnection}>
-          <span className="front">
-          Connexion
-          </span>
+    <div className="login-modal flex-container flex-column align-center">
+      <div className="header-buttons">
+        <button onClick={() => navigate('/')} className="close-button">
+          <img src={Cross} alt="Close" />
         </button>
+        <button className="login-nav-button" onClick={() => navigate('/signin')}>Connexion</button>
       </div>
-      <p className="forgot-password">
-        Déjà un compte ? <a href="/signin">Cliquez Ici</a>
-      </p>
-      {errors.apiError && <p className="api-error-message">{errors.apiError}</p>}
+      <form className="login-form-container" onSubmit={(e) => e.preventDefault()}>
+        <div>
+          <h1 className="login-title">Crée ton profil</h1>
+          <div className="login-form">
+            <input
+              type="number"
+              placeholder="Âge"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              className="login-input"
+            />
+            <input
+              type="text"
+              placeholder="Nom (facultatif)"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="login-input"
+            />
+            <input
+              type="email"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="login-input"
+            />
+            <div className="password-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Mot de passe"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="login-input"
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                <img 
+                  src={showPassword ? HideIcon : ShowIcon} 
+                  alt={showPassword ? "Hide password" : "Show password"} 
+                  className="password-toggle-icon"
+                />
+              </button>
+            </div>
+            <button 
+              type="button" 
+              onClick={handleSignUp}
+              className="login-button"
+            >
+              CRÉER MON COMPTE
+            </button>
+            <div className="divider">
+              <span>OU</span>
+            </div>
+            <button type="button" className="social-button facebook">
+              <span className="facebook-icon"></span>
+              FACEBOOK
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };
 
-export default LoginSignup;
+export default SignUp;

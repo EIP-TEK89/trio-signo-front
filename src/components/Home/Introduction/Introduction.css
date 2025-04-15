@@ -1,0 +1,130 @@
+.intro {
+  padding: 6rem 0;
+  background-color: white;
+}
+
+.intro-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.intro-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.intro-badge {
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 0.25rem 1rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  color: rgb(14, 165, 233);
+  font-weight: 500;
+}
+
+.intro-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: rgb(17, 24, 39);
+}
+
+@media (min-width: 768px) {
+  .intro-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+.intro-subtitle {
+  color: rgb(107, 114, 128);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .intro-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.intro-card {
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgb(229, 231, 235);
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+
+.intro-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.intro-icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.intro-icon-blue {
+  background-color: rgb(14, 165, 233);
+}
+
+.intro-icon-green {
+  background-color: rgb(34, 197, 94);
+}
+
+.intro-icon-purple {
+  background-color: rgb(168, 85, 247);
+}
+
+.intro-icon-red {
+  background-color: rgb(239, 68, 68);
+}
+
+.intro-feature-icon {
+  height: 2rem;
+  width: 2rem;
+}
+
+.intro-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: rgb(17, 24, 39);
+}
+
+.intro-card-text {
+  color: rgb(107, 114, 128);
+}
+
+.intro-footer {
+  margin-top: 4rem;
+  text-align: center;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro-footer-text {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: rgb(107, 114, 128);
+}

@@ -1,9 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
 :root {
-    --color: #9B59B6;
-    --hover-color: #ab70bf;
-    --bottom-color: #5D3A9B;
-    --text-color: white;
-    --text-darker-color: lightgray;
+    /* Background Colors */
+    --color-background-main: #131f24;
+    --color-background-footer-courses: #202f36;
+    --color-background-button: #1f2937;
+    
+    /* Green Colors */
+    --color-green-primary: #58CC02;
+    --color-green-shadow: #46a001;
+    --color-green-dark: #79b933;
+    --color-green-hover: #A9DC5C;
+    --color-green-courses: #93d333;
+    --color-green-success: #4CAF50;
+    
+    /* Red Colors */
+    --color-red-error: #ee5555;
+    --color-red-error-shadow: #d84848;
+    --color-red-error-hover: #FF6B6B;
+    --color-red-hearts: #FF6B6B;
+
+    /* Blue Colors */
+    --color-blue: #1cb0f6;
+    --color-blue-shadow: #1899d6;
+    --color-text-blue: #52656d;
+    --color-blue-gems: #84D8FF;
+    --color-blue-super: #3c4dff;
+    --color-blue-super-shadow: #3f22ec;
+    
+    /* Yellow Colors */
+    --color-yellow-streak: #FFD700;
+    --color-yellow-text: #ffc800;
+
+    /* Text Colors */
+    --color-text: #ffffff;
+    --color-text-light: lightgray;
+    --color-text-dark: #37464f;
+    
+    /* Border Colors */
+    --color-border: #37464f;
+    --color-border-overlay: rgba(255, 255, 255, 0.1);
+    --color-border-overlay-hover: rgba(255, 255, 255, 0.15);
 }
 
 .pushable {

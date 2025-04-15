@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
-
-import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
+import React, { useState, useEffect, useRef } from 'react';
+import Webcam from 'react-webcam';
+import { useNavigate } from 'react-router-dom';
+import { getBaseUrl } from '$utils/getBaseUrl';
+import VideoFetcher from '$utils/VideoFetcher';
+import SignRecognizer, { ModelsPredictions } from "$utils/SignRecognizer"
+import { drawHandLandmarkerResult } from '$utils/DrawLandmark';
 
 
 interface VideoCaptureUploaderProps {
@@ -11,123 +14,103 @@ interface VideoCaptureUploaderProps {
 }
 
 const VideoCaptureUploader: React.FC<VideoCaptureUploaderProps> = ({ goodAnswer, badAnswer, response }) => {
-    console.log(response)
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
-    const [isStreaming, setIsStreaming] = useState(false);
-    const streamingRef = useRef(false); // Référence pour suivre l'état de streaming
+    const navigate = useNavigate();
+    const webcamRef = React.useRef<Webcam>(null);
 
-    const startCaptureProcess = async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            setMediaStream(stream);
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream;
-            }
 
-        } catch (err) {
-            console.error("Error accessing webcam:", err);
-        }
-    };
+    // const [borderClass, setBorderClass] = useState<string>('');
 
-    const stopStreaming = () => {
-        setIsStreaming(false);
-        streamingRef.current = false; // Met à jour la référence pour arrêter la boucle
-    };
 
-    const startStreaming = () => {
-        if (!mediaStream) {
-            console.error("No media stream available.");
-            return;
-        }
+    const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+    const videoFetcherRef = useRef<VideoFetcher | null>(null);
+    const signRecognizerRef = useRef<SignRecognizer | null>(null);
+    const [text, setText] = useState<string>('');
 
-        if (isStreaming) {
-            console.warn("Already streaming.");
-            return;
-        }
-
-        setIsStreaming(true);
-        streamingRef.current = true; // Met à jour la référence pour indiquer que le streaming est actif
-
-        const captureFrames = async () => {
-            if (!streamingRef.current || !canvasRef.current || !videoRef.current) {
-                console.warn("Stopping captureFrames because streaming is off.");
-                return;
-            }
-
-            const canvas = canvasRef.current;
-            const video = videoRef.current;
-            const context = canvas.getContext("2d");
-
-            if (context) {
-                // Configure le canvas selon la taille de la vidéo
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-
-                // Dessine la vidéo sur le canvas
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                // Convertit le canvas en Blob (image)
-                canvas.toBlob(async (blob) => {
-                    if (!blob) return;
-
-                    // Prépare et envoie la requête au backend
-                    const formData = new FormData();
-                    formData.append("file", blob);
-
-                    try {
-                        // console.log("Uploading frame to backend...");
-                        var res = fetch(getBaseUrl() + ":5000/get-alphabet", {
-                            method: "POST",
-                            body: formData,
-                        })
-                        res
-                            .then((response) => response.json())
-                            .then((data) => {
-                                console.log(data);
-                                if (data.message === response || data.message == response.toUpperCase()) {
-                                    stopStreaming()
-                                    goodAnswer();
-                                }
-                            })
-                            .catch((err) => {
-                                console.error("Error handling response:", err);
-                            });
-                        // console.log("Frame uploaded successfully.", resp.json());
-                        // fetch(getBaseUrl() + ":5000/get-alphabet-end", {
-                        //   method: "DELETE",
-                        // })
-                    } catch (err) {
-                        console.error("Error uploading frame:", err);
-                    }
-                }, "image/jpeg");
-
-                // Capture la prochaine frame après 100ms
-                setTimeout(captureFrames, 1000 / 30);
-            } else {
-                console.warn("No context available for canvas.");
-            }
-        };
-
-        captureFrames();
-    };
 
     useEffect(() => {
-        startCaptureProcess()
+        // Initialize camera, by default the camera is however not recording
+        // so make sure to use .toggleCamera() or .startCamera() methods.
+        videoFetcherRef.current = new VideoFetcher();
+
+
+        if (videoFetcherRef.current) {
+            videoFetcherRef.current.toggleCamera();
+        }
+
+        // Initialize the sign recognizer model, as the model will not be stored
+        // directly on the frontend, it will be fetched from the backend.
+        // We do this to being able to dynamically load model depending of the lesson.
+        signRecognizerRef.current = new SignRecognizer(getBaseUrl() + ":5000/get-sign-recognizer-model/alphabet");
+        // This variable helps calculating framerate, so it is not necessary to keep it.
+        let timings: Array<number> = [];
+        let output_sign: string;
+
+        const drawToCanvas = async () => {
+            if (videoFetcherRef.current) {
+
+                // Fetch the video element from the video fetcher containing the latest frame.
+                // Keep in mind that you can call this method more times than camera
+                // framerate, so it is not guaranteed that you will get a new frame,
+                // but the last one fetched.
+                let video: HTMLVideoElement | null = videoFetcherRef.current.getFrame();
+
+                // If the video is fetched, the canvas is initialized and the sign recognizer is initialized
+                if (video && canvasRef.current && signRecognizerRef.current) {
+                    // Get the 2D rendering context of the canvas to draw the video frame
+                    canvasRef.current.width = video.videoWidth;
+                    canvasRef.current.height = video.videoHeight;
+                    const ctx = canvasRef.current.getContext("2d");
+
+                    if (ctx) {
+                        canvasRef.current.width = 500
+                        canvasRef.current.height = 392
+                        // Draw the video frame on the canvas
+                        ctx.drawImage(video, 0, 0, canvasRef.current.width, canvasRef.current.height);
+
+                        // Predict the sign from the video frame
+                        // DO not forget to check ModelsPredictions type to see what is returned
+                        const prediction_results: ModelsPredictions = signRecognizerRef.current.predict(video);
+
+                        // If a hand is detected, draw the hand landmarks on the canvas
+                        if (prediction_results.landmarks.hand) {
+                            drawHandLandmarkerResult(ctx, prediction_results.landmarks.hand);
+                        }
+
+                        // Set output_sign with the detected sign
+                        output_sign = prediction_results.signLabel;
+                    }
+
+                    // The next lines only calculate the framerate
+                    const time_now: number = performance.now();
+                    timings.push(time_now);
+                    while (timings.length && timings[0] + 1000 < time_now) {
+                        timings.shift();
+                    }
+                    const average_ms = timings.length ? (time_now - timings[0]) / timings.length : 0;
+                    setText("Framerate: " + timings.length + "FPS" + " Average time: " + (average_ms).toFixed(2) + "ms" + " Output sign: " + output_sign);
+                }
+            }
+            if (response === output_sign)
+                goodAnswer()
+            // Make sure to call this function again to keep the loop going
+            requestAnimationFrame(drawToCanvas);
+        }
+
+        drawToCanvas();
     }, []);
 
+
     return (
-        <div className="tuto">
-            <video ref={videoRef} autoPlay width={540} height={480} />
-            <canvas ref={canvasRef} hidden />
-            <button className="pushable"
-                onClick={startStreaming}>
-                <span className="front">
-                    {isStreaming ? "Enregistrement en cours..." : "Démarrer l'enregistrement"}
-                </span>
-            </button>
-        </div>
+        <div className="coursesJourneyPage">
+            <div className='coursesJourney'>
+                <main>
+                    <div className='tuto'>
+                        <canvas ref={canvasRef}></canvas>
+                        {/* <p className='text'>{text}</p> */}
+                    </div>
+                </main>
+            </div >
+        </div >
     );
 };
 
