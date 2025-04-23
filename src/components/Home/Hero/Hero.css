@@ -142,6 +142,10 @@
   border: 1px solid rgb(229, 231, 235);
   border-radius: 0.5rem;
   transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .hero-btn-secondary:hover {
