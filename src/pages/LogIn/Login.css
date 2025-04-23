@@ -82,7 +82,32 @@
 .password-container {
     position: relative;
     display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.password-input-group {
+    position: relative;
+    display: flex;
     align-items: center;
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 50px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.password-toggle img {
+    width: 20px;
+    height: 20px;
 }
 
 .forgot-password {
@@ -96,7 +121,8 @@
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .forgot-password:hover {
@@ -255,4 +281,41 @@
     cursor: pointer;
     padding: 8px;
     font-size: 16px;
-} 
+}
+
+/* Error styles */
+.error-message {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 3px solid #ff5252;
+    color: #ff5252;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.error-text {
+    color: #ff5252;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.input-error {
+    border-color: #ff5252 !important;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Loading state */
+.login-button:disabled {
+    background-color: #384e5a;
+    color: #748a99;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
