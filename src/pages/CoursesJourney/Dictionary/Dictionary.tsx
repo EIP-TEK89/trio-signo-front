@@ -2,46 +2,88 @@ import React, { useState } from 'react';
 import Navbar from '$components/NavBar/NavBar';
 import RightSidebar from '$components/RightSidebar/RightSidebar';
 import { useNavigate } from 'react-router-dom';
+import { useSigns } from '$hooks/useSign';
+import { Sign } from '$services/signService';
 import './Dictionary.css';
 
 const DictionaryPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
+  const { signs, loading, error } = useSigns();
 
-  // Mock data for the word list
-  const words = ['Bonjour', 'Merci', 'Au revoir', 'S\'il te plaît'];
+  const lowerSearch = searchTerm.toLowerCase();
 
-  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  const { letterSigns, wordSigns } = signs.reduce(
+    (acc, sign) => {
+      const isMatch = sign.word.toLowerCase().includes(lowerSearch);
+      if (!isMatch) return acc;
 
-  // Filter both words and letters
-  const filteredWords = words.filter(word =>
-    word.toLowerCase().includes(searchTerm.toLowerCase())
+      if (sign.word.length === 1) {
+        acc.letterSigns.push(sign);
+      } else {
+        acc.wordSigns.push(sign);
+      }
+
+      return acc;
+    },
+    { letterSigns: [], wordSigns: [] } as {
+      letterSigns: Sign[];
+      wordSigns: Sign[];
+    },
   );
 
-  const filteredLetters = letters.filter(letter =>
-    letter.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  letterSigns.sort((a, b) => a.word.localeCompare(b.word));
+  wordSigns.sort((a, b) => a.word.localeCompare(b.word));
 
   const handleWordClick = (word: string) => {
     // Convert the word to URL-friendly format
-    const urlWord = word.toLowerCase().replace(/\s+/g, '-');
+    const urlWord = word.replace(/\s+/g, '-');
     navigate(`/coursesJourney/dictionary/${urlWord}`);
   };
 
-  const handleLetterClick = (letter: string) => {
-    // Navigate to letter description page
-    navigate(`/coursesJourney/dictionary/letter/${letter.toLowerCase()}`);
-  };
+  if (loading) {
+    return (
+      <div className="duolingo-container">
+        <Navbar />
+        <main className="main-content">
+          <div>Loading signs...</div>
+        </main>
+        <RightSidebar
+          stats={{
+            streak: 5,
+            gems: 100,
+            hearts: 3,
+          }}
+          cards={[]}
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="duolingo-container">
+        <Navbar />
+        <main className="main-content">
+          <div>Error loading signs: {error.message}</div>
+        </main>
+        <RightSidebar
+          stats={{
+            streak: 5,
+            gems: 100,
+            hearts: 3,
+          }}
+          cards={[]}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="duolingo-container">
-      {/* Left Sidebar */}
-      <Navbar/>
-
-      {/* Main Content */}
+      <Navbar />
       <main className="main-content">
         <header className="dictionary-header">
-          {/* Search bar */}
           <div className="dictionary-search-container">
             <input
               type="text"
@@ -54,45 +96,37 @@ const DictionaryPage: React.FC = () => {
         </header>
 
         {/* Letters section */}
-        <div className="dictionary-words-container">
-          <div className="dictionary-word-grid">
-            {(searchTerm ? filteredLetters : letters).map((letter) => (
-              <button
-                key={letter}
-                className="dictionary-letter-button"
-                onClick={() => handleLetterClick(letter)}
-              >
-                {letter}
+        <section className="dictionary-section">
+          <h2 className="dictionary-section-title">Lettres</h2>
+          <div className="dictionary-letter-grid">
+            {letterSigns.map((sign) => (
+              <button key={sign.id} className="dictionary-letter-button" onClick={() => handleWordClick(sign.word)}>
+                {sign.word.toUpperCase()}
               </button>
             ))}
           </div>
-          {(searchTerm ? filteredLetters.length > 0 : true) && (
-            <div className="dictionary-separator" />
-          )}
-        </div>
+        </section>
 
-        {/* Words list */}
-        <div className="dictionary-words-container">
+        <div className="dictionary-separator" />
+
+        {/* Signs section */}
+        <section className="dictionary-section">
+          <h2 className="dictionary-section-title">Signes</h2>
           <div className="dictionary-word-grid">
-            {filteredWords.map((word, index) => (
-              <button
-                key={index}
-                className="dictionary-word-button"
-                onClick={() => handleWordClick(word)}
-              >
-                {word}
+            {wordSigns.map((sign) => (
+              <button key={sign.id} className="dictionary-word-button" onClick={() => handleWordClick(sign.word)}>
+                {sign.word}
               </button>
             ))}
           </div>
-        </div>
+        </section>
       </main>
 
-      {/* Right Sidebar */}
       <RightSidebar
         stats={{
           streak: 5,
           gems: 100,
-          hearts: 3
+          hearts: 3,
         }}
         cards={[
           {
@@ -102,8 +136,8 @@ const DictionaryPage: React.FC = () => {
             button: {
               label: 'ESSAYER 2 SEMAINES GRATUITES',
               onClick: () => {},
-              variant: 'primary'
-            }
+              variant: 'primary',
+            },
           },
           {
             type: 'league',
@@ -113,15 +147,15 @@ const DictionaryPage: React.FC = () => {
             button: {
               label: 'VOIR LES LIGUES',
               onClick: () => {},
-              variant: 'secondary'
-            }
+              variant: 'secondary',
+            },
           },
           {
             type: 'quest',
             title: 'Quêtes du jour',
             current: 0,
             total: 10,
-            reward: 'Gagne 10 XP'
+            reward: 'Gagne 10 XP',
           },
           {
             type: 'badge',
@@ -130,10 +164,10 @@ const DictionaryPage: React.FC = () => {
               {
                 icon: '/path-to-badge-icon.svg',
                 title: 'Termine 30 quêtes',
-                description: 'pour remporter le badge du mois'
-              }
-            ]
-          }
+                description: 'pour remporter le badge du mois',
+              },
+            ],
+          },
         ]}
       />
     </div>

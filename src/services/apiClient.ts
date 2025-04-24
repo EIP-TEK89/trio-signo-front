@@ -3,7 +3,7 @@ import { getBaseUrl } from '../utils/getBaseUrl';
 
 // Create axios instance
 const apiClient = axios.create({
-  baseURL: `${getBaseUrl()}/api`, // Base URL from environment
+  baseURL: `${getBaseUrl()}/`, // Base URL from environment
   timeout: 10000, // Request timeout
 });
 

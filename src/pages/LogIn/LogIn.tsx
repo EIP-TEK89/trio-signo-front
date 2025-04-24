@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '$hooks/useAuth';
+import { getBaseUrl } from '$utils/getBaseUrl';
 import Cross from '$assets/Courses/cross.svg';
+import Hide from '$assets/SingInUp/hide.svg';
+import Show from '$assets/SingInUp/show.svg';
 import './Login.css';
-import { getBaseUrl } from '../../utils/getBaseUrl';
-import Hide from '../../Assets/SingInUp/hide.svg';
-import Show from '../../Assets/SingInUp/show.svg';
-import { useAuth } from '../../hooks/useAuth';
 
 const LoginSignin: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -156,7 +156,6 @@ const LoginSignin: React.FC = () => {
                                 </button>
                             </div>
                             {errors.password && <div className="error-text">{errors.password}</div>}
-                            <span className="forgot-password">OUBLIÉ ?</span>
                         </div>
                         <button 
                             type="submit" 
@@ -183,7 +182,7 @@ const LoginSignin: React.FC = () => {
                 <div className="form-section">
                     <div className="form-group">
                         <p className="form-text">
-                            Vous n'avez pas de compte ? <a href="/signup">Inscrivez-vous</a>
+                           Mot de passe oublié ? <a href="/signup">Clicker ici</a>
                         </p>
                     </div>
                 </div>
