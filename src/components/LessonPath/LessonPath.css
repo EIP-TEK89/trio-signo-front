@@ -8,6 +8,13 @@
     
 }
 
+.separator {
+    height: 2px;
+    background-color: var(--color-border);
+    margin-right: 3%;
+    width: 70%;
+  }
+
 .lesson-path-title {
     color: var(--color-green-primary);
     font-weight: 700;

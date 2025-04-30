@@ -45,6 +45,7 @@ const LessonPath: React.FC<LessonPathProps> = ({
         <h2 className="lesson-path-title">{title}</h2>
         <hr className="lesson-path-divider" />
       </div> */}
+      <div className="separator" />
       <div className={`lesson-path ${curveDirection}-curve`} style={{ '--path-color': color } as React.CSSProperties}>
         <button className="lesson-node completed">
           <div className="node-circle">

@@ -11,13 +11,13 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   const GoToCourses = async () => {
-      navigate('/courses');
+    navigate('/courses');
   };
 
   return (
     <div className="duolingo-container">
       {/* Left Sidebar */}
-      <Navbar/>
+      <Navbar />
 
       {/* Main Content */}
       <main className="main-content">
@@ -37,30 +37,15 @@ const HomePage: React.FC = () => {
 
         {/* Lesson Paths */}
         <div className="lesson-paths-container">
-          <LessonPath 
-            onStartLesson={GoToCourses} 
-            color="var(--color-green-primary)" 
+          <LessonPath
+            onStartLesson={GoToCourses}
+            color="var(--color-green-primary)"
             curveDirection="left"
-            title="Describe people" 
+            title="Describe people"
           />
-          <LessonPath 
-            onStartLesson={GoToCourses} 
-            color="#9B6DFF" 
-            curveDirection="right"
-            title="Family members" 
-          />
-          <LessonPath 
-            onStartLesson={GoToCourses} 
-            color="#FFD700" 
-            curveDirection="left"
-            title="Basic phrases" 
-          />
-          <LessonPath 
-            onStartLesson={GoToCourses} 
-            color="#FF6B6B" 
-            curveDirection="right"
-            title="Common verbs" 
-          />
+          <LessonPath onStartLesson={GoToCourses} color="#9B6DFF" curveDirection="right" title="Family members" />
+          <LessonPath onStartLesson={GoToCourses} color="#FFD700" curveDirection="left" title="Basic phrases" />
+          <LessonPath onStartLesson={GoToCourses} color="#FF6B6B" curveDirection="right" title="Common verbs" />
         </div>
       </main>
 
@@ -69,7 +54,7 @@ const HomePage: React.FC = () => {
         stats={{
           streak: 5,
           gems: 100,
-          hearts: 3
+          hearts: 3,
         }}
         cards={[
           {
@@ -79,8 +64,8 @@ const HomePage: React.FC = () => {
             button: {
               label: 'ESSAYER 2 SEMAINES GRATUITES',
               onClick: () => {},
-              variant: 'primary'
-            }
+              variant: 'primary',
+            },
           },
           {
             type: 'league',
@@ -90,15 +75,15 @@ const HomePage: React.FC = () => {
             button: {
               label: 'VOIR LES LIGUES',
               onClick: () => {},
-              variant: 'secondary'
-            }
+              variant: 'secondary',
+            },
           },
           {
             type: 'quest',
             title: 'Quêtes du jour',
             current: 0,
             total: 10,
-            reward: 'Gagne 10 XP'
+            reward: 'Gagne 10 XP',
           },
           {
             type: 'badge',
@@ -107,10 +92,10 @@ const HomePage: React.FC = () => {
               {
                 icon: '/path-to-badge-icon.svg',
                 title: 'Termine 30 quêtes',
-                description: 'pour remporter le badge du mois'
-              }
-            ]
-          }
+                description: 'pour remporter le badge du mois',
+              },
+            ],
+          },
         ]}
       />
     </div>
