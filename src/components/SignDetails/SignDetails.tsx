@@ -21,14 +21,7 @@ const SignDetails: React.FC = () => {
         <main className="main-content">
           <div>Loading sign details...</div>
         </main>
-        <RightSidebar
-          stats={{
-            streak: 5,
-            gems: 100,
-            hearts: 3,
-          }}
-          cards={[]}
-        />
+        <RightSidebar cards={[]} />
       </div>
     );
   }
@@ -40,19 +33,12 @@ const SignDetails: React.FC = () => {
         <main className="main-content">
           <div>Error loading sign details: {error.message}</div>
         </main>
-        <RightSidebar
-          stats={{
-            streak: 5,
-            gems: 100,
-            hearts: 3,
-          }}
-          cards={[]}
-        />
+        <RightSidebar cards={[]} />
       </div>
     );
   }
 
-  console.log(sign)
+  console.log(sign);
 
   const currentSign = sign?.[0];
 
@@ -93,21 +79,9 @@ const SignDetails: React.FC = () => {
 
       {/* Right Sidebar */}
       <RightSidebar
-        stats={{
-          streak: 5,
-          gems: 100,
-          hearts: 3,
-        }}
         cards={[
           {
             type: 'super',
-            title: 'Essaie Super Duolingo gratuitement',
-            description: 'Pas de pubs, entraînements personnalisés et Défis Légendaires illimités !',
-            button: {
-              label: 'ESSAYER 2 SEMAINES GRATUITES',
-              onClick: () => {},
-              variant: 'primary',
-            },
           },
         ]}
       />

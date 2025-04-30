@@ -50,54 +50,7 @@ const HomePage: React.FC = () => {
       </main>
 
       {/* Right Sidebar */}
-      <RightSidebar
-        stats={{
-          streak: 5,
-          gems: 100,
-          hearts: 3,
-        }}
-        cards={[
-          {
-            type: 'super',
-            title: 'Essaie Super Duolingo gratuitement',
-            description: 'Pas de pubs, entraînements personnalisés et Défis Légendaires illimités !',
-            button: {
-              label: 'ESSAYER 2 SEMAINES GRATUITES',
-              onClick: () => {},
-              variant: 'primary',
-            },
-          },
-          {
-            type: 'league',
-            leagueType: 'LIGUES',
-            title: 'Bien joué !',
-            description: 'Tu as terminé n° 15 et sauvé ta place en Division Saphir',
-            button: {
-              label: 'VOIR LES LIGUES',
-              onClick: () => {},
-              variant: 'secondary',
-            },
-          },
-          {
-            type: 'quest',
-            title: 'Quêtes du jour',
-            current: 0,
-            total: 10,
-            reward: 'Gagne 10 XP',
-          },
-          {
-            type: 'badge',
-            title: 'Badges mensuels',
-            badges: [
-              {
-                icon: '/path-to-badge-icon.svg',
-                title: 'Termine 30 quêtes',
-                description: 'pour remporter le badge du mois',
-              },
-            ],
-          },
-        ]}
-      />
+      <RightSidebar cards={[{ type: 'super' }, { type: 'league' }, { type: 'quest' }, { type: 'badge' }]} />
     </div>
   );
 };

@@ -48,14 +48,7 @@ const DictionaryPage: React.FC = () => {
         <main className="main-content">
           <div>Loading signs...</div>
         </main>
-        <RightSidebar
-          stats={{
-            streak: 5,
-            gems: 100,
-            hearts: 3,
-          }}
-          cards={[]}
-        />
+        <RightSidebar cards={[]} />
       </div>
     );
   }
@@ -67,14 +60,7 @@ const DictionaryPage: React.FC = () => {
         <main className="main-content">
           <div>Error loading signs: {error.message}</div>
         </main>
-        <RightSidebar
-          stats={{
-            streak: 5,
-            gems: 100,
-            hearts: 3,
-          }}
-          cards={[]}
-        />
+        <RightSidebar cards={[]} />
       </div>
     );
   }
@@ -123,11 +109,6 @@ const DictionaryPage: React.FC = () => {
       </main>
 
       <RightSidebar
-        stats={{
-          streak: 5,
-          gems: 100,
-          hearts: 3,
-        }}
         cards={[
           {
             type: 'super',
