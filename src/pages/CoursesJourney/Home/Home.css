@@ -8,7 +8,21 @@
 }
 
 .lesson-header {
+  top: 0;
+  background-color: var(--color-background-main);
   width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.lesson-block {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

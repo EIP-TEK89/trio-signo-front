@@ -22,17 +22,19 @@ const HomePage: React.FC = () => {
       {/* Main Content */}
       <main className="main-content">
         <header className="lesson-header">
-          <div className="lesson-title">
-            <button className="back-button">
-              <img src={BackArrowIcon} alt="Back" className="back-arrow" />
-              CHAPITRE 1, UNITÉ 1
+          <div className="lesson-block">
+            <div className="lesson-title">
+              <button className="back-button">
+                <img src={BackArrowIcon} alt="Back" className="back-arrow" />
+                CHAPITRE 1, UNITÉ 1
+              </button>
+              <h1>Utilise des mots de base</h1>
+            </div>
+            <button className="guide-button">
+              <img src={GuideIcon} alt="Guide" />
+              <span>GUIDE</span>
             </button>
-            <h1>Utilise des mots de base</h1>
           </div>
-          <button className="guide-button">
-            <img src={GuideIcon} alt="Guide" />
-            <span>GUIDE</span>
-          </button>
         </header>
 
         {/* Lesson Paths */}
