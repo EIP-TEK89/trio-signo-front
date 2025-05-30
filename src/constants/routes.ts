@@ -3,6 +3,7 @@ export const ROUTES = {
   SIGNUP: '/signup',
   SIGNIN: '/signin',
   COURSES: '/courses',
+  COURSES_LESSON: '/courses/:lessonId',
   COURSES_JOURNEY: {
     HOME: '/coursesJourney/home',
     QUESTS: '/coursesJourney/quests',

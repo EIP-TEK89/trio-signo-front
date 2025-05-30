@@ -1,18 +1,24 @@
 import React from 'react';
-import Navbar from '$components/NavBar/NavBar';
+import Navbar from '$components/Navbar/NavBar';
 import RightSidebar from '$components/RightSidebar/RightSidebar';
 import LessonPath from '$components/LessonPath/LessonPath';
 import GuideIcon from '$assets/CoursesJourney/Home/guide.svg';
 import BackArrowIcon from '$assets/CoursesJourney/Home/backArrow.svg';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
+import { useAllLessonProgress } from '$hooks/useLessonProgress';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  const { progressList, loading, error } = useAllLessonProgress();
+  console.log(progressList);
 
-  const GoToCourses = async () => {
-    navigate('/courses');
+  const handleStartLesson = (lessonId: string) => {
+    navigate(`/courses/${lessonId}`);
   };
+
+  if (loading) return <div>Loading lesson progress...</div>;
+  if (error) return <div>Error loading lesson progress</div>;
 
   return (
     <div className="duolingo-container">
@@ -40,14 +46,12 @@ const HomePage: React.FC = () => {
         {/* Lesson Paths */}
         <div className="lesson-paths-container">
           <LessonPath
-            onStartLesson={GoToCourses}
+            onStartLesson={handleStartLesson}
             color="var(--color-green-primary)"
             curveDirection="left"
-            title="Describe people"
+            title="Alphabet Path"
+            lessons={progressList}
           />
-          <LessonPath onStartLesson={GoToCourses} color="#9B6DFF" curveDirection="right" title="Family members" />
-          <LessonPath onStartLesson={GoToCourses} color="#FFD700" curveDirection="left" title="Basic phrases" />
-          <LessonPath onStartLesson={GoToCourses} color="#FF6B6B" curveDirection="right" title="Common verbs" />
         </div>
       </main>
 
