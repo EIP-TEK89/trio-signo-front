@@ -1,69 +1,3 @@
-.right-sidebar {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-/* Stats Bar Styles */
-.stats-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-}
-
-.language-selector {
-  width: 32px;
-  height: 25px;
-  overflow: hidden;
-}
-
-.language-selector img {
-  width: 32px;
-  object-fit: cover;
-  object-position: 0 -52px;
-}
-
-.user-stats {
-  display: flex;
-  gap: 16px;
-}
-
-.user-stats img {
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 4px;
-}
-
-.stat {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--color-text);
-}
-
-.stat.streak {
-  color: var(--color-yellow-streak);
-}
-
-.stat.gems {
-  color: var(--color-blue-gems);
-}
-
-.stat.hearts {
-  color: var(--color-red-hearts);
-}
-
-/* Sidebar Content */
-.sidebar-content {
-  padding: 24px 20px;
-  flex: 1;
-  overflow-y: auto;
-}
-
 /* Common Card Styles */
 .sidebar-card {
   border: 2px solid var(--color-border);
@@ -128,13 +62,22 @@
 }
 
 /* Super Card Styles */
-
 .super-header {
   margin-bottom: 16px;
 }
 
 .super-badge {
   background-color: transparent;
+}
+
+/* League Card Styles */
+.league-card {
+  border: 2px solid var(--color-border);
+}
+
+.league-info {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Quest Card Styles */

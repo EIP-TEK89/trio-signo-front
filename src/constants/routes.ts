@@ -3,6 +3,7 @@ export const ROUTES = {
   SIGNUP: '/signup',
   SIGNIN: '/signin',
   COURSES: '/courses',
+  COURSES_LESSON: '/courses/:lessonId',
   COURSES_JOURNEY: {
     HOME: '/coursesJourney/home',
     QUESTS: '/coursesJourney/quests',
@@ -12,6 +13,5 @@ export const ROUTES = {
     SHOP: '/coursesJourney/shop',
     DICTIONARY: '/coursesJourney/dictionary',
     DICTIONARY_DETAILS: '/coursesJourney/dictionary/:signId',
-    LETTER_DETAILS: '/coursesJourney/dictionary/letter/:letter',
   },
 } as const; 

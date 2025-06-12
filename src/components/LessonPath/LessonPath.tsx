@@ -21,60 +21,57 @@ const hexToRgb = (hex: string): string => {
 };
 
 interface LessonPathProps {
-  onStartLesson: () => void;
+  onStartLesson: (lessonId: string) => void;
   color?: string;
   curveDirection?: 'left' | 'right';
   className?: string;
   title?: string;
+  lessons: {
+    id: string;
+    title: string;
+    progress: any;
+  }[];
 }
 
-const LessonPath: React.FC<LessonPathProps> = ({ 
-  onStartLesson, 
+const LessonPath: React.FC<LessonPathProps> = ({
+  onStartLesson,
   color = 'var(--color-primary)',
   curveDirection = 'left',
   className = '',
-  title = 'Describe people'
+  title = '',
+  lessons,
 }) => {
   // Convert hex color to RGB for gradient
   const rgbColor = color.startsWith('#') ? hexToRgb(color) : '58, 148, 242'; // default blue RGB
 
   return (
     <div className={`lesson-path-container ${className}`}>
-      {/* <div className="lesson-path-title-container">
-        <hr className="lesson-path-divider" />
-        <h2 className="lesson-path-title">{title}</h2>
-        <hr className="lesson-path-divider" />
-      </div> */}
+      <div className="separator" />
       <div className={`lesson-path ${curveDirection}-curve`} style={{ '--path-color': color } as React.CSSProperties}>
-        <button className="lesson-node completed">
-          <div className="node-circle">
-            <img src={WhiteOkIcon} alt="Completed" />
-          </div>
-        </button>
-        <button onClick={onStartLesson} className="lesson-node active">
-          <div className="node-circle">
-            <img src={WhiteStarIcon} alt="Star" />
-          </div>
-          <div className="start-button">
-            COMMENCER
-            <div className="start-button-arrow"></div>
-          </div>
-        </button>
-        <button className="lesson-node locked">
-          <div className="node-circle">
-            <img src={StarIcon} alt="Locked Star" />
-          </div>
-        </button>
-        <button className="lesson-node locked">
-          <div className="node-circle">
-            <img src={ChestIcon} alt="Chest" />
-          </div>
-        </button>
-        <button className="lesson-node locked">
-          <div className="node-circle">
-            <img src={TrophyIcon} alt="Trophy" />
-          </div>
-        </button>
+        {lessons.map((lesson, idx) => {
+          // Find the first locked node
+          const isFirstLocked = !lesson.progress && lessons.findIndex((l) => !l.progress) === idx;
+          return (
+            <button
+              key={lesson.id}
+              className={`lesson-node ${lesson.progress ? 'completed' : 'locked'}`}
+              onClick={() => !lesson.progress && onStartLesson(lesson.id)}
+              disabled={!!lesson.progress}
+              style={{ position: 'absolute' }}
+            >
+              <div className="node-circle">
+                <img src={lesson.progress ? WhiteOkIcon : StarIcon} alt={lesson.title} />
+              </div>
+              {isFirstLocked && (
+                <div className="start-button">
+                  COMMENCER
+                  <div className="start-button-arrow"></div>
+                </div>
+              )}
+              {/* <div className="lesson-label">{lesson.title}</div> */}
+            </button>
+          );
+        })}
       </div>
       {/* <div className={`mascot mascot-${curveDirection}-curve`}>
         <img src={DuoMascot} alt="Duo" className="duo-image" />
@@ -83,4 +80,4 @@ const LessonPath: React.FC<LessonPathProps> = ({
   );
 };
 
-export default LessonPath; 
+export default LessonPath;

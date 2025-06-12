@@ -39,6 +39,10 @@ const API_ROUTES = {
   getExercises: (lessonId: string) => `/exercise?lessonId=${lessonId}`,
   getExerciseById: (id: string) => `/exercise/${id}`,
   submitExerciseAnswer: (id: string) => `/exercise/${id}/answer`,
+
+  // Sign endpoints
+  getAllSigns: '/signs',
+  searchSignByName: (name: string) => `/signs/search/${name}`,
 };
 
 export default API_ROUTES;
