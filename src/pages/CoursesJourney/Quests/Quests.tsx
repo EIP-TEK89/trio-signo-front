@@ -17,9 +17,7 @@ const QuestsPage: React.FC = () => {
         <section className="quests-header">
           <h1>Gagne des récompenses grâce aux quêtes !</h1>
           <p>Tu as terminé 0 quête sur 3 aujourd'hui.</p>
-          <div className="mascot-circle">
-            {/* Add your mascot image here */}
-          </div>
+          <div className="mascot-circle">{/* Add your mascot image here */}</div>
         </section>
 
         <section className="quests-container">
@@ -75,23 +73,10 @@ const QuestsPage: React.FC = () => {
       </main>
 
       <RightSidebar
-        stats={{
-          streak: 5,
-          gems: 100,
-          hearts: 3
-        }}
         cards={[
           {
             type: 'badge',
-            title: 'Badges mensuels',
-            badges: [
-              {
-                icon: '/duo-badge-icon.svg',
-                title: 'Termine 30 quêtes',
-                description: 'pour remporter le badge du mois'
-              }
-            ]
-          }
+          },
         ]}
       />
     </div>

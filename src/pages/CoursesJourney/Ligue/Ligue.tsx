@@ -7,39 +7,21 @@ const LiguePage: React.FC = () => {
   return (
     <div className="duolingo-container">
       {/* Left Sidebar */}
-      <Navbar/>
+      <Navbar />
 
       {/* Main Content */}
       <main className="main-content">
-        <header className="ligue-header">
-          
-        </header>
+        <header className="ligue-header"></header>
 
-        <div className="ligue-container">
-          
-        </div>
-
+        <div className="ligue-container"></div>
       </main>
 
       {/* Right Sidebar */}
       <RightSidebar
-        stats={{
-          streak: 5,
-          gems: 100,
-          hearts: 3
-        }}
         cards={[
           {
             type: 'badge',
-            title: 'Badges mensuels',
-            badges: [
-              {
-                icon: '/duo-badge-icon.svg',
-                title: 'Termine 30 quêtes',
-                description: 'pour remporter le badge du mois'
-              }
-            ]
-          }
+          },
         ]}
       />
     </div>
