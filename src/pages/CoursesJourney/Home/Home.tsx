@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '$components/Navbar/NavBar';
+import Navbar from '$components/NavBar/NavBar';
 import RightSidebar from '$components/RightSidebar/RightSidebar';
 import LessonPath from '$components/LessonPath/LessonPath';
 import GuideIcon from '$assets/CoursesJourney/Home/guide.svg';
