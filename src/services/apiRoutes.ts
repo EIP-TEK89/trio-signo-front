@@ -26,8 +26,8 @@ const API_ROUTES = {
   googleAuthRedirect: '/api/auth/google/callback',
 
   // Dictionary endpoints
-  getDictionary: '/dictionary',
-  getDictionaryEntry: (id: string) => `/dictionary/${id}`,
+  getDictionary: '/api/dictionary',
+  getDictionaryEntry: (id: string) => `/api/dictionary/${id}`,
 
   // Lesson endpoints
   getLessons: '/lesson',
