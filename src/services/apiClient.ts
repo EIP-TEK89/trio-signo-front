@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { getBaseUrl } from '../utils/getBaseUrl';
+import { ROUTES } from '../constants/routes';
 
 // Create axios instance
 const apiClient = axios.create({
@@ -119,7 +120,7 @@ apiClient.interceptors.response.use(
         localStorage.removeItem('user');
 
         // Navigate to login page
-        window.location.href = '/login?expired=true';
+        window.location.href = `${ROUTES.SIGNIN}?expired=true`;
         return Promise.reject(refreshError);
       }
     }

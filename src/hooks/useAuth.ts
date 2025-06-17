@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { RootState } from '../Store/Store';
 import { User, loginUser, logoutUser, setToken, setUser, clearToken } from '../Store/AuthSlice';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../constants/routes';
 
 /**
  * Custom hook for handling authentication
@@ -11,9 +12,7 @@ import { useNavigate } from 'react-router-dom';
 export const useAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, user, isLoading, error, isAuthenticated } = useSelector(
-    (state: RootState) => state.auth
-  );
+  const { token, user, isLoading, error, isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   /**
    * Login function
@@ -22,7 +21,7 @@ export const useAuth = () => {
     (credentials: { email: string; password: string }) => {
       return dispatch(loginUser(credentials) as any);
     },
-    [dispatch]
+    [dispatch],
   );
 
   /**
@@ -30,7 +29,7 @@ export const useAuth = () => {
    */
   const logout = useCallback(() => {
     dispatch(logoutUser() as any);
-    navigate('/login');
+    navigate(ROUTES.SIGNIN);
   }, [dispatch, navigate]);
 
   /**
@@ -43,11 +42,11 @@ export const useAuth = () => {
         localStorage.setItem('refreshToken', refreshToken);
       }
       localStorage.setItem('user', JSON.stringify(newUser));
-      
+
       dispatch(setToken(newToken));
       dispatch(setUser(newUser));
     },
-    [dispatch]
+    [dispatch],
   );
 
   /**
@@ -57,7 +56,7 @@ export const useAuth = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
-    
+
     dispatch(clearToken());
   }, [dispatch]);
 
