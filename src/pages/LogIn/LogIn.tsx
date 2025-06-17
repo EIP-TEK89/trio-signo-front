@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '$hooks/useAuth';
 import { getBaseUrl } from '$utils/getBaseUrl';
+import { get } from '$services/apiClient';
 import Cross from '$assets/Courses/cross.svg';
 import Hide from '$assets/SingInUp/hide.svg';
 import Show from '$assets/SingInUp/show.svg';
@@ -50,21 +51,26 @@ const LoginSignin: React.FC = () => {
       setErrors((prev) => ({ ...prev, apiError: error }));
     }
   }, [error]);
+  const handleOAuthSuccess = async (token: string) => {
+    try {
+      // Réellement récupérer les informations de l'utilisateur avec le token
+      const userInfo = await get(
+        '/auth/me',
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
 
-  const handleOAuthSuccess = (token: string) => {
-    // Fetch user info with the token and set the session
-    // For now, we'll just simulate this with a basic user object
-    const mockUser = {
-      id: 'oauth-user',
-      username: 'OAuth User',
-      email: email || 'user@example.com',
-    };
+      // Stocker le token et les informations de l'utilisateur
+      setSession(token, userInfo.user);
 
-    // Store token and user info
-    setSession(token, mockUser);
-
-    // Clear the token from URL (to avoid security issues)
-    navigate('/coursesJourney/home', { replace: true });
+      // Nettoyer l'URL et rediriger vers la page d'accueil
+      navigate('/coursesJourney/home', { replace: true });
+    } catch (error) {
+      console.error('Erreur lors de la récupération des informations utilisateur:', error);
+      setErrors((prev) => ({ ...prev, apiError: 'Erreur lors de la connexion' }));
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -110,7 +116,7 @@ const LoginSignin: React.FC = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${getBaseUrl()}/auth/google`;
+    window.location.href = `${getBaseUrl()}/auth/google/redirect`;
   };
 
   return (
