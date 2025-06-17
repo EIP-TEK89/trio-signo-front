@@ -116,7 +116,7 @@ const LoginSignin: React.FC = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${getBaseUrl()}/auth/google/redirect`;
+    window.location.href = `${getBaseUrl()}/api/auth/google`;
   };
 
   return (
