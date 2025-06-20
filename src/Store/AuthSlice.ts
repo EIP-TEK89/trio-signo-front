@@ -45,9 +45,10 @@ export const loginUser = createAsyncThunk(
       localStorage.setItem('token', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
       localStorage.setItem('user', JSON.stringify(response.user));
-      
+
       return response;
     } catch (error: any) {
+      console.log(error)
       return rejectWithValue(error.message || 'Login failed');
     }
   }

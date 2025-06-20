@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getBaseUrl } from '$utils/getBaseUrl';
 
 interface UserStats {
   streak: number;
@@ -20,7 +19,8 @@ export const useUserStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get(`${getBaseUrl()}/api/user/stats`, {
+        // TODO ???? what is Uuser/stats ???? 
+        const response = await axios.get("TODO", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },

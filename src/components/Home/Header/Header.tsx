@@ -11,7 +11,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="app-header">
-      <h1 className="title">Signify</h1>
+      <h1 className="title">Triosigno</h1>
       <button className="login" onClick={Login}>
         Connexion
       </button>
