@@ -1,4 +1,4 @@
-# 👐 Signify - Front-End
+# 👐 Triosigno - Front-End
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-%2361DAFB.svg?style=for-the-badge&logo=react&logoColor=black)
@@ -6,7 +6,7 @@
 ![HTML](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
-**Signify** is an interactive platform dedicated to learning French Sign Language (LSF). With a modern and accessible interface, we offer a fun experience, supported by artificial intelligence, to help users learn LSF in an engaging way.
+**Triosigno** is an interactive platform dedicated to learning French Sign Language (LSF). With a modern and accessible interface, we offer a fun experience, supported by artificial intelligence, to help users learn LSF in an engaging way.
 
 ## 🌟 Key Features
 

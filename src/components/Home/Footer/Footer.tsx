@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                   <path d="M12 20v2" />
                 </svg>
               </div>
-              <span className="brand-title">Linguo</span>
+              <span className="brand-title">Triosigno</span>
             </div>
             <p className="brand-text">L'apprentissage de la LSF rendu simple, efficace et agréable.</p>
             <div className="social-list">

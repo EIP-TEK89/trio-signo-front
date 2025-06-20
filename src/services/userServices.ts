@@ -1,5 +1,5 @@
 import { get, post, put, del } from './apiClient';
-import API_ROUTES from './apiRoutes';
+import { API_ROUTES } from '$constants/routes';
 import { UserCredentials } from '../types/User';
 
 /**

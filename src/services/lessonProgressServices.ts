@@ -1,5 +1,5 @@
 import { get, post, put } from './apiClient';
-import API_ROUTES from './apiRoutes';
+import { API_ROUTES } from '$constants/routes';
 
 // Get all lessons with user progress
 export const fetchAllLessonProgress = async () => {

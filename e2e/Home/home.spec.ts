@@ -3,5 +3,5 @@ import { test, expect } from '@playwright/test';
 test('has title', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await expect(page.getByText('Signify').first()).toBeVisible()
+  await expect(page.getByText('Triosigno').first()).toBeVisible()
 });

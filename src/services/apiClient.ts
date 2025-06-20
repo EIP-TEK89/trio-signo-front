@@ -1,10 +1,9 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { getBaseUrl } from '../utils/getBaseUrl';
-import { ROUTES } from '../constants/routes';
+import { API_ROUTES, API_URL } from '$constants/routes';
 
 // Create axios instance
 const apiClient = axios.create({
-  baseURL: `${getBaseUrl()}/`, // Base URL from environment
+  baseURL: API_URL, // Base URL from environment
   timeout: 10000, // Request timeout
 });
 
@@ -29,7 +28,7 @@ apiClient.interceptors.request.use(
     const token = localStorage.getItem('token');
 
     // Skip auth header for login/register/refresh routes
-    const isAuthRoute = ['/api/auth/login', '/api/auth/register', '/api/auth/refresh'].some((route) =>
+    const isAuthRoute = ['/auth/login', '/auth/register', '/auth/refresh'].some((route) =>
       config.url?.includes(route),
     );
 
@@ -52,7 +51,7 @@ apiClient.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url?.includes('/api/auth/refresh')
+      !originalRequest.url?.includes('/auth/refresh')
     ) {
       // If already refreshing, add request to queue
       if (isRefreshing) {
@@ -86,7 +85,7 @@ apiClient.interceptors.response.use(
 
         // Attempt to refresh the token
         const response = await axios.post(
-          `${getBaseUrl()}/api/auth/refresh`,
+          API_ROUTES.refreshToken,
           { refreshToken },
           {
             headers: { 'Content-Type': 'application/json' },
@@ -120,7 +119,7 @@ apiClient.interceptors.response.use(
         localStorage.removeItem('user');
 
         // Navigate to login page
-        window.location.href = `${ROUTES.SIGNIN}?expired=true`;
+        window.location.href = `${API_ROUTES.signUp}?expired=true`;
         return Promise.reject(refreshError);
       }
     }

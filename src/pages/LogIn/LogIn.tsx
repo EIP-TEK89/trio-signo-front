@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '$hooks/useAuth';
-import { getBaseUrl } from '$utils/getBaseUrl';
 import { get } from '$services/apiClient';
+import { handleGoogleLogin } from "$utils/handleGoogleLogin"
+import { SocialButton } from "$components/SocialButton/SocialButton"
 import Cross from '$assets/Courses/cross.svg';
 import Hide from '$assets/SingInUp/hide.svg';
 import Show from '$assets/SingInUp/show.svg';
@@ -115,15 +116,11 @@ const LoginSignin: React.FC = () => {
       });
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = `${getBaseUrl()}/api/auth/google`;
-  };
-
   return (
     <div className="login-modal flex-container flex-column align-center">
       <div className="header-buttons">
         <button onClick={() => navigate('/')} className="close-button">
-          <img src={Cross} alt="Close" />
+          <img src={Cross} alt="Fermer" />
         </button>
         <button className="signup-button" onClick={() => navigate('/signup')}>
           S'inscrire
@@ -154,7 +151,7 @@ const LoginSignin: React.FC = () => {
                   className={`login-input ${errors.password ? 'input-error' : ''}`}
                 />
                 <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
-                  <img src={showPassword ? Hide : Show} alt="Toggle password visibility" />
+                  <img src={showPassword ? Hide : Show} alt="Afficher le mot de passe" />
                 </button>
               </div>
               {errors.password && <div className="error-text">{errors.password}</div>}
@@ -165,18 +162,13 @@ const LoginSignin: React.FC = () => {
             <div className="divider">
               <span>OU</span>
             </div>
-            <div className="social-buttons-row">
-              <button type="button" className="social-button google" onClick={handleGoogleLogin}>
-                <span className="google-icon"></span>
-                GOOGLE
-              </button>
-            </div>
+            <SocialButton title="GOOGLE" onClick={handleGoogleLogin} />
           </div>
         </div>
         <div className="form-section">
           <div className="form-group">
             <p className="form-text">
-              Mot de passe oublié ? <a href="/signup">Clicker ici</a>
+              Mot de passe oublié ? <a href="/signup">Cliquez ici</a>
             </p>
           </div>
         </div>

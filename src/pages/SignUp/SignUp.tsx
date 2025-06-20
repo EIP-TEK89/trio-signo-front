@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from '$store/AuthSlice';
+import { handleGoogleLogin } from "$utils/handleGoogleLogin"
+import { SocialButton } from "$components/SocialButton/SocialButton"
+import { API_ROUTES } from "$constants/routes"
 import Cross from '$assets/Courses/cross.svg';
 import ShowIcon from '$assets/SingInUp/show.svg';
 import HideIcon from '$assets/SingInUp/hide.svg';
@@ -19,7 +22,7 @@ const SignUp: React.FC = () => {
 
   const handleSignUp = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/sign-up", {
+      const response = await fetch(API_ROUTES.signUp, {
         method: "POST",
         headers: {
           "accept": "application/json",
@@ -50,13 +53,13 @@ const SignUp: React.FC = () => {
     <div className="login-modal flex-container flex-column align-center">
       <div className="header-buttons">
         <button onClick={() => navigate('/')} className="close-button">
-          <img src={Cross} alt="Close" />
+          <img src={Cross} alt="Fermer" />
         </button>
         <button className="login-nav-button" onClick={() => navigate('/signin')}>Connexion</button>
       </div>
       <form className="login-form-container" onSubmit={(e) => e.preventDefault()}>
         <div>
-          <h1 className="login-title">Crée ton profil</h1>
+          <h1 className="login-title">Créer ton profil</h1>
           <div className="login-form">
             <input
               type="number"
@@ -104,15 +107,12 @@ const SignUp: React.FC = () => {
               onClick={handleSignUp}
               className="login-button"
             >
-              CRÉER MON COMPTE
+              CRÉER UN COMPTE
             </button>
             <div className="divider">
               <span>OU</span>
             </div>
-            <button type="button" className="social-button facebook">
-              <span className="facebook-icon"></span>
-              FACEBOOK
-            </button>
+            <SocialButton className="google-icon" title="GOOGLE" onClick={handleGoogleLogin} />
           </div>
         </div>
       </form>

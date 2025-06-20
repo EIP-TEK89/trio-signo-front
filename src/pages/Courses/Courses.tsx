@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Webcam from 'react-webcam';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getBaseUrl, getBaseUrlWithPort } from '$utils/getBaseUrl';
 import { useExercisesByLesson } from '$hooks/useExercices';
 import { fetchExerciseById } from '$services/exercicesServices';
 
@@ -33,33 +32,6 @@ const Courses: React.FC = () => {
   const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
   const [text, setText] = useState<string | undefined>(undefined);
 
-  // Move capture useCallback to top level
-  const capture = React.useCallback(
-    async (answer: string) => {
-      if (webcamRef.current !== null) {
-        const imageSrc = webcamRef.current.getScreenshot();
-        if (imageSrc) {
-          const blob = await fetch(imageSrc).then((res) => res.blob());
-          const formData = new FormData();
-          formData.append('file', blob, 'image.jpg');
-          try {
-            const response = await axios.post(getBaseUrl() + ':5000/get-alphabet', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            });
-            console.log(response.data.message);
-            console.log(answer);
-            if (response.data.message == answer.toUpperCase()) GoodAnswer();
-            else BadAnswer();
-          } catch (error) {
-            console.error('Error uploading image:', error);
-          }
-        }
-      }
-    },
-    [webcamRef],
-  );
 
   useEffect(() => {
     if (!exercises || exercises.length === 0) return;
@@ -73,11 +45,9 @@ const Courses: React.FC = () => {
   }, [exercises]);
 
   // Now do conditional returns
-  if (loading || detailsLoading) return <div>Loading exercises...</div>;
-  if (error) return <div>Error loading exercises</div>;
-  if (!lessonExercises.length) return <div>No exercises found for this lesson.</div>;
-
-  console.log(lessonExercises);
+  if (loading || detailsLoading) return <div>Chargement des exercices...</div>;
+  if (error) return <div>Erreur lors du chargement des exercices.</div>;
+  if (!lessonExercises.length) return <div>Pas d'exercices trouvés pour cette leçon.</div>;
 
   const BackToHome = async () => {
     navigate('/coursesJourney/home');

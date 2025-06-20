@@ -21,6 +21,7 @@ export default defineConfig({
           $services: path.resolve(__dirname, 'src/services'),
           $hooks: path.resolve(__dirname, 'src/hooks'),
           $utils: path.resolve(__dirname, 'src/utils'),
+          $constants: path.resolve(__dirname, 'src/constants'),
         }
         ,
     },
