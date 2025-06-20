@@ -1,5 +1,5 @@
 import apiClient from './apiClient';
-import API_ROUTES from './apiRoutes';
+import { API_ROUTES } from '$constants/routes';
 
 export interface Sign {
   id: string;

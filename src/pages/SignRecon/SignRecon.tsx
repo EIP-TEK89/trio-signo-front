@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Webcam from 'react-webcam';
 import { useNavigate } from 'react-router-dom';
-import { getBaseUrl } from '$utils/getBaseUrl';
 import VideoFetcher from '$utils/VideoFetcher';
 import SignRecognizer, { ModelsPredictions } from "$utils/SignRecognizer"
 import { drawHandLandmarkerResult } from '$utils/DrawLandmark';
@@ -28,7 +27,7 @@ const SignRecon: React.FC = () => {
         // Initialize the sign recognizer model, as the model will not be stored
         // directly on the frontend, it will be fetched from the backend.
         // We do this to being able to dynamically load model depending of the lesson.
-        signRecognizerRef.current = new SignRecognizer(getBaseUrl() + ":5000/get-sign-recognizer-model/alphabet");
+        signRecognizerRef.current = new SignRecognizer(window.location.origin + ":5000/get-sign-recognizer-model/alphabet");
         // This variable helps calculating framerate, so it is not necessary to keep it.
         let timings: Array<number> = [];
         let output_sign: string;
