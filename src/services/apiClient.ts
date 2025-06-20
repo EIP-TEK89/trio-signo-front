@@ -28,7 +28,7 @@ apiClient.interceptors.request.use(
     const token = localStorage.getItem('token');
 
     // Skip auth header for login/register/refresh routes
-    const isAuthRoute = ['/auth/login', '/auth/register', '/auth/refresh'].some((route) =>
+    const isAuthRoute = [API_ROUTES.logIn, API_ROUTES.signUp, API_ROUTES.refreshToken].some((route) =>
       config.url?.includes(route),
     );
 
@@ -51,7 +51,7 @@ apiClient.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url?.includes('/auth/refresh')
+      !originalRequest.url?.includes(API_ROUTES.refreshToken)
     ) {
       // If already refreshing, add request to queue
       if (isRefreshing) {

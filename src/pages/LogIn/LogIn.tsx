@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '$hooks/useAuth';
 import { get } from '$services/apiClient';
-import { handleGoogleLogin } from "$utils/handleGoogleLogin"
-import { SocialButton } from "$components/SocialButton/SocialButton"
+import { handleGoogleLogin } from '$utils/handleGoogleLogin';
+import { SocialButton } from '$components/SocialButton/SocialButton';
+import { API_ROUTES } from '$constants/routes';
 import Cross from '$assets/Courses/cross.svg';
 import Hide from '$assets/SingInUp/hide.svg';
 import Show from '$assets/SingInUp/show.svg';
@@ -56,7 +57,7 @@ const LoginSignin: React.FC = () => {
     try {
       // Réellement récupérer les informations de l'utilisateur avec le token
       const userInfo = await get(
-        '/auth/me',
+        API_ROUTES.currentUser,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
