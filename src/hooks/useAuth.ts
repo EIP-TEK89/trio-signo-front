@@ -28,7 +28,19 @@ export const useAuth = () => {
    * Logout function
    */
   const logout = useCallback(() => {
+    // D'abord, effaçons manuellement les tokens du localStorage
+    // Clear localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
+
+    // Update Redux state
+    dispatch(clearToken());
+
+    // Here we assume logoutUser is an async thunk that handles API call
     dispatch(logoutUser() as any);
+
+    // Redirect to sign-in page
     navigate(ROUTES.SIGNIN);
   }, [dispatch, navigate]);
 
