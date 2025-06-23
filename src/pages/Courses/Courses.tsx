@@ -4,9 +4,11 @@ import Webcam from 'react-webcam';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useExercisesByLesson } from '$hooks/useExercices';
 import { fetchExerciseById } from '$services/exercicesServices';
+import { API_URL } from '$constants/routes';
 
 import VideoStreamUploader from '$components/VideoStream/VideoStream';
 import ProgressBar from '$components/Progressionbar/Progressionbar';
+import Loader from '$components/Loader';
 
 import './Courses.css';
 
@@ -32,6 +34,24 @@ const Courses: React.FC = () => {
   const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
   const [text, setText] = useState<string | undefined>(undefined);
 
+  // Fonction utilitaire pour formater les URLs des médias
+  const getMediaUrl = (url: string | undefined) => {
+    if (!url) return '';
+
+    // Si l'URL est déjà absolue (commence par http ou https), la retourner telle quelle
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+
+    // Si l'URL est relative, l'attacher à la base URL de l'API
+    // Enlever le préfixe /api si présent dans l'URL
+    const cleanUrl = url.startsWith('/api/') ? url.substring(4) : url;
+
+    // S'assurer que l'URL commence par un slash
+    const formattedUrl = cleanUrl.startsWith('/') ? cleanUrl : `/${cleanUrl}`;
+
+    return `${API_URL}${formattedUrl}`;
+  };
 
   useEffect(() => {
     if (!exercises || exercises.length === 0) return;
@@ -39,13 +59,23 @@ const Courses: React.FC = () => {
     Promise.all(exercises.map((exo) => fetchExerciseById(exo.id)))
       .then((results) => {
         setLessonExercises(results);
+        // Afficher les URLs des médias pour le débogage
+        results.forEach((exo, idx) => {
+          if (exo.sign?.mediaUrl) {
+            console.log(`Exercice ${idx} - URL originale: ${exo.sign.mediaUrl}`);
+            console.log(`Exercice ${idx} - URL formatée: ${getMediaUrl(exo.sign.mediaUrl)}`);
+          }
+        });
         setDetailsLoading(false);
       })
-      .catch(() => setDetailsLoading(false));
+      .catch((error) => {
+        console.error('Erreur lors du chargement des détails des exercices:', error);
+        setDetailsLoading(false);
+      });
   }, [exercises]);
 
   // Now do conditional returns
-  if (loading || detailsLoading) return <div>Chargement des exercices...</div>;
+  if (loading || detailsLoading) return <Loader message="Chargement des exercices" />;
   if (error) return <div>Erreur lors du chargement des exercices.</div>;
   if (!lessonExercises.length) return <div>Pas d'exercices trouvés pour cette leçon.</div>;
 
@@ -143,11 +173,21 @@ const Courses: React.FC = () => {
     <div className="courses-container">
       <header className="header">
         <button onClick={BackToHome} className="cross-button">
-          <img src={Cross} alt="cross-img" className="icon" />
+          <img
+            src={Cross}
+            alt="cross-img"
+            className="icon"
+            onError={(e) => console.error('Erreur de chargement de Cross icon')}
+          />
         </button>
         <ProgressBar currentStep={step} />
         <div className="icon-container">
-          <img src={Life} alt="Life" className="icon" />
+          <img
+            src={Life}
+            alt="Life"
+            className="icon"
+            onError={(e) => console.error('Erreur de chargement de Life icon')}
+          />
           <span className="text">5</span>
         </div>
       </header>
@@ -159,7 +199,15 @@ const Courses: React.FC = () => {
           {/* WORD_TO_IMAGE: show prompt, sign video, options as text */}
           {currentExo.type === 'WORD_TO_IMAGE' && (
             <div className="tuto">
-              <img src={currentExo.sign?.mediaUrl} className="tuto-img" />
+              <img
+                src={getMediaUrl(currentExo.sign?.mediaUrl)}
+                className="tuto-img"
+                alt={currentExo.sign?.word || 'Signe'}
+                onError={(e) => {
+                  console.error('Erreur de chargement image:', currentExo.sign?.mediaUrl);
+                  e.currentTarget.src = '/placeholder-image.png'; // Image par défaut en cas d'erreur
+                }}
+              />
               <div className="image-selection">
                 {currentExo.options?.map((option: string, index: number) => (
                   <button
@@ -177,7 +225,15 @@ const Courses: React.FC = () => {
           {/* IMAGE_TO_WORD: show prompt, sign video, options as text */}
           {currentExo.type === 'IMAGE_TO_WORD' && (
             <div className="tuto">
-              <img src={currentExo.sign?.mediaUrl} className="tuto-img" />
+              <img
+                src={getMediaUrl(currentExo.sign?.mediaUrl)}
+                className="tuto-img"
+                alt={currentExo.sign?.word || 'Signe'}
+                onError={(e) => {
+                  console.error('Erreur de chargement image:', currentExo.sign?.mediaUrl);
+                  e.currentTarget.src = '/placeholder-image.png'; // Image par défaut en cas d'erreur
+                }}
+              />
               <div className="text-selection">
                 {currentExo.options?.map((option: string, index: number) => (
                   <button
@@ -202,15 +258,26 @@ const Courses: React.FC = () => {
           {currentExo.type === 'multiple_choice_image' && (
             <div className="tuto">
               <div className="image-selection">
-                {currentExo.options?.map((option, index) => (
+                {currentExo.options?.map((option: string, index: number) => (
                   <button
                     key={index}
                     className={`Img-Button ${activeButton === index ? 'active' : ''}`}
                     onClick={() => handleButtonClick(index, option)}
                   >
-                    {/* You may need to adjust the image source for your API */}
-                    {/* <img src={...} alt="image" className="choice-img" /> */}
-                    {option}
+                    {/* Si option contient une URL d'image */}
+                    {option.includes('/') || option.includes('.') ? (
+                      <img
+                        src={getMediaUrl(option)}
+                        alt="option"
+                        className="choice-img"
+                        onError={(e) => {
+                          console.error('Erreur de chargement image:', option);
+                          e.currentTarget.src = '/placeholder-image.png';
+                        }}
+                      />
+                    ) : (
+                      option
+                    )}
                   </button>
                 ))}
               </div>
@@ -240,9 +307,19 @@ const Courses: React.FC = () => {
 
           {currentExo.type === 'multiple_choice_meaning' && (
             <div className="tuto">
-              {/* <img src={...} alt="image" className="multiple-choice-img" /> */}
+              {currentExo.sign?.mediaUrl && (
+                <img
+                  src={getMediaUrl(currentExo.sign?.mediaUrl)}
+                  alt="signe"
+                  className="multiple-choice-img"
+                  onError={(e) => {
+                    console.error('Erreur de chargement image:', currentExo.sign?.mediaUrl);
+                    e.currentTarget.src = '/placeholder-image.png';
+                  }}
+                />
+              )}
               <div className="text-selection">
-                {currentExo.options?.map((option, index) => (
+                {currentExo.options?.map((option: string, index: number) => (
                   <button
                     key={index}
                     className={`text-Button ${activeButton === index ? 'active' : ''}`}
@@ -273,7 +350,12 @@ const Courses: React.FC = () => {
             <>
               <div className="success-message-container">
                 <div className="success-icon-wrapper">
-                  <img src={Good} alt="success" className="success-icon" />
+                  <img
+                    src={Good}
+                    alt="success"
+                    className="success-icon"
+                    onError={(e) => console.error('Erreur de chargement de Good icon')}
+                  />
                 </div>
                 <div>
                   <div className="success-title">C'est bien !</div>
@@ -288,7 +370,12 @@ const Courses: React.FC = () => {
             <>
               <div className="error-message-container">
                 <div className="error-icon-wrapper">
-                  <img src={Error} alt="error" className="error-icon" />
+                  <img
+                    src={Error}
+                    alt="error"
+                    className="error-icon"
+                    onError={(e) => console.error('Erreur de chargement de Error icon')}
+                  />
                 </div>
                 <div>
                   <div className="error-title">La bonne réponse est :</div>
