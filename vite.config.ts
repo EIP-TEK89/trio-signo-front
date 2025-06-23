@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  base: './',
+  // Changement de 'base' pour utiliser des chemins absolus au lieu de relatifs
+  base: '/',
   plugins: [
     react(),
   ],
