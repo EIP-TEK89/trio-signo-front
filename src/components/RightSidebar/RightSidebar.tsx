@@ -7,11 +7,11 @@ import lifeIcon from '$assets/components/RightSidebar/life.svg';
 import { SuperCard, LeagueCard, QuestCard, BadgeCard } from '$components/Cards';
 import { useUserStats } from '$hooks/useUserStats';
 
-interface Stats {
-  streak: number;
-  gems: number;
-  hearts: number;
-}
+// interface Stats {
+//   streak: number;
+//   gems: number;
+//   hearts: number;
+// }
 
 interface Card {
   type: 'super' | 'league' | 'quest' | 'badge';
@@ -89,11 +89,11 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ cards }) => {
         </span>
       </div>
 
-      <div className="sidebar-content">
+      {/* <div className="sidebar-content">
         {cards.map((card, index) => (
           <SidebarCard key={index} {...card} />
         ))}
-      </div>
+      </div> */}
     </aside>
   );
 };
