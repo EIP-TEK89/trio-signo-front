@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '$components/Home/Header/Header';
 import Hero from '$components/Home/Hero/Hero';
@@ -6,27 +6,29 @@ import Introduction from '$components/Home/Introduction/Introduction';
 import Sign from '$components/Home/Sign/Sign';
 import Journey from '$components/Home/Journey/Journey';
 import Footer from '$components/Home/Footer/Footer';
+import { ROUTES } from '$constants/routes';
+import { useAuth } from '$hooks/useAuth';
 
 import './Home.css';
 import '../../App.css';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-
-  //   if (!token) {
-  //     navigate('/');
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    // If the user is authenticated, redirect them to the courses journey home page
+    if (isAuthenticated) {
+      navigate(ROUTES.COURSES_JOURNEY.HOME);
+    }
+  }, [isAuthenticated, navigate]);
 
   const Login = async () => {
-    navigate('/signin');
+    navigate(ROUTES.SIGNIN);
   };
 
   const Courses = async () => {
-    navigate('/courses');
+    navigate(ROUTES.COURSES);
   };
 
   return (
