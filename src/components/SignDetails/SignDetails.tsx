@@ -61,7 +61,7 @@ const SignDetails: React.FC = () => {
                 <div className="letter-image">
                   {currentSign.mediaUrl &&
                     (currentSign.mediaUrl.match(/\.(jpg|jpeg|png|gif)$/i) ? (
-                      <img src={currentSign.mediaUrl} alt={`Sign ${currentSign.word}`} className="letter-media" />
+                      <img src={currentSign.mediaUrl} alt={`Sign ${currentSign.word}`} className="letter-img" />
                     ) : (
                       <video src={currentSign.mediaUrl} controls className="letter-media" autoPlay loop muted>
                         Your browser does not support the video tag.
