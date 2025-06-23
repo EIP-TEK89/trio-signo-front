@@ -19,6 +19,7 @@ import SignDetails from './components/SignDetails/SignDetails';
 import { useDispatch } from 'react-redux';
 import { getCurrentUser } from './services/userServices';
 import { setUser, setToken } from './Store/AuthSlice';
+import Loader from './components/Loader';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -57,20 +58,7 @@ const App: React.FC = () => {
 
   // Afficher un indicateur de chargement pendant l'initialisation
   if (isLoading) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          flexDirection: 'column',
-        }}
-      >
-        <div>Chargement de l'application...</div>
-        <div style={{ marginTop: '10px' }}>TrioSigno</div>
-      </div>
-    );
+    return <Loader message="Chargement de l'application" />;
   }
 
   return (

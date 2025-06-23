@@ -3,6 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { ROUTES } from '../../constants/routes';
 import { getCurrentUser } from '../../services/userServices';
+import Loader from '../Loader';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -65,19 +66,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   // Afficher un spinner pendant la vérification
   if (isVerifying) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          flexDirection: 'column',
-        }}
-      >
-        <div className="loading-spinner">Vérification de l'authentification...</div>
-      </div>
-    );
+    return <Loader message="Vérification de l'authentification" />;
   }
 
   // Si le token n'est pas valide ou l'utilisateur n'est pas authentifié, rediriger vers la page de connexion
