@@ -58,13 +58,15 @@ const App: React.FC = () => {
   // Afficher un indicateur de chargement pendant l'initialisation
   if (isLoading) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        flexDirection: 'column'
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          flexDirection: 'column',
+        }}
+      >
         <div>Chargement de l'application...</div>
         <div style={{ marginTop: '10px' }}>TrioSigno</div>
       </div>
@@ -80,58 +82,73 @@ const App: React.FC = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path={ROUTES.COURSES} element={<Courses />} />
         <Route path={ROUTES.COURSES_LESSON} element={<Courses />} />
-        
+
         {/* Routes protégées du parcours de cours */}
-        <Route 
-          path={ROUTES.COURSES_JOURNEY.HOME} 
+        <Route
+          path={ROUTES.COURSES_JOURNEY.HOME}
           element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path={ROUTES.COURSES_JOURNEY.DICTIONARY} 
+        <Route
+          path={ROUTES.COURSES_JOURNEY.DICTIONARY}
           element={
             <ProtectedRoute>
               <DictionaryPage />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path={ROUTES.COURSES_JOURNEY.DICTIONARY_DETAILS} 
+        <Route
+          path={ROUTES.COURSES_JOURNEY.DICTIONARY_DETAILS}
           element={
             <ProtectedRoute>
               <SignDetails />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route path={ROUTES.COURSES_JOURNEY.QUESTS} element={
-          <ProtectedRoute>
-            <QuestsPage />
-          </ProtectedRoute>
-        } />
-        <Route path={ROUTES.COURSES_JOURNEY.LEAGUE} element={
-          <ProtectedRoute>
-            <LiguePage />
-          </ProtectedRoute>
-        } />
-        <Route path={ROUTES.COURSES_JOURNEY.PROFILE} element={
-          <ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>
-        } />
-        <Route path={ROUTES.COURSES_JOURNEY.TRAINING} element={
-          <ProtectedRoute>
-            <TrainingPage />
-          </ProtectedRoute>
-        } />
-        <Route path={ROUTES.COURSES_JOURNEY.SHOP} element={
-          <ProtectedRoute>
-            <ShopPage />
-          </ProtectedRoute>
-        } />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.QUESTS}
+          element={
+            <ProtectedRoute>
+              <QuestsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.LEAGUE}
+          element={
+            <ProtectedRoute>
+              <LiguePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.PROFILE}
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.TRAINING}
+          element={
+            <ProtectedRoute>
+              <TrainingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.SHOP}
+          element={
+            <ProtectedRoute>
+              <ShopPage />
+            </ProtectedRoute>
+          }
+        />
 
         {/* 404 Page - Catch all unmatched routes */}
         <Route path="*" element={<NotFound />} />
