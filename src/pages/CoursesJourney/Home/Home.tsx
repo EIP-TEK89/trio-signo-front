@@ -17,6 +17,10 @@ const HomePage: React.FC = () => {
     navigate(`/courses/${lessonId}`);
   };
 
+  const goToDictionary = () => {
+    navigate('/dictionary');
+  };
+
   if (loading) return <div>Loading lesson progress...</div>;
   if (error) return <div>Error loading lesson progress</div>;
 
@@ -36,7 +40,7 @@ const HomePage: React.FC = () => {
               </button>
               <h1>Utilise des mots de base</h1>
             </div>
-            <button className="guide-button">
+            <button className="guide-button" onClick={goToDictionary}>
               <img src={GuideIcon} alt="Guide" />
               <span>GUIDE</span>
             </button>

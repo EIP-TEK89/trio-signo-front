@@ -34,20 +34,20 @@ const Courses: React.FC = () => {
   const [buttonAnswer, setButtonAnswer] = useState<string | null>(null);
   const [text, setText] = useState<string | undefined>(undefined);
 
-  // Fonction utilitaire pour formater les URLs des médias
+  // Utility function to format media URLs
   const getMediaUrl = (url: string | undefined) => {
     if (!url) return '';
 
-    // Si l'URL est déjà absolue (commence par http ou https), la retourner telle quelle
+    // If the URL is already absolute (starts with http or https), return it as is
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
 
-    // Si l'URL est relative, l'attacher à la base URL de l'API
-    // Enlever le préfixe /api si présent dans l'URL
+    // If the URL is relative, attach it to the API base URL
+    // Remove the /api prefix if present in the URL
     const cleanUrl = url.startsWith('/api/') ? url.substring(4) : url;
 
-    // S'assurer que l'URL commence par un slash
+    // Ensure the URL starts with a slash
     const formattedUrl = cleanUrl.startsWith('/') ? cleanUrl : `/${cleanUrl}`;
 
     return `${API_URL}${formattedUrl}`;
@@ -59,25 +59,25 @@ const Courses: React.FC = () => {
     Promise.all(exercises.map((exo) => fetchExerciseById(exo.id)))
       .then((results) => {
         setLessonExercises(results);
-        // Afficher les URLs des médias pour le débogage
+        // Log media URLs for debugging
         results.forEach((exo, idx) => {
           if (exo.sign?.mediaUrl) {
-            console.log(`Exercice ${idx} - URL originale: ${exo.sign.mediaUrl}`);
-            console.log(`Exercice ${idx} - URL formatée: ${getMediaUrl(exo.sign.mediaUrl)}`);
+            console.log(`Exercise ${idx} - Original URL: ${exo.sign.mediaUrl}`);
+            console.log(`Exercise ${idx} - Formatted URL: ${getMediaUrl(exo.sign.mediaUrl)}`);
           }
         });
         setDetailsLoading(false);
       })
       .catch((error) => {
-        console.error('Erreur lors du chargement des détails des exercices:', error);
+        console.error('Error loading exercise details:', error);
         setDetailsLoading(false);
       });
   }, [exercises]);
 
   // Now do conditional returns
-  if (loading || detailsLoading) return <Loader message="Chargement des exercices" />;
-  if (error) return <div>Erreur lors du chargement des exercices.</div>;
-  if (!lessonExercises.length) return <div>Pas d'exercices trouvés pour cette leçon.</div>;
+  if (loading || detailsLoading) return <Loader message="Loading exercises" />;
+  if (error) return <div>Error loading exercises.</div>;
+  if (!lessonExercises.length) return <div>No exercises found for this lesson.</div>;
 
   const BackToHome = async () => {
     navigate('/coursesJourney/home');
@@ -94,7 +94,7 @@ const Courses: React.FC = () => {
     } else {
       BackToHome();
     }
-    //display publicity on phone
+    // display advertisement on phone
   };
 
   const GoodAnswer = async () => {
@@ -177,17 +177,12 @@ const Courses: React.FC = () => {
             src={Cross}
             alt="cross-img"
             className="icon"
-            onError={(e) => console.error('Erreur de chargement de Cross icon')}
+            onError={(e) => console.error('Error loading Cross icon')}
           />
         </button>
         <ProgressBar currentStep={step} />
         <div className="icon-container">
-          <img
-            src={Life}
-            alt="Life"
-            className="icon"
-            onError={(e) => console.error('Erreur de chargement de Life icon')}
-          />
+          <img src={Life} alt="Life" className="icon" onError={(e) => console.error('Error loading Life icon')} />
           <span className="text">5</span>
         </div>
       </header>
@@ -204,8 +199,8 @@ const Courses: React.FC = () => {
                 className="tuto-img"
                 alt={currentExo.sign?.word || 'Signe'}
                 onError={(e) => {
-                  console.error('Erreur de chargement image:', currentExo.sign?.mediaUrl);
-                  e.currentTarget.src = '/placeholder-image.png'; // Image par défaut en cas d'erreur
+                  console.error('Error loading image:', currentExo.sign?.mediaUrl);
+                  e.currentTarget.src = '/placeholder-image.png'; // Default image on error
                 }}
               />
               <div className="image-selection">
@@ -230,8 +225,8 @@ const Courses: React.FC = () => {
                 className="tuto-img"
                 alt={currentExo.sign?.word || 'Signe'}
                 onError={(e) => {
-                  console.error('Erreur de chargement image:', currentExo.sign?.mediaUrl);
-                  e.currentTarget.src = '/placeholder-image.png'; // Image par défaut en cas d'erreur
+                  console.error('Error loading image:', currentExo.sign?.mediaUrl);
+                  e.currentTarget.src = '/placeholder-image.png'; // Default image on error
                 }}
               />
               <div className="text-selection">
@@ -264,14 +259,14 @@ const Courses: React.FC = () => {
                     className={`Img-Button ${activeButton === index ? 'active' : ''}`}
                     onClick={() => handleButtonClick(index, option)}
                   >
-                    {/* Si option contient une URL d'image */}
+                    {/* If option contains an image URL */}
                     {option.includes('/') || option.includes('.') ? (
                       <img
                         src={getMediaUrl(option)}
                         alt="option"
                         className="choice-img"
                         onError={(e) => {
-                          console.error('Erreur de chargement image:', option);
+                          console.error('Error loading image:', option);
                           e.currentTarget.src = '/placeholder-image.png';
                         }}
                       />
@@ -299,7 +294,7 @@ const Courses: React.FC = () => {
                   className="form-answer-input"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  placeholder="Écrivez votre réponse..."
+                  placeholder="Write your answer..."
                 />
               </form>
             </div>
@@ -313,7 +308,7 @@ const Courses: React.FC = () => {
                   alt="signe"
                   className="multiple-choice-img"
                   onError={(e) => {
-                    console.error('Erreur de chargement image:', currentExo.sign?.mediaUrl);
+                    console.error('Error loading image:', currentExo.sign?.mediaUrl);
                     e.currentTarget.src = '/placeholder-image.png';
                   }}
                 />
@@ -354,16 +349,16 @@ const Courses: React.FC = () => {
                     src={Good}
                     alt="success"
                     className="success-icon"
-                    onError={(e) => console.error('Erreur de chargement de Good icon')}
+                    onError={(e) => console.error('Error loading Good icon')}
                   />
                 </div>
                 <div>
-                  <div className="success-title">C'est bien !</div>
-                  <div className="success-message">Bonne réponse : {getCorrectAnswer(currentExo)}</div>
+                  <div className="success-title">Well done!</div>
+                  <div className="success-message">Correct answer: {getCorrectAnswer(currentExo)}</div>
                 </div>
               </div>
               <button className="footer-button primary" onClick={handleNextExo}>
-                CONTINUER
+                CONTINUE
               </button>
             </>
           ) : showError ? (
@@ -374,16 +369,16 @@ const Courses: React.FC = () => {
                     src={Error}
                     alt="error"
                     className="error-icon"
-                    onError={(e) => console.error('Erreur de chargement de Error icon')}
+                    onError={(e) => console.error('Error loading Error icon')}
                   />
                 </div>
                 <div>
-                  <div className="error-title">La bonne réponse est :</div>
+                  <div className="error-title">The correct answer is:</div>
                   <div className="error-message">{getCorrectAnswer(currentExo)}</div>
                 </div>
               </div>
               <button className="footer-button error" onClick={handleNextExo}>
-                CONTINUER
+                CONTINUE
               </button>
             </>
           ) : (
