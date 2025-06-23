@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
   };
 
   const goToDictionary = () => {
-    navigate('/coursesJourney/home');
+    navigate('/coursesJourney/dictionary');
   };
 
   if (loading) return <div>Loading lesson progress...</div>;
