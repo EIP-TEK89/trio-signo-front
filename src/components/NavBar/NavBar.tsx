@@ -22,41 +22,45 @@ const Navbar: React.FC = () => {
         <img src={logoSmall} alt="Duolingo" className="logo-small" />
       </div>
       <ul className="nav-items">
-        <NavLink to={`${basePath}/home`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        <NavLink to={`${basePath}/home`} className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
           <img src={homeIcon} alt="Mon cours" className="nav-icon" />
           <span className="nav-label">MON COURS</span>
         </NavLink>
-        <NavLink to={`${basePath}/dictionary`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        <NavLink
+          to={`${basePath}/dictionary`}
+          className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
+        >
           <img src={dictionaryIcon} alt="Dictionnaire" className="nav-icon" />
           <span className="nav-label">DICTIONNAIRE</span>
         </NavLink>
-        <NavLink to={`${basePath}/training`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        {/* Uncomment the following lines if you want to include these sections in the future */}
+        {/* <NavLink to={`${basePath}/training`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
           <img src={trainingIcon} alt="Entraînement" className="nav-icon" />
           <span className="nav-label">ENTRAÎNEMENT</span>
-        </NavLink>
-        <NavLink to={`${basePath}/league`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        </NavLink> */}
+        {/* <NavLink to={`${basePath}/league`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
           <img src={ligueIcon} alt="Ligues" className="nav-icon" />
           <span className="nav-label">LIGUES</span>
-        </NavLink>
-        <NavLink to={`${basePath}/quests`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        </NavLink> */}
+        {/* <NavLink to={`${basePath}/quests`} className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
           <img src={questsIcon} alt="Quêtes" className="nav-icon" />
           <span className="nav-label">QUÊTES</span>
-        </NavLink>
-        <NavLink to={`${basePath}/shop`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        </NavLink> */}
+        {/* <NavLink to={`${basePath}/shop`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
           <img src={shopIcon} alt="Boutique" className="nav-icon" />
           <span className="nav-label">BOUTIQUE</span>
-        </NavLink>
-        <NavLink to={`${basePath}/profile`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        </NavLink> */}
+        <NavLink to={`${basePath}/profile`} className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
           <div className="nav-icon profile-icon">D</div>
           <span className="nav-label">PROFIL</span>
         </NavLink>
-        <NavLink to={`${basePath}/plus`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        {/* <NavLink to={`${basePath}/plus`} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
           <img src={plusIcon} alt="Plus" className="nav-icon" />
           <span className="nav-label">PLUS</span>
-        </NavLink>
+        </NavLink> */}
       </ul>
     </nav>
   );
 };
 
-export default Navbar; 
+export default Navbar;
