@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { RootState } from '../Store/Store';
 import { User, loginUser, logoutUser, setToken, setUser, clearToken } from '../Store/AuthSlice';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../constants/routes';
+import { getCurrentUser } from '../services/userServices';
 
 /**
  * Custom hook for handling authentication
@@ -13,6 +14,7 @@ export const useAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token, user, isLoading, error, isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const [isValidating, setIsValidating] = useState(false);
 
   /**
    * Login function
@@ -23,6 +25,43 @@ export const useAuth = () => {
     },
     [dispatch],
   );
+
+  /**
+   * Validate current token with backend
+   */
+  const validateToken = useCallback(async () => {
+    // If no token exists, we're definitely not authenticated
+    if (!token) return false;
+
+    setIsValidating(true);
+    try {
+      // Fetch current user to validate token
+      const userData = await getCurrentUser();
+      if (userData) {
+        // Ensure user data is up to date
+        dispatch(setUser(userData));
+        setIsValidating(false);
+        return true;
+      } else {
+        // Token is invalid, clear session
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        dispatch(clearToken());
+        setIsValidating(false);
+        return false;
+      }
+    } catch (error) {
+      console.error('Token validation error:', error);
+      // On error, token is likely invalid
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      dispatch(clearToken());
+      setIsValidating(false);
+      return false;
+    }
+  }, [token, dispatch]);
 
   /**
    * Logout function
@@ -78,9 +117,11 @@ export const useAuth = () => {
     isLoading,
     error,
     isAuthenticated,
+    isValidating,
     login,
     logout,
     setSession,
     clearSession,
+    validateToken,
   };
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Courses from './pages/Courses/Courses';
@@ -16,8 +16,36 @@ import NotFound from './pages/NotFound/NotFound';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import { ROUTES } from './constants/routes';
 import SignDetails from './components/SignDetails/SignDetails';
+import { useDispatch } from 'react-redux';
+import { getCurrentUser } from './services/userServices';
+import { setUser, setToken } from './Store/AuthSlice';
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
+
+  // Vérifier l'authentification au démarrage de l'application
+  useEffect(() => {
+    const initAuth = async () => {
+      try {
+        // Vérifier si nous avons un token dans localStorage
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        // Vérifier le token en obtenant l'utilisateur courant
+        const userData = await getCurrentUser();
+        if (userData) {
+          // Mettre à jour Redux avec les données utilisateur
+          dispatch(setToken(token));
+          dispatch(setUser(userData));
+        }
+      } catch (error) {
+        console.error("Erreur lors de l'initialisation de l'authentification:", error);
+      }
+    };
+
+    initAuth();
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>
@@ -27,9 +55,32 @@ const App: React.FC = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path={ROUTES.COURSES} element={<Courses />} />
         <Route path={ROUTES.COURSES_LESSON} element={<Courses />} />
-        <Route path={ROUTES.COURSES_JOURNEY.HOME} element={<HomePage />} />
-        <Route path={ROUTES.COURSES_JOURNEY.DICTIONARY} element={<DictionaryPage />} />
-        <Route path={ROUTES.COURSES_JOURNEY.DICTIONARY_DETAILS} element={<SignDetails />} />
+
+        {/* Routes protégées du parcours de cours */}
+        <Route
+          path={ROUTES.COURSES_JOURNEY.HOME}
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.DICTIONARY}
+          element={
+            <ProtectedRoute>
+              <DictionaryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.DICTIONARY_DETAILS}
+          element={
+            <ProtectedRoute>
+              <SignDetails />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Protected Route for Quests */}
         {/* <Route
@@ -41,11 +92,46 @@ const App: React.FC = () => {
           }
         /> */}
 
-        <Route path={ROUTES.COURSES_JOURNEY.QUESTS} element={<QuestsPage />} />
-        <Route path={ROUTES.COURSES_JOURNEY.LEAGUE} element={<LiguePage />} />
-        <Route path={ROUTES.COURSES_JOURNEY.PROFILE} element={<ProfilePage />} />
-        <Route path={ROUTES.COURSES_JOURNEY.TRAINING} element={<TrainingPage />} />
-        <Route path={ROUTES.COURSES_JOURNEY.SHOP} element={<ShopPage />} />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.QUESTS}
+          element={
+            <ProtectedRoute>
+              <QuestsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.LEAGUE}
+          element={
+            <ProtectedRoute>
+              <LiguePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.PROFILE}
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.TRAINING}
+          element={
+            <ProtectedRoute>
+              <TrainingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COURSES_JOURNEY.SHOP}
+          element={
+            <ProtectedRoute>
+              <ShopPage />
+            </ProtectedRoute>
+          }
+        />
 
         {/* 404 Page - Catch all unmatched routes */}
         <Route path="*" element={<NotFound />} />

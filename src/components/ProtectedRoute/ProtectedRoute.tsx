@@ -9,32 +9,48 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const location = useLocation();
-  const { isAuthenticated, token } = useAuth();
-  const [isVerifying, setIsVerifying] = useState(true);
+  const { isAuthenticated, validateToken, isValidating } = useAuth();
+  const [isChecking, setIsChecking] = useState(true);
+  const [isValid, setIsValid] = useState(false);
 
   // Check authentication on mount
   useEffect(() => {
-    // Simple validation that we have a token
-    // In a real app, you might want to check if the token is valid
-    // by making a request to the server
-    if (token) {
-      setIsVerifying(false);
-    } else {
-      setIsVerifying(false);
-    }
-  }, [token]);
+    const checkAuth = async () => {
+      try {
+        if (!isAuthenticated) {
+          setIsChecking(false);
+          return;
+        }
 
-  // Show loading while verifying
-  if (isVerifying) {
-    return <div className="loading-spinner">Loading...</div>;
+        // Validate token with backend
+        const isValid = await validateToken();
+        setIsValid(isValid);
+      } catch (error) {
+        console.error('Error checking authentication:', error);
+        setIsValid(false);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkAuth();
+  }, [isAuthenticated, validateToken]);
+
+  // Show loading while checking
+  if (isChecking || isValidating) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div className="loading-spinner">Chargement...</div>
+      </div>
+    );
   }
 
-  // If not authenticated, redirect to login
-  if (!isAuthenticated) {
+  // If not authenticated or token not valid, redirect to login
+  if (!isAuthenticated || !isValid) {
     return <Navigate to={ROUTES.SIGNIN} state={{ from: location.pathname }} replace />;
   }
 
-  // If authenticated, render children
+  // If authenticated and token valid, render children
   return <>{children}</>;
 };
 

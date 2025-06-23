@@ -79,7 +79,11 @@ apiClient.interceptors.response.use(
           localStorage.removeItem('token');
           localStorage.removeItem('refreshToken');
           localStorage.removeItem('user');
-          window.location.href = '/login';
+
+          // Check if we're already on login page to avoid redirect loops
+          if (!window.location.pathname.includes('/signin') && !window.location.pathname.includes('/login')) {
+            window.location.href = '/signin?expired=true';
+          }
           return Promise.reject(error);
         }
 
@@ -118,8 +122,10 @@ apiClient.interceptors.response.use(
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
 
-        // Navigate to login page
-        window.location.href = `${API_ROUTES.signUp}?expired=true`;
+        // Navigate to login page if not already there
+        if (!window.location.pathname.includes('/signin') && !window.location.pathname.includes('/login')) {
+          window.location.href = '/signin?expired=true';
+        }
         return Promise.reject(refreshError);
       }
     }
@@ -135,6 +141,17 @@ const handleError = (error: any) => {
     if (error.response?.status === 401) {
       // Handle 401 for specific API calls if needed
       console.error('Authentication error:', error.response?.data?.message || 'Authentication failed');
+
+      // Check if we're not already on the login page to avoid redirect loops
+      if (!window.location.pathname.includes('/signin') && !window.location.pathname.includes('/login')) {
+        // Clear local storage
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+
+        // Redirect to login with an expired parameter
+        window.location.href = '/signin?expired=true';
+      }
     } else if (error.response?.status === 403) {
       console.error('Authorization error:', error.response?.data?.message || 'Not authorized');
     } else {
